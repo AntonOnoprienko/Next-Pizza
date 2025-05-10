@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import "./globals.css";
+import { Header } from "@/components/shared";
+
 
 interface RootLayoutProps {
   readonly children: React.ReactNode;
@@ -21,6 +23,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
   return (
     <html lang="en">
       <body className={nunito.variable}>
+        <Header className="p-4"></Header>
         <main className="min-h-screen">{children}</main>
       </body>
     </html>
