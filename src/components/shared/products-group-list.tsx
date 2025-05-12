@@ -1,10 +1,10 @@
 'use client'
 
 import React, { useEffect, useRef } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/src/lib/utils";
 import { ProductCard, Title } from ".";
 import { useIntersection } from 'react-use'
-import { useCategoryStore } from "@/store/category";
+import { useCategoryStore } from "@/src/store/category";
 
 export interface IProduct {
   id: number;
