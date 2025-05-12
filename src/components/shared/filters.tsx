@@ -1,5 +1,5 @@
 import React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/src/lib/utils";
 import { Input } from "../ui";
 import { RangeSlider, Title, FilterCheckbox } from ".";
 import { CheckboxFiltersGroup } from "./checkbox-filters-group";

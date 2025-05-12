@@ -1,4 +1,4 @@
-import { Container, Filters, ProductCard, ProductsGroupList, Title, TopBar } from "@/components/shared";
+import { Container, Filters, ProductsGroupList, Title, TopBar } from "@/src/components/shared";
 const products = [
   {
     id: 1,

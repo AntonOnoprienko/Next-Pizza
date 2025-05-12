@@ -1,9 +1,9 @@
 'use client'
 import React from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/src/lib/utils';
 import Link from 'next/link';
-import { siteConfig } from '@/config/site';
-import { useCategoryStore } from '@/store/category';
+import { siteConfig } from '@/src/config/site';
+import { useCategoryStore } from '@/src/store/category';
 
 
 type Props = {
