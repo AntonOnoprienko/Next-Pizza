@@ -19,7 +19,7 @@ const products = [
   {
     id: 3,
     imageUrl: "https://media.dodostatic.net/image/r:292x292/11ee7d610d2925109ab2e1c92cc5383c.avif",
-    name: "Сырная",
+    name: "Титан пицца",
     items: [{ price: 370 }],
     count: 1,
     ingredients: "Моцарелла, сыры чеддер и пармезан, фирменный соус альфредо",

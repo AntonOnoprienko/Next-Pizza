@@ -20,7 +20,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
     ingredients,
     isLoading,
     onAddId,
-    selectedIds: selectedIngredients,
+    selectedIngredients,
   } = useFilterIngredients();
 
   const [sizes, { toggle: toggleSizes }] = useSet(new Set<string>([]));

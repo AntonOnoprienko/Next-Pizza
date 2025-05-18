@@ -10,7 +10,7 @@ interface UseFilterIngredientsResult {
   ingredients: IngredientItem[];
   isLoading: boolean;
   error: Error | null;
-  selectedIds: Set<string>
+  selectedIngredients: Set<string>
   onAddId: (id: string) => void
 }
 
@@ -24,9 +24,6 @@ export const useFilterIngredients = (): UseFilterIngredientsResult => {
   React.useEffect(() => {
     const fetchIngredients = async () => {
       try {
-        console.log('API base URL:', process.env.NEXT_PUBLIC_API_URL);
-        console.log('DATABASE_URL:', process.env.DATABASE_URL);
-
         const items = await Api.ingredients.getAll();
         setIngredients(
           items.map((ingredient) => ({value: String(ingredient.id), text: ingredient.name}))
@@ -45,5 +42,5 @@ export const useFilterIngredients = (): UseFilterIngredientsResult => {
     fetchIngredients();
   }, []);
 
-  return { ingredients, isLoading, error, selectedIds, onAddId: toggle  };
+  return { ingredients, isLoading, error, selectedIngredients: selectedIds , onAddId: toggle  };
 };
