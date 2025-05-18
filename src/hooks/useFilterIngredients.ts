@@ -25,6 +25,7 @@ export const useFilterIngredients = (): UseFilterIngredientsResult => {
     const fetchIngredients = async () => {
       try {
         console.log('API base URL:', process.env.NEXT_PUBLIC_API_URL);
+        console.log('DATABASE_URL:', process.env.DATABASE_URL);
 
         const items = await Api.ingredients.getAll();
         setIngredients(
