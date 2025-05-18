@@ -3,7 +3,7 @@
 import React from "react";
 import { cn } from "@/src/lib/utils";
 import { Search } from "lucide-react";
-import { useClickAway } from "react-use";
+import { useClickAway, useDebounce } from "react-use";
 import Link from "next/link";
 import { Api } from "@/src/services/api-client";
 import { Product } from "@prisma/client";
@@ -23,9 +23,31 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
     setFocused(false);
   });
 
-  React.useEffect(() => {
-    Api.products.search(searchQuery).then((items) => setProducts(items));
-  }, [searchQuery]);
+  useDebounce(
+    () => {
+      const fetchData = async () => {
+        if (!searchQuery.trim()) {
+          setProducts([]);
+          return;
+        }
+        try {
+          const response = await Api.products.search(searchQuery);
+          setProducts(response);
+        } catch (e) {
+          console.log(e);
+        }
+      };
+      fetchData();
+    },
+    250,
+    [searchQuery]
+  );
+
+  const onClickItem = React.useCallback(() => {
+    setSearchQuery("");
+    setFocused(false);
+    setProducts([]);
+  }, []);
 
   return (
     <>
@@ -54,22 +76,23 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
           placeholder="Найти пиццу..."
           onFocus={() => setFocused(true)}
         />
-        {products.length > 0 && <div
-          className={cn(
-            "absolute w-full bg-white rounded-xl py-2 top-14 shadow-md transition-all duration-200 invisible opacity-0 z-30",
-            focused && "visible opacity-100 top-12"
-          )}
-        >
-          {products.length > 0 &&
-            products.map((item) => (
+        {products.length > 0 && (
+          <div
+            className={cn(
+              "absolute w-full bg-white rounded-xl py-2 top-14 shadow-md transition-all duration-200 invisible opacity-0 z-30",
+              focused && "visible opacity-100 top-12"
+            )}
+          >
+            {products.map((item) => (
               <Link
                 className="flex items-center gap-3 w-full px-3 py-2 hover:bg-primary/10"
                 key={item.id}
-                href={`/products/${item.id}`}
+                href={`/product/${item.id}`}
+                onClick={onClickItem}
               >
                 <img
                   className="rounded-sm"
-                  src={item.imageUrl}
+                  src={item.imageUrl || "./fallback.svg"}
                   alt={item.name}
                   width={32}
                   height={32}
@@ -77,7 +100,8 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
                 <span>{item.name}</span>
               </Link>
             ))}
-        </div>}
+          </div>
+        )}
       </div>
     </>
   );
