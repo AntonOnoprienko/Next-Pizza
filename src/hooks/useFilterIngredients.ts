@@ -24,6 +24,8 @@ export const useFilterIngredients = (): UseFilterIngredientsResult => {
   React.useEffect(() => {
     const fetchIngredients = async () => {
       try {
+        console.log('API base URL:', process.env.NEXT_PUBLIC_API_URL);
+
         const items = await Api.ingredients.getAll();
         setIngredients(
           items.map((ingredient) => ({value: String(ingredient.id), text: ingredient.name}))
