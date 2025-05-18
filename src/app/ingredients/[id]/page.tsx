@@ -1,0 +1,18 @@
+import React from 'react';
+import { cn } from '@/src/lib/utils';
+
+type Props = {
+  params: {
+    id: string;
+  };
+};
+
+const IngredientsId = ({ params }: Props) => {
+  return (
+    <div className={cn('')}>
+      <p>Продукт {params.id}</p>
+    </div>
+  );
+};
+
+export default IngredientsId;
