@@ -2,16 +2,15 @@ import React from 'react';
 import { cn } from '@/src/lib/utils';
 
 type Props = {
-  className?: string;
   params: {
     id: string;
-  }  
+  };
 };
 
-const ProductId: React.FC<Props> = ({ className, params  }) => {
+const ProductId = ({ params }: Props) => {
   return (
-    <div className={cn('', className)}>
-        <p>Продукт {params.id}</p>
+    <div className={cn('')}>
+      <p>Продукт {params.id}</p>
     </div>
   );
 };
