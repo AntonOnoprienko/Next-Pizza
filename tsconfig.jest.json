@@ -4,7 +4,10 @@
     "module": "CommonJS",
     "moduleResolution": "node",
     "jsx": "react-jsx",
-    "noEmit": true
+    "noEmit": true,
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   "include": ["**/*.ts", "**/*.tsx"]
 }

@@ -1,4 +1,3 @@
-/** @type {import('ts-jest').JestConfigWithTsJest} */
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
@@ -9,8 +8,9 @@ module.exports = {
     },
   },
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1',
+    '^@/(.*)$': '<rootDir>/$1',
   },
+  moduleDirectories: ['node_modules', 'src'],  // <-- добавь это
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest',
   },
