@@ -6,6 +6,7 @@ import {
   TopBar,
 } from "@/src/components/shared";
 import { Suspense } from "react";
+import { PizzaLoader } from "../components/shared/pizza-loader";
 const products = [
   {
     id: 1,
@@ -78,7 +79,8 @@ const Home = () => {
       <Container className="mt-10 pb-14">
         <div className="flex gap-[80px]">
           <div className="w-[250px]">
-            <Suspense fallback={<div>Loading...</div>}>
+            
+            <Suspense fallback={<PizzaLoader />}>
               <Filters />
             </Suspense>
           </div>
