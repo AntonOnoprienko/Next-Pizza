@@ -17,7 +17,7 @@ const generateProductItem = ({
 }) => {
   return {
     productId,
-    price: randomDecimalNumber(190, 600),
+    price: randomDecimalNumber(50, 300),
     pizzaType,
     size,
   };
