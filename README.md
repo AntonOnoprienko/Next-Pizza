@@ -22,4 +22,4 @@ Containerized with **Docker**, deployed via **Railway**, and powered by **CI/CD*
 | Deployment    | [Railway](https://railway.app/)          |
 | CI/CD         | GitHub Actions                           |
 
----
+------
