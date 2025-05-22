@@ -9,7 +9,7 @@ import { Suspense } from "react";
 import { PizzaLoader } from "../components/shared/pizza-loader";
 import { prisma } from "@/prisma/prisma-client";
 
-export const revalidate = 0;
+
 
 const Home = async () => {
   const categories = await prisma.category.findMany({
