@@ -16,7 +16,7 @@ type Props = {
   };
 };
 
-const ProductId = async ({ params }: Props) => {
+const ProductPage = async ({ params }: Props) => {
   const product = await prisma.product.findFirst({
     where: { id: Number(params.id) },
   });
@@ -69,4 +69,4 @@ const ProductId = async ({ params }: Props) => {
   );
 };
 
-export default ProductId;
+export default ProductPage;

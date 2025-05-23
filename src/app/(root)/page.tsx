@@ -6,7 +6,7 @@ import {
   TopBar,
 } from "@/src/components/shared";
 import { Suspense } from "react";
-import { PizzaLoader } from "../components/shared/pizza-loader";
+import { PizzaLoader } from "../../components/shared/pizza-loader";
 import { prisma } from "@/prisma/prisma-client";
 
 

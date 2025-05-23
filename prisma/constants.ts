@@ -180,8 +180,8 @@ export const products = [
     categoryId: 4,
   },
   {
-    name: 'Ирландский Капучино',
-    imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE7D61999EBDA59C10E216430A6093.webp',
+    name: 'Ореховый капучино',
+    imageUrl: 'https://media.dodostatic.net/image/r:760x760/11ee7d61b12220ab911ff4fa42ef585d.avif',
     categoryId: 5,
   },
   {
