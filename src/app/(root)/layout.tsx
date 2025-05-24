@@ -29,12 +29,11 @@ export const metadata: Metadata = {
 
 const HomeLayout = ({ children, modal }: HomeLayoutProps) => {
   return (
-      <main className="min-h-screen">
-        <Header className="p-4" />
-        {modal}
-        {children}
-        
-      </main>
+    <main className="min-h-screen">
+      <Header className="p-4" />
+      {children}
+      {modal}
+    </main>
   );
 };
 

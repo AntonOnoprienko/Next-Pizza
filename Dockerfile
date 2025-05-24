@@ -29,7 +29,6 @@ COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/next.config.mjs ./next.config.mjs
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/src ./src
-COPY --from=builder /app/next-i18next.config.mjs ./next-i18next.config.mjs
 
 ARG NEXT_PUBLIC_API_URL
 ARG DATABASE_URL

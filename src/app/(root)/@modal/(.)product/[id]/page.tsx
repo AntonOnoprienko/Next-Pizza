@@ -1,7 +1,6 @@
 
+export default async function ProductModalPage({ params: { id } }: { params: { id: string } }) {
 
-export default async function  ProductModalPage({ params: { id } }: { params: { id: string } }) {
-  
 
-  return <p className="h-[400px] bg-black">ПРодукт {id}</p>
+  return <h1>Продукт с id: {id} </h1>
 }
