@@ -9,8 +9,10 @@ export const useQueryFilters = (filters: Filters) => {
 
   React.useEffect(() => {
     if (isMounted.current) {
+      const { priceFrom, priceTo } = filters.prices;
       const params = {
-        ...filters.prices,
+        ...(priceFrom !== 0 && { priceFrom }),
+        ...(priceTo !== 1000 && { priceTo }),
         pizzaTypes: Array.from(filters.pizzaTypes),
         sizes: Array.from(filters.sizes),
         ingredients: Array.from(filters.selectedIngredients),
