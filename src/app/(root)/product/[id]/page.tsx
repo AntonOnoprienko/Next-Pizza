@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import {
   Container,
   GroupVariants,
-  ProductImage,
+  PizzaImage,
   Title,
 } from "@/src/components/shared";
 
@@ -28,11 +28,10 @@ const ProductPage = async ({ params }: Props) => {
   return (
     <Container className="flex flex-col my-10">
       <div className="flex flex-1">
-        <ProductImage
+        <PizzaImage
           imageUrl={product.imageUrl}
           size={40}
           alt={product.name}
-          className={""}
         />
         <div className="w-[490px] bg-[#F7F6F5] p-7">
           <Title
