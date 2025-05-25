@@ -53,6 +53,7 @@ model ProductItem {
   price     Int
   size      Int?
   pizzaType Int?
+  imageUrl  String? 
   productId Int
   cartItems CartItem[]
   product   Product    @relation(fields: [productId], references: [id])

@@ -43,7 +43,7 @@ const ProductPage = async ({ params }: Props) => {
             Lorem ipsum dolot. Ea distinctio, laborum perferendis libero
             voluptas, enim sequi fuga
           </p>
-          <GroupVariants
+          {/* <GroupVariants
             value="2"
             items={[
               {
@@ -61,7 +61,7 @@ const ProductPage = async ({ params }: Props) => {
               },
             ]}
             
-          />
+          /> */}
         </div>
       </div>
     </Container>
