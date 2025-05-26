@@ -121,12 +121,12 @@ export const _ingredients = [
 export const products = [
   {
     name: 'Омлет с ветчиной и грибами',
-    imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE7970321044479C1D1085457A36EB.webp',
+    imageUrl: 'https://media.dodostatic.net/image/r:760x760/019635f0e97378779f544848739c1cde.avif',
     categoryId: 2,
   },
   {
     name: 'Омлет с пепперони',
-    imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE94ECF33B0C46BA410DEC1B1DD6F8.webp',
+    imageUrl: 'https://media.dodostatic.net/image/r:760x760/019635f2326f7275ba5858615f263d6f.avif',
     categoryId: 2,
   },
   {
@@ -141,11 +141,11 @@ export const products = [
   },
   {
     name: 'Куриные наггетсы',
-    imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE7D618B5C7EC29350069AE9532C6E.webp',
+    imageUrl: 'https://media.dodostatic.net/image/r:760x760/11eef45eacc4d7eabc10e0a0e0c2c67a.avif',
     categoryId: 3,
   },
   {
-    name: 'Картофель из печи с соусом 🌱',
+    name: 'Картофель из печи с соусом',
     imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EED646A9CD324C962C6BEA78124F19.webp',
     categoryId: 3,
   },
@@ -155,7 +155,7 @@ export const products = [
     categoryId: 3,
   },
   {
-    name: 'Острый Додстер 🌶️🌶️',
+    name: 'Острый Додстер',
     imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE796FD3B594068F7A752DF8161D04.webp',
     categoryId: 3,
   },
@@ -175,7 +175,7 @@ export const products = [
     categoryId: 4,
   },
   {
-    name: 'Классический молочный коктейль 👶',
+    name: 'Классический молочный коктейль',
     imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE796F93FB126693F96CB1D3E403FB.webp',
     categoryId: 4,
   },
