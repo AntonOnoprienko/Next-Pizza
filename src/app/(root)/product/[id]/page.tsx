@@ -29,7 +29,7 @@ const ProductPage = async ({ params }: Props) => {
     <Container className="flex flex-col my-10">
       <div className="flex flex-1">
         <PizzaImage
-          imageUrl={product.imageUrl}
+          publicId={product.imageUrl}
           size={40}
           alt={product.name}
         />

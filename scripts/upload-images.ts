@@ -1,0 +1,35 @@
+import { v2 as cloudinary } from 'cloudinary';
+import { imageUrls } from './images';
+import { writeFileSync } from 'fs';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+cloudinary.config({
+  cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET,
+});
+
+async function uploadAllImages() {
+  const resultIds: string[] = [];
+
+  for (const url of imageUrls) {
+    try {
+      const result = await cloudinary.uploader.upload(url, {
+        folder: 'ingredients',
+      });
+      resultIds.push(`"${result.public_id}"`);
+      console.log(`✅ ${result.public_id}`);
+    } catch (err) {
+      console.error(`❌ Ошибка загрузки ${url}`, err);
+    }
+  }
+
+  const content = `export const uploadedIds = [\n${resultIds.map(id => `  ${id},`).join('\n')}\n];\n`;
+
+  writeFileSync('./scripts/uploaded-ids.ts', content, 'utf-8');
+  console.log('\n📁 Файл saved to scripts/uploaded-ids.ts');
+}
+
+uploadAllImages();

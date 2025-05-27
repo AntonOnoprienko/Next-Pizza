@@ -5,6 +5,7 @@ import { Title } from ".";
 import { Button } from "../ui";
 import { Plus } from "lucide-react";
 import { Ingredient } from "@prisma/client";
+import { CldImage } from "next-cloudinary";
 
 interface Props {
   id: number;
@@ -26,10 +27,20 @@ export const ProductCard: React.FC<Props> = ({
   ingredients
 }) => {
   return (
-    <div className={cn('h-full flex flex-col',className)}>
+    <div className={cn('h-full flex flex-col', className)}>
       <Link href={`/product/${id}`} className="flex flex-col h-full">
         <div className="flex justify-center p-6 bg-secondary rounded-lg h-[260px]">
-          <img className="w-[215px] h-[215px] transition-transform duration-300 ease-in-out hover:translate-y-2" src={imageUrl} alt={name} />
+          <CldImage
+            src={imageUrl}
+            alt={name}
+            width={215}
+            height={215}
+            crop="fill"
+            gravity="auto"
+            loading="lazy"
+            className="w-[215px] h-[215px] transition-transform duration-300 ease-in-out hover:translate-y-2"
+          />
+
         </div>
 
         <Title text={name} size="sm" className="mb-1 mt-3 font-bold" />

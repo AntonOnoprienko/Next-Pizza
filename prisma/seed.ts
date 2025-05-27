@@ -59,7 +59,7 @@ async function up() {
     data: {
       name: "Пепперони фреш",
       imageUrl:
-        "https://media.dodostatic.net/image/r:292x292/11ee7d612fc7b7fca5be822752bee1e5.avif",
+        "pizza/kt55pnu34dwxvzpqqvcq",
       categoryId: 1,
       ingredients: {
         connect: _ingredients.slice(0, 5),
@@ -71,7 +71,7 @@ async function up() {
     data: {
       name: "Сырная",
       imageUrl:
-        "https://media.dodostatic.net/image/r:233x233/11EE7D610CF7E265B7C72BE5AE757CA7.webp",
+        "pizza/sducpzxocpaorkbnmvia",
       categoryId: 1,
       ingredients: {
         connect: _ingredients.slice(5, 10),
@@ -82,7 +82,7 @@ async function up() {
     data: {
       name: "Чоризо фреш",
       imageUrl:
-        "https://media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp",
+        "pizza/crnuppteokh1sggodnik",
       categoryId: 1,
       ingredients: {
         connect: _ingredients.slice(10, 40),
@@ -94,7 +94,7 @@ async function up() {
     data: {
       name: "Аррива!",
       imageUrl:
-        "https://media.dodostatic.net/image/r:292x292/019591a0591d7642b97bf6ed6da45252.avif",
+        "pizza/nemo6xpot1p0bvfcss6y",
       categoryId: 1,
       ingredients: {
         connect: _ingredients.slice(11, 18),
@@ -106,7 +106,7 @@ async function up() {
     data: {
       name: "Харьков 1654",
       imageUrl:
-        "https://media.dodostatic.net/image/r:292x292/019591a8006370038e0a9fb3e94925d1.avif",
+        "pizza/vsr7mtsxpsbosxuurcw8",
       categoryId: 1,
       ingredients: {
         connect: _ingredients.slice(8, 15),
@@ -118,7 +118,7 @@ async function up() {
     data: {
       name: "Мясной микс с говядиной и колбасками",
       imageUrl:
-        "https://media.dodostatic.net/image/r:292x292/0194d4f6904975a5a6427e297591980d.avif",
+        "pizza/wxne07l8sq8a4pioymrw",
       categoryId: 1,
       ingredients: {
         connect: _ingredients.slice(4, 9),
@@ -133,31 +133,31 @@ async function up() {
         productId: pizza1.id,
         pizzaType: 1,
         size: 20,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/0196361e0a4973709768f45ffcc468de.avif",
+        imageUrl: "pizza/od2r8urunijxigyb1dir",
       }),
       generateProductItem({
         productId: pizza1.id,
         pizzaType: 1,
         size: 30,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/11ee7d612fc7b7fca5be822752bee1e5.avif",
+        imageUrl: "pizza/kt55pnu34dwxvzpqqvcq",
       }),
       generateProductItem({
         productId: pizza1.id,
         pizzaType: 2,
         size: 30,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/11ee7d612ff49f2c98064fb647c3aa86.avif",
+        imageUrl: "pizza/qnbnvufd2piuamtrj6mr",
       }),
       generateProductItem({
         productId: pizza1.id,
         pizzaType: 1,
         size: 40,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/11ee7d6130241e75b0ab33725248c0d0.avif",
+        imageUrl: "pizza/b5dpfzx91176pcfmjtqk",
       }),
       generateProductItem({
         productId: pizza1.id,
         pizzaType: 2,
         size: 40,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/11ee7d61304faf5a98a6958f2bb2d260.avif",
+        imageUrl: "pizza/aofbu3gjsan7msa3e3wi",
       }),
 
       // Пицца "Сырная"
@@ -165,31 +165,31 @@ async function up() {
         productId: pizza2.id,
         pizzaType: 1,
         size: 20,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/01963620711970c7bd2e67ffaf21ee79.avif",
+        imageUrl: "pizza/lm1rvjsigcehmkhtying",
       }),
       generateProductItem({
         productId: pizza2.id,
         pizzaType: 1,
         size: 30,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/11ee7d610d2925109ab2e1c92cc5383c.avif",
+        imageUrl: "pizza/sducpzxocpaorkbnmvia",
       }),
       generateProductItem({
         productId: pizza2.id,
         pizzaType: 2,
         size: 30,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/11ee7d610d5dbb14a551b640b90776fc.avif",
+        imageUrl: "pizza/jfm1zb9ofcygoalkemnv",
       }),
       generateProductItem({
         productId: pizza2.id,
         pizzaType: 1,
         size: 40,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/11ee7d610d91679bb519f38c3f45880f.avif",
+        imageUrl: "pizza/bfipqdqngzlfcprhvkcv",
       }),
       generateProductItem({
         productId: pizza2.id,
         pizzaType: 2,
         size: 40,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/11ee7d610dbefef68ade96df563888b4.avif",
+        imageUrl: "pizza/dalakbgu6rbkdwped7e8",
       }),
 
       // Пицца "Чоризо фреш"
@@ -197,31 +197,31 @@ async function up() {
         productId: pizza3.id,
         pizzaType: 1,
         size: 20,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/0196361f5a95778db95f1c99c26cbf96.avif",
+        imageUrl: "pizza/l4o0fy8femvpman1qv0r",
       }),
       generateProductItem({
         productId: pizza3.id,
         pizzaType: 1,
         size: 30,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/11ee7d61706d472f9a5d71eb94149304.avif",
+        imageUrl: "pizza/crnuppteokh1sggodnik",
       }),
       generateProductItem({
         productId: pizza3.id,
         pizzaType: 2,
         size: 30,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/11ee7d61709f9f34a0b85f25ecdb286d.avif",
+        imageUrl: "pizza/d1gvofdif9vb5s0uhbjp",
       }),
       generateProductItem({
         productId: pizza3.id,
         pizzaType: 1,
         size: 40,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/11ee7d6170d5f99c89e91a2b3b91d16e.avif",
+        imageUrl: "pizza/xtom0tlxr4elzpfkisp4",
       }),
       generateProductItem({
         productId: pizza3.id,
         pizzaType: 2,
         size: 40,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/11ee7d6171059e7d8d5af72d04721d66.avif",
+        imageUrl: "pizza/dekitise03wo1mjxrr7z",
       }),
 
 
@@ -231,31 +231,31 @@ async function up() {
         productId: pizza4.id,
         pizzaType: 1,
         size: 20,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/019591a0e98a79599259845460d9c682.avif",
+        imageUrl: "pizza/h1dwlixg2talrwgwhfup",
       }),
       generateProductItem({
         productId: pizza4.id,
         pizzaType: 1,
         size: 30,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/019591a0591d7642b97bf6ed6da45252.avif",
+        imageUrl: "pizza/nemo6xpot1p0bvfcss6y",
       }),
       generateProductItem({
         productId: pizza4.id,
         pizzaType: 2,
         size: 30,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/019591a0512e772db666c21eca238bf3.avif",
+        imageUrl: "pizza/t4svvooon0mq94rquopq",
       }),
       generateProductItem({
         productId: pizza4.id,
         pizzaType: 1,
         size: 40,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/019591a041db716ab6c22e7d675722bd.avif",
+        imageUrl: "pizza/m4z2hrgywfixjobbesbb",
       }),
       generateProductItem({
         productId: pizza4.id,
         pizzaType: 2,
         size: 40,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/019591a03d907329bdd796e81d9b2fc0.avif",
+        imageUrl: "pizza/eqgfmjzimx3n6usvezve",
       }),
 
       //Пицца Харьковская
@@ -264,32 +264,32 @@ async function up() {
         productId: pizza5.id,
         pizzaType: 1,
         size: 20,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/019636153a22759caaabffae8a743b8f.avif",
+        imageUrl: "pizza/w3uyti46tbagypsurzv1",
       }),
       generateProductItem({
         productId: pizza5.id,
         pizzaType: 1,
         size: 30,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/019591a8006370038e0a9fb3e94925d1.avif",
+        imageUrl: "pizza/vsr7mtsxpsbosxuurcw8",
       }),
       generateProductItem({
         productId: pizza5.id,
         pizzaType: 1,
         size: 40,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/019591a81257786ebe90159effdfcf7b.avif",
+        imageUrl: "pizza/rkeezkonura3ko4zbitq",
       }),
 
       generateProductItem({
         productId: pizza5.id,
         pizzaType: 2,
         size: 30,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/019591a80924707f8d472bdcd622dd30.avif",
+        imageUrl: "pizza/skdsgtcytij6gdicw6mr",
       }),
       generateProductItem({
         productId: pizza5.id,
         pizzaType: 2,
         size: 40,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/019591a81a4b768a908acb98d51c85fe.avif",
+        imageUrl: "pizza/arowjhjfzmgvdqr8qtpw",
       }),
 
       //Пицца Мясной микс
@@ -298,32 +298,32 @@ async function up() {
         productId: pizza6.id,
         pizzaType: 1,
         size: 20,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/0194d4f62142707eaebe3a3402a63ddc.avif",
+        imageUrl: "pizza/aiy0zbzz42jd5xunrgcg",
       }),
       generateProductItem({
         productId: pizza6.id,
         pizzaType: 1,
         size: 30,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/0194d4f6904975a5a6427e297591980d.avif",
+        imageUrl: "pizza/wxne07l8sq8a4pioymrw",
       }),
       generateProductItem({
         productId: pizza6.id,
         pizzaType: 1,
         size: 40,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/0194d4f6b569714c81b4699dcda65116.avif",
+        imageUrl: "pizza/pxfguj9gqxp7lv5s221h",
       }),
 
       generateProductItem({
         productId: pizza6.id,
         pizzaType: 2,
         size: 30,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/0194d4f6a6f07488bea1dcb9340e3495.avif",
+        imageUrl: "pizza/mmti4kfzprhwiqqxo4qa",
       }),
       generateProductItem({
         productId: pizza6.id,
         pizzaType: 2,
         size: 40,
-        imageUrl: "https://media.dodostatic.net/image/r:760x760/0194d4f6bbc67215a6c489e31f9b3f1c.avif",
+        imageUrl: "pizza/jwxe4dacsb59haok5p7y",
       }),
 
       // Остальные продукты
