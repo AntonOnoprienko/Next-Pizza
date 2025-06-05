@@ -40,6 +40,7 @@ model Product {
   id          Int           @id @default(autoincrement())
   name        String
   imageUrl    String
+  description String?
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
   categoryId  Int
@@ -57,6 +58,8 @@ model ProductItem {
   productId Int
   cartItems CartItem[]
   product   Product    @relation(fields: [productId], references: [id])
+  extraIngredients ProductItemExtraIngredient[]
+
 }
 
 model Ingredient {
@@ -68,6 +71,7 @@ model Ingredient {
   updatedAt DateTime   @updatedAt
   cartItems CartItem[] @relation("CartItemToIngredient")
   products  Product[]  @relation("IngredientToProduct")
+  productItemExtras ProductItemExtraIngredient[]
 }
 
 model Cart {
@@ -119,6 +123,17 @@ model VerificationCode {
   user      User     @relation(fields: [userId], references: [id])
 
   @@unique([userId, code])
+}
+
+model ProductItemExtraIngredient {
+  id             Int          @id @default(autoincrement())
+  productItemId  Int
+  ingredientId   Int
+
+  productItem    ProductItem  @relation(fields: [productItemId], references: [id])
+  ingredient     Ingredient   @relation(fields: [ingredientId], references: [id])
+
+  @@unique([productItemId, ingredientId])
 }
 
 enum OrderStatus {

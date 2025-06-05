@@ -3,14 +3,22 @@ import { ChooseProductModal } from "@/src/components/shared/modals/choose-produc
 import { notFound } from "next/navigation"
 
 export default async function ProductModalPage({ params: { id } }: { params: { id: string } }) {
-  const product = await prisma.product.findFirst({ where: {
-    id: Number(id)
-  },
+  const product = await prisma.product.findFirst({
+  where: { id: Number(id) },
   include: {
-    ingredients: true,
-    items: true
+    ingredients: true, // базовые ингредиенты продукта
+    items: {
+      include: {
+        extraIngredients: { // связь ProductItemExtraIngredient с ингредиентом
+          include: {
+            ingredient: true // сам объект ингредиента
+          }
+        }
+      }
+    }
   }
-})
+});
+
 
   if(!product) {
     return notFound()

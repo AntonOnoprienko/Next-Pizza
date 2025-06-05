@@ -15,6 +15,7 @@ interface Props {
   imageUrl: string;
   className?: string;
   ingredients: Ingredient[];
+  description?: string,
 }
 
 export const ProductCard: React.FC<Props> = ({
@@ -24,7 +25,8 @@ export const ProductCard: React.FC<Props> = ({
   count,
   imageUrl,
   className,
-  ingredients
+  ingredients,
+  description
 }) => {
   return (
     <div className={cn('h-full flex flex-col', className)}>
@@ -36,7 +38,6 @@ export const ProductCard: React.FC<Props> = ({
             width={215}
             height={215}
             crop="fill"
-            gravity="auto"
             loading="lazy"
             className="w-[215px] h-[215px] transition-transform duration-300 ease-in-out hover:translate-y-2"
           />
@@ -45,6 +46,7 @@ export const ProductCard: React.FC<Props> = ({
 
         <Title text={name} size="sm" className="mb-1 mt-3 font-bold" />
         <p className="text-sm text-gray-400">
+          {description}
           {ingredients.map((ingredient) => ingredient.name).join(', ')}
         </p>
         <div className="flex justify-between items-center mt-auto pt-4">
