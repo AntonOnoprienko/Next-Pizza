@@ -8,14 +8,14 @@ type Props = {
   description?: string | null;
   textDetails: string;
   ingredients: Ingredient[];
-  excludeIngredients: Set<number>;
+  excludedIngredients: Set<number>;
   onToggleExclude: (id: number) => void;
 }
 
 export const DescriptionAndIngredients: React.FC<Props> = ({
   description,
   ingredients,
-  excludeIngredients,
+  excludedIngredients,
   onToggleExclude,
   textDetails
 }) => {
@@ -29,7 +29,7 @@ export const DescriptionAndIngredients: React.FC<Props> = ({
               id={ingredient.id}
               name={ingredient.name}
               callback={onToggleExclude}
-              isActive={excludeIngredients.has(ingredient.id)}
+              isActive={excludedIngredients.has(ingredient.id)}
             />
             {idx < ingredients.length - 1 && <span>,&nbsp;</span>}
           </React.Fragment>

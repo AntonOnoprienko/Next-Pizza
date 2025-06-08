@@ -10,6 +10,7 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger,
+    SheetDescription
 } from '@/src/components/ui/sheet';
 import { Button } from '../ui';
 import { ArrowRight } from 'lucide-react';
@@ -74,48 +75,64 @@ const excludedIngredients: Ingredient[] = [
 
 
 export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
+
+// const adaptedItem = {
+//   id: cartItem.id,
+//   quantity: cartItem.quantity,
+//   price: cartItem.productItem.price,
+//   size: cartItem.productItem.size,
+//   type: cartItem.productItem.pizzaType,
+//   imageUrl: cartItem.productItem.imageUrl || cartItem.productItem.product.imageUrl,
+//   name: cartItem.productItem.product.name,
+//   excludedIngredients: cartItem.ingredients,
+//   extraIngredients: cartItem.productItem.extraIngredients.map(e => e.ingredient)
+// }
+
     return (
         <Sheet>
             <SheetTrigger asChild>{children}</SheetTrigger>
-            <SheetContent className="flex flex-col justify-between pb-0 bg-[#F4F1EE]" aria-describedby={undefined}>
-                <SheetHeader>
+            <SheetContent className="flex flex-col justify-between pb-0 bg-[#F4F1EE]">
+                <SheetHeader className="mb-2">
                     <SheetTitle>
                         В корзине <span className="font-bold">3 товара</span>
                     </SheetTitle>
+                    <SheetDescription>
+                        Проверьте состав и количество товаров перед оформлением заказа.
+                    </SheetDescription>
                 </SheetHeader>
 
-                <div className="-mx-6 mt-5 flex-1 overflow-auto">
+                <div className="-mx-6 mt-2 flex-1 overflow-auto">
                     <div className="mb-2">
                         <CartDrawerItem
-                    id={1}
-                    imageUrl={'pizza/kt55pnu34dwxvzpqqvcq'}
-                    name={'Пеперони фреш'}
-                    price={440} quantity={1}
-                    size={30}
-                    type={1}
-                    excludedIngredients={selectedIngredients} extraIngredients={excludedIngredients} />
+                            id={1}
+                            imageUrl={'pizza/kt55pnu34dwxvzpqqvcq'}
+                            name={'Пеперони фреш'}
+                            price={440} quantity={1}
+                            size={30}
+                            type={1}
+                            excludedIngredients={selectedIngredients} extraIngredients={excludedIngredients} />
 
                     </div>
                     <div className="mb-2">
                         <CartDrawerItem
-                    id={1}
-                    imageUrl={'pizza/kt55pnu34dwxvzpqqvcq'}
-                    name={'Пеперони фреш'}
-                    price={440} quantity={1}
-                    size={30}
-                    type={1}
-                    excludedIngredients={selectedIngredients} extraIngredients={excludedIngredients} />
+                            id={1}
+                            imageUrl={'pizza/kt55pnu34dwxvzpqqvcq'}
+                            name={'Пеперони фреш'}
+                            price={440} quantity={1}
+                            size={30}
+                            type={1}
+                            excludedIngredients={selectedIngredients} extraIngredients={excludedIngredients} />
 
                     </div>
                     <div className="mb-2">
                         <CartDrawerItem
-                    id={1}
-                    imageUrl={'pizza/kt55pnu34dwxvzpqqvcq'}
-                    name={'Пеперони фреш'}
-                    price={440} quantity={1}
-                    size={30}
-                    type={1}
-                    excludedIngredients={selectedIngredients} extraIngredients={excludedIngredients} />
+                            id={1}
+                            imageUrl={'pizza/kt55pnu34dwxvzpqqvcq'}
+                            name={'Пеперони фреш'}
+                            price={440} quantity={1}
+                            size={30}
+                            type={1}
+                            excludedIngredients={selectedIngredients} extraIngredients={excludedIngredients} />
 
                     </div>
 
@@ -124,17 +141,17 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
 
                     <div className="mb-2">
                         <CartDrawerItem
-                    id={1}
-                    imageUrl={'pizza/kt55pnu34dwxvzpqqvcq'}
-                    name={'Пеперони фреш'}
-                    price={440} quantity={1}
-                    size={30}
-                    type={1}
-                    excludedIngredients={selectedIngredients} extraIngredients={excludedIngredients} />
+                            id={1}
+                            imageUrl={'pizza/kt55pnu34dwxvzpqqvcq'}
+                            name={'Пеперони фреш'}
+                            price={440} quantity={1}
+                            size={30}
+                            type={1}
+                            excludedIngredients={selectedIngredients} extraIngredients={excludedIngredients} />
 
                     </div>
                 </div>
-                
+
 
                 <SheetFooter className="-mx-6 bg-white p-8">
                     <div className="w-full">

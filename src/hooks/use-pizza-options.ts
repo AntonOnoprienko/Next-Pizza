@@ -12,7 +12,7 @@ export const usePizzaOption = (
   const [type, setType] = React.useState<PizzaType>(1);
 
   const [selectedIngredients, { toggle: addIngredient }] = useSet(new Set<number>());
-  const [excludeIngredients, { toggle: excludeIngredient }] = useSet(new Set<number>());
+  const [excludedIngredients, { toggle: excludeIngredient }] = useSet(new Set<number>());
 
   const selectedItem = items.find(item => item.size === size && item.pizzaType === type);
   const selectedImg = selectedItem?.imageUrl || imageUrl;
@@ -63,7 +63,7 @@ export const usePizzaOption = (
     totalPrice,
     selectedIngredients,
     addIngredient,
-    excludeIngredients,
+    excludedIngredients,
     excludeIngredient,
     availablePizzaSize,
     textDetails,

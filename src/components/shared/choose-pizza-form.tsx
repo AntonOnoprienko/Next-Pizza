@@ -45,7 +45,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
     totalPrice,
     selectedIngredients,
     addIngredient,
-    excludeIngredients,
+    excludedIngredients,
     excludeIngredient,
     availablePizzaSize,
     textDetails
@@ -62,7 +62,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
       selectedImg,
       totalPrice,
       selectedItem,
-      ingredients
+      excludedIngredients
     })
   }
 
@@ -76,7 +76,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
         <DescriptionAndIngredients
           description={description}
           ingredients={ingredients}
-          excludeIngredients={excludeIngredients}
+          excludedIngredients={excludedIngredients}
           onToggleExclude={excludeIngredient}
           textDetails={textDetails} />
 
