@@ -17,139 +17,57 @@ import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { CartDrawerItem } from './cart-drawer-item';
 import { Ingredient } from '@prisma/client';
-
-const selectedIngredients: Ingredient[] = [
-    {
-        id: 1,
-        name: 'Моцарелла',
-        price: 25,
-        imageUrl: '/images/ingredients/mozzarella.png',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-
-    },
-    {
-        id: 2,
-        name: 'Пепперони',
-        price: 30,
-        imageUrl: '/images/ingredients/pepperoni.png',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-    },
-    {
-        id: 3,
-        name: 'Оливки',
-        price: 15,
-        imageUrl: '/images/ingredients/olives.png',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-    },
-];
-
-const excludedIngredients: Ingredient[] = [
-    {
-        id: 4,
-        name: 'Лук',
-        price: 10,
-        imageUrl: '/images/ingredients/onion.png',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-    },
-    {
-        id: 5,
-        name: 'Перец',
-        price: 12,
-        imageUrl: '/images/ingredients/pepper.png',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-    },
-    {
-        id: 6,
-        name: 'Шампиньоны',
-        price: 18,
-        imageUrl: '/images/ingredients/mushrooms.png',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-    },
-];
+import { useCartStore } from '@/src/store';
+import { PizzaSize, PizzaType } from '@/src/constants/pizza';
 
 
 export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
 
-// const adaptedItem = {
-//   id: cartItem.id,
-//   quantity: cartItem.quantity,
-//   price: cartItem.productItem.price,
-//   size: cartItem.productItem.size,
-//   type: cartItem.productItem.pizzaType,
-//   imageUrl: cartItem.productItem.imageUrl || cartItem.productItem.product.imageUrl,
-//   name: cartItem.productItem.product.name,
-//   excludedIngredients: cartItem.ingredients,
-//   extraIngredients: cartItem.productItem.extraIngredients.map(e => e.ingredient)
-// }
+const totalAmount = useCartStore(state => state.totalAmount);
+const fetchCartItems = useCartStore(state => state.fetchCartItems);
+const items = useCartStore(state => state.items);
+const updateItemQuantity = useCartStore(state => state.updateItemQuantity);
 
+const onClickCountButton = (id: number, quantity: number, type: 'plus' | 'minus') => {
+    const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1;
+    updateItemQuantity(id, newQuantity);
+}
+
+    React.useEffect(() => {
+        fetchCartItems()
+    }, [])
     return (
         <Sheet>
             <SheetTrigger asChild>{children}</SheetTrigger>
             <SheetContent className="flex flex-col justify-between pb-0 bg-[#F4F1EE]">
                 <SheetHeader className="mb-2">
                     <SheetTitle>
-                        В корзине <span className="font-bold">3 товара</span>
+                        В корзине <span className="font-bold">{items.length + " товар(а)"}</span>
                     </SheetTitle>
                     <SheetDescription>
                         Проверьте состав и количество товаров перед оформлением заказа.
                     </SheetDescription>
                 </SheetHeader>
-
                 <div className="-mx-6 mt-2 flex-1 overflow-auto">
-                    <div className="mb-2">
+                    {items && items.map(item => (
+                        
                         <CartDrawerItem
-                            id={1}
-                            imageUrl={'pizza/kt55pnu34dwxvzpqqvcq'}
-                            name={'Пеперони фреш'}
-                            price={440} quantity={1}
-                            size={30}
-                            type={1}
-                            excludedIngredients={selectedIngredients} extraIngredients={excludedIngredients} />
+                            key={item.id}
+                            id={item.id}
+                            imageUrl={item.imageUrl}
+                            name={item.name}
+                            price={item.price}
+                            quantity={item.quantity}
+                            size={item.size as PizzaSize}
+                            type={item.type as PizzaType}
+                            excludedIngredients={item.excludedIngredients}
+                            extraIngredients={item.extraIngredients}
+                            className='mb-2'
+                            onClickCountButton={type => onClickCountButton(item.id, item.quantity, type)}
+                             />
 
-                    </div>
-                    <div className="mb-2">
-                        <CartDrawerItem
-                            id={1}
-                            imageUrl={'pizza/kt55pnu34dwxvzpqqvcq'}
-                            name={'Пеперони фреш'}
-                            price={440} quantity={1}
-                            size={30}
-                            type={1}
-                            excludedIngredients={selectedIngredients} extraIngredients={excludedIngredients} />
-
-                    </div>
-                    <div className="mb-2">
-                        <CartDrawerItem
-                            id={1}
-                            imageUrl={'pizza/kt55pnu34dwxvzpqqvcq'}
-                            name={'Пеперони фреш'}
-                            price={440} quantity={1}
-                            size={30}
-                            type={1}
-                            excludedIngredients={selectedIngredients} extraIngredients={excludedIngredients} />
-
-                    </div>
-
-
-
-
-                    <div className="mb-2">
-                        <CartDrawerItem
-                            id={1}
-                            imageUrl={'pizza/kt55pnu34dwxvzpqqvcq'}
-                            name={'Пеперони фреш'}
-                            price={440} quantity={1}
-                            size={30}
-                            type={1}
-                            excludedIngredients={selectedIngredients} extraIngredients={excludedIngredients} />
-
-                    </div>
+                    ) )
+                }
                 </div>
 
 
@@ -160,7 +78,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
                                 Итого
                                 <div className="flex-1 border-b border-dashed border-b-neutral-200 relative -top-1 mx-2" />
                             </span>
-                            <span className="font-bold text-lg">500 ₴</span>
+                            <span className="font-bold text-lg">{totalAmount} ₴</span>
                         </div>
 
                         <Link href="/checkout">

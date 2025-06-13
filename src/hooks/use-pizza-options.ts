@@ -31,6 +31,17 @@ export const usePizzaOption = (
     ...item,
     disabled: !availableSizesSet.has(Number(item.value) as PizzaSize),
   }));
+  
+  const allowedIngredients = React.useMemo(() => 
+  new Set(selectedItem?.extraIngredients.map(e => e.ingredientId)), 
+  [selectedItem]
+);
+
+const filteredIngredients = React.useMemo(() => 
+  Array.from(selectedIngredients).filter(id => allowedIngredients.has(id)), 
+  [selectedIngredients, allowedIngredients]
+);
+
 
   React.useEffect(() => {
     const availableSizes = items
@@ -41,16 +52,6 @@ export const usePizzaOption = (
       setSize(availableSizes[0] as PizzaSize);
     }
   }, [type, items]);
-
-  React.useEffect(() => {
-  const availableExtras = selectedItem?.extraIngredients.map(e => e.ingredientId) ?? [];
-
-  selectedIngredients.forEach(id => {
-    if (!availableExtras.includes(id)) {
-      addIngredient(id);
-    }
-  });
-}, [selectedItem]);
 
   return {
     size,
@@ -67,5 +68,6 @@ export const usePizzaOption = (
     excludeIngredient,
     availablePizzaSize,
     textDetails,
+    filteredIngredients
   };
 };

@@ -5,19 +5,15 @@ export const dynamic = "force-dynamic";
 
 export async function GET(req: NextRequest) {
   try {
-    const userId = 1;
     const token = req.cookies.get("cartToken")?.value;
 
     if (!token) {
-      return NextResponse.json({ cartItems: [] });
+      return NextResponse.json({totalAmount: 0, cartItems: [] });
     }
 
     const cart = await prisma.cart.findFirst({
       where: {
         OR: [
-          {
-            userId,
-          },
           {
             token,
           },
@@ -44,10 +40,10 @@ export async function GET(req: NextRequest) {
     });
 
     if (!cart) {
-      return NextResponse.json({ cartItems: [] });
+      return NextResponse.json({ totalAmount: 0, cartItems: [] });
     }
 
-    return NextResponse.json({ cartItems: cart.cartItems });
+    return NextResponse.json(cart);
   } catch (err) {
     console.log(err);
   }

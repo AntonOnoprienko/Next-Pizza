@@ -48,17 +48,21 @@ export const ChoosePizzaForm: React.FC<Props> = ({
     excludedIngredients,
     excludeIngredient,
     availablePizzaSize,
-    textDetails
+    textDetails,
+    filteredIngredients
   } = usePizzaOption(items, imageUrl);
 
 
 
   const handleClickAdd = () => {
     onClickAddCart?.();
+    if (!selectedItem) return;
+
+  
     console.log({
       size,
       type,
-      selectedIngredients,
+      filteredIngredients,
       selectedImg,
       totalPrice,
       selectedItem,
