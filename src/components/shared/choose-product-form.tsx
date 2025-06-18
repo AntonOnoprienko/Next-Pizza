@@ -4,6 +4,7 @@ import { Title } from ".";
 import { Button } from "../ui";
 import { Ingredient, ProductItem } from "@prisma/client";
 import { CldImage } from "next-cloudinary";
+import { CreateCartItemValues } from "@/src/services/dto/cart.dto";
 
 type Props = {
   imageUrl: string;
@@ -11,7 +12,7 @@ type Props = {
   ingredients: Ingredient[];
   items: ProductItem[];
   loading?: boolean;
-  onSubmit?: (itemId: number, ingredients: number[]) => void;
+  onSubmit: (values: CreateCartItemValues ) => void;
   className?: string;
   description: string | null;
 };
@@ -27,9 +28,10 @@ export const ChooseProductForm: React.FC<Props> = ({
   loading,
   onSubmit,
   className,
-  description
+  description,
 
 }) => {
+
   return (
     <div className={cn(className, "flex flex-1")}>
       <div className="flex items-center justify-center flex-1 relative w-full">
@@ -51,7 +53,11 @@ export const ChooseProductForm: React.FC<Props> = ({
           {textDetails}
         </p>
         <p>{description}</p>
-        <Button
+        <Button onClick={() => onSubmit({
+          productItemId: items[0].id,
+          excludedIngredients: [],
+          extraIngredients: []
+        })}
           className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10">
           Добавить в корзину за {totalPrice} ₽
         </Button>

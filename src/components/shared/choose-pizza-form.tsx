@@ -9,6 +9,8 @@ import { Ingredient } from "@prisma/client";
 import { PizzaSize, pizzaTypes, PizzaType } from "@/src/constants/pizza";
 import { ProductItemWithExtras } from "@/src/@types/prisma";
 import { usePizzaOption } from "@/src/hooks/use-pizza-options";
+import { CreateCartItemValues } from "@/src/services/dto/cart.dto";
+
 
 type Props = {
   imageUrl: string;
@@ -19,7 +21,7 @@ type Props = {
   loading?: boolean;
   onSubmit?: (itemId: number, ingredients: number[]) => void;
   className?: string;
-  onClickAddCart?: () => void
+  onClickAddCart?: (values: CreateCartItemValues) => void
 };
 
 
@@ -54,20 +56,16 @@ export const ChoosePizzaForm: React.FC<Props> = ({
 
 
 
-  const handleClickAdd = () => {
-    onClickAddCart?.();
-    if (!selectedItem) return;
 
-  
-    console.log({
-      size,
-      type,
-      filteredIngredients,
-      selectedImg,
-      totalPrice,
-      selectedItem,
-      excludedIngredients
-    })
+  const handleClickAdd = () => {
+    if (!selectedItem) return;
+    const values: CreateCartItemValues = {
+      productItemId: selectedItem.id,
+      excludedIngredients: Array.from(excludedIngredients),
+      extraIngredients: filteredIngredients
+    }
+    onClickAddCart?.(values)
+    console.log(values)
   }
 
   return (
@@ -76,7 +74,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
       <div className="w-[490px] bg-[rgb(252,252,252)] p-7">
 
         <Title text={name} size="md" className="font-extrabold mb-1" />
-        
+
         <DescriptionAndIngredients
           description={description}
           ingredients={ingredients}

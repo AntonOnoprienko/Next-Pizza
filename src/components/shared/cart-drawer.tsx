@@ -65,7 +65,10 @@ const onClickCountButton = (id: number, quantity: number, type: 'plus' | 'minus'
                             extraIngredients={item.extraIngredients}
                             className='mb-2'
                             onClickCountButton={type => onClickCountButton(item.id, item.quantity, type)}
-                            onClickRemove={() => removeCartItem(item.id)}
+                            onClickRemove={() => 
+                                {removeCartItem(item.id)
+                                console.log("Удаляем item с id", item.id)}
+                            }
                              />
 
                     ) )

@@ -56,5 +56,4 @@ export interface CreateCartItemValues {
   productItemId: number;
   excludedIngredients?: number[];
   extraIngredients?: number[];
-  quantity: number;
 }
