@@ -1,4 +1,3 @@
-import { Ingredient } from '@prisma/client';
 import { PizzaSize, PizzaType } from '@/src/constants/pizza';
 
 export interface CartItemProps {
@@ -11,7 +10,7 @@ export interface CartItemProps {
 
   size?: PizzaSize;
   type?: PizzaType;
-  extraIngredients?: Ingredient[];
-  excludedIngredients?: Ingredient[];
+  extraIngredients?: {name: string, price: number}[];
+  excludedIngredients?: {name: string}[];
   
 }
