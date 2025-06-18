@@ -13,14 +13,27 @@ export const updateCartTotalAmount = async (token: string) => {
           productItem: {
             include: {
               product: true,
-              extraIngredients: {
-                include: {
-                  ingredient: true,
+            },
+          },
+          cartItemExtraIngredients: {
+            include: {
+              ingredient: {
+                select: {
+                  name: true,
+                  price: true,
                 },
               },
             },
           },
-          ingredients: true,
+          cartItemExcludedIngredients: {
+            include: {
+              ingredient: {
+                select: {
+                  name: true,
+                },
+              },
+            },
+          },
         },
       },
     },
@@ -49,14 +62,27 @@ export const updateCartTotalAmount = async (token: string) => {
           productItem: {
             include: {
               product: true,
-              extraIngredients: {
-                include: {
-                  ingredient: true,
+            },
+          },
+          cartItemExtraIngredients: {
+            include: {
+              ingredient: {
+                select: {
+                  name: true,
+                  price: true,
                 },
               },
             },
           },
-          ingredients: true,
+          cartItemExcludedIngredients: {
+            include: {
+              ingredient: {
+                select: {
+                  name: true,
+                },
+              },
+            },
+          },
         },
       },
     },

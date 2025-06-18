@@ -15,13 +15,28 @@ const Home = async () => {
   const categories = await prisma.category.findMany({
     include: {
       products: {
-        include: {
-          ingredients: true,
-          items: true,
+        select: {
+          id: true,
+          name: true,
+          imageUrl: true,
+          description: true,
+          ingredients: {
+            select: {
+              name: true,
+            },
+          },
+          items: {
+            take: 1,
+            select: {
+              price: true,
+            },
+          },
         },
       },
     },
   });
+
+
 
   return (
     <>
@@ -46,7 +61,6 @@ const Home = async () => {
                       title={category.name}
                       categoryId={category.id}
                       items={category.products}
-                      
                     />
                   )
               )}

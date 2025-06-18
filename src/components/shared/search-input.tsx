@@ -7,6 +7,7 @@ import { useClickAway, useDebounce } from "react-use";
 import Link from "next/link";
 import { Api } from "@/src/services/api-client";
 import { Product } from "@prisma/client";
+import { CldImage } from "next-cloudinary";
 
 type Props = {
   className?: string;
@@ -90,12 +91,15 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
                 href={`/product/${item.id}`}
                 onClick={onClickItem}
               >
-                <img
+
+                <CldImage
                   className="rounded-sm"
-                  src={item.imageUrl || "./fallback.svg"}
+                  src={item.imageUrl}
                   alt={item.name}
                   width={32}
                   height={32}
+                  quality="auto"
+                  format="auto"
                 />
                 <span>{item.name}</span>
               </Link>

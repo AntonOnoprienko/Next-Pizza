@@ -27,6 +27,7 @@ const totalAmount = useCartStore(state => state.totalAmount);
 const fetchCartItems = useCartStore(state => state.fetchCartItems);
 const items = useCartStore(state => state.items);
 const updateItemQuantity = useCartStore(state => state.updateItemQuantity);
+const removeCartItem = useCartStore(state => state.removeCartItem);
 
 const onClickCountButton = (id: number, quantity: number, type: 'plus' | 'minus') => {
     const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1;
@@ -64,6 +65,7 @@ const onClickCountButton = (id: number, quantity: number, type: 'plus' | 'minus'
                             extraIngredients={item.extraIngredients}
                             className='mb-2'
                             onClickCountButton={type => onClickCountButton(item.id, item.quantity, type)}
+                            onClickRemove={() => removeCartItem(item.id)}
                              />
 
                     ) )

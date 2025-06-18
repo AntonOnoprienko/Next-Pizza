@@ -5,16 +5,16 @@ import { Ingredient } from "@prisma/client";
 import { PizzaSize, PizzaType } from "../constants/pizza";
 
 export interface CartStateItem {
-      id: number;
-      imageUrl: string;
-      name: string;
-      price: number;
-      quantity: number;
-    
-      size?: number | null;
-        type?: number | null;
-       extraIngredients?: Ingredient[];
-        excludedIngredients?: Ingredient[];
+  id: number;
+  imageUrl: string;
+  name: string;
+  price: number;
+  quantity: number;
+
+  size?: number | null;
+  type?: number | null;
+  extraIngredients?: Ingredient[];
+  excludedIngredients?: Ingredient[];
 }
 
 export interface CartState {
@@ -69,23 +69,25 @@ export const useCartStore = create<CartState>((set, get) => ({
   },
 
   removeCartItem: async (id: number) => {
-    // try {
-    //   set((state) => ({
-    //     loading: true,
-    //     error: false,
-    //     items: state.items.map((item) => (item.id === id ? { ...item, disabled: true } : item)),
-    //   }));
-    //   const data = await Api.cart.removeCartItem(id);
-    //   set(getCartDetails(data));
-    // } catch (error) {
-    //   console.error(error);
-    //   set({ error: true });
-    // } finally {
-    //   set((state) => ({
-    //     loading: false,
-    //     items: state.items.map((item) => ({ ...item, disabled: false })),
-    //   }));
-    // }
+    try {
+      set((state) => ({
+        loading: true,
+        error: false,
+        items: state.items.map((item) =>
+          item.id === id ? { ...item, disabled: true } : item
+        ),
+      }));
+      const data = await Api.cart.removeCartItem(id);
+      set(getCartDetails(data));
+    } catch (error) {
+      console.error(error);
+      set({ error: true });
+    } finally {
+      set((state) => ({
+        loading: false,
+        items: state.items.map((item) => ({ ...item, disabled: false })),
+      }));
+    }
   },
 
   addCartItem: async (values: any) => {

@@ -1,25 +1,43 @@
 import {
   Cart,
-  CartItem,
-  Ingredient,
   Product,
   ProductItem,
-  ProductItemExtraIngredient,
+  Prisma,
 } from "@prisma/client";
 
 export type ProductItemDTO = ProductItem & {
   product: Product;
-    extraIngredients: (ProductItemExtraIngredient & {
-      ingredient: Ingredient;
-    })[];
 };
 
-
-export type CartItemDTO = CartItem & {
-  productItem: ProductItemDTO;
-  ingredients: Ingredient[];
-};
+export type CartItemDTO = Prisma.CartItemGetPayload<{
+  include: {
+    productItem: {
+      select: { price: true };
+    };
+    cartItemExtraIngredients: {
+      include: {
+        ingredient: {
+          select: { name: true; price: true };
+        };
+      };
+    };
+    cartItemExcludedIngredients: {
+      include: {
+        ingredient: {
+          select: { name: true };
+        };
+      };
+    };
+  };
+}>;
 
 export interface CartDTO extends Cart {
   cartItems: CartItemDTO[];
+}
+
+export interface CreateCartItemValues {
+  productItemId: number;
+  excludedIngredients?: number[];
+  extraIngredients?: number[];
+  quantity: number;
 }
