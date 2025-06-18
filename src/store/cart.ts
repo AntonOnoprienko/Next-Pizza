@@ -1,8 +1,6 @@
 import { create } from "zustand";
 import { Api } from "../services/api-client";
 import { getCartDetails } from "../lib/get-cart-details";
-import { Ingredient } from "@prisma/client";
-import { PizzaSize, PizzaType } from "../constants/pizza";
 
 export interface CartStateItem {
   id: number;
@@ -13,8 +11,8 @@ export interface CartStateItem {
 
   size?: number | null;
   type?: number | null;
-  extraIngredients?: Ingredient[];
-  excludedIngredients?: Ingredient[];
+  extraIngredients?: {name: string, price: number}[];
+  excludedIngredients?: {name: string}[];
 }
 
 export interface CartState {

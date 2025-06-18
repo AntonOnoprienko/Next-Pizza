@@ -12,24 +12,41 @@ export type ProductItemDTO = ProductItem & {
 export type CartItemDTO = Prisma.CartItemGetPayload<{
   include: {
     productItem: {
-      select: { price: true };
+      select: {
+        price: true;
+        size: true;
+        pizzaType: true;
+        imageUrl: true;
+        product: {
+          select: {
+            name: true;
+            imageUrl: true;
+          };
+        };
+      };
     };
     cartItemExtraIngredients: {
       include: {
         ingredient: {
-          select: { name: true; price: true };
+          select: {
+            name: true;
+            price: true;
+          };
         };
       };
     };
     cartItemExcludedIngredients: {
       include: {
         ingredient: {
-          select: { name: true };
+          select: {
+            name: true;
+          };
         };
       };
     };
   };
 }>;
+
 
 export interface CartDTO extends Cart {
   cartItems: CartItemDTO[];
