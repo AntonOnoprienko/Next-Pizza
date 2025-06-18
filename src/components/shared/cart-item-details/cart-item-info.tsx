@@ -6,8 +6,8 @@ interface Props {
   name: string;
   size?: PizzaSize ;
   type?: PizzaType;
-  extraIngredients?: Ingredient[];
-  excludedIngredients?: Ingredient[];
+  extraIngredients?: {name: string, price: number}[];
+  excludedIngredients?: {name: string}[];
   className?: string;
 }
 
