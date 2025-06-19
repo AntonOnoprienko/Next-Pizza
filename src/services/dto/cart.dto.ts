@@ -45,7 +45,9 @@ export type CartItemDTO = Prisma.CartItemGetPayload<{
       };
     };
   };
-}>;
+}> & {
+  totalPrice: number; 
+};
 
 
 export interface CartDTO extends Cart {
@@ -56,4 +58,25 @@ export interface CreateCartItemValues {
   productItemId: number;
   excludedIngredients?: number[];
   extraIngredients?: number[];
+}
+
+export interface LightCartItemDTO {
+  id: number;
+  quantity: number;
+  productItem: {
+    price: number;
+    size?: number | null;
+    pizzaType?: number | null;
+    imageUrl?: string | null;
+    product: {
+      name: string;
+      imageUrl: string;
+    };
+  };
+  cartItemExtraIngredients: {
+    ingredient: {
+      name: string;
+      price: number;
+    };
+  }[];
 }
