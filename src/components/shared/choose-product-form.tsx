@@ -4,7 +4,7 @@ import { Title } from ".";
 import { Button } from "../ui";
 import { Ingredient, ProductItem } from "@prisma/client";
 import { CldImage } from "next-cloudinary";
-import { CreateCartItemValues } from "@/src/services/dto/cart.dto";
+import { CartItemForToast } from "./modals/choose-product-modal";
 
 type Props = {
   imageUrl: string;
@@ -12,13 +12,12 @@ type Props = {
   ingredients: Ingredient[];
   items: ProductItem[];
   loading?: boolean;
-  onSubmit: (values: CreateCartItemValues ) => void;
+  onSubmit: (cartItem: CartItemForToast ) => void;
   className?: string;
   description: string | null;
 };
 
-const textDetails = '30см , традиционное тесто 30';
-const totalPrice = 220;
+
 
 export const ChooseProductForm: React.FC<Props> = ({
   name,
@@ -31,6 +30,24 @@ export const ChooseProductForm: React.FC<Props> = ({
   description,
 
 }) => {
+
+  const textDetails = '30см , традиционное тесто 30';
+  const firstItem = items[0];
+
+  const handleClickAdd = () => {
+    
+      const cartItem = {
+      productItemId: firstItem.id,
+      excludedIngredients: [],
+      extraIngredients: [],
+      name,                    
+      imageUrl: firstItem.imageUrl || './fallback.svg',    
+      price: firstItem.price,
+    };
+    onSubmit(cartItem);
+
+    
+  }
 
   return (
     <div className={cn(className, "flex flex-1")}>
@@ -53,13 +70,10 @@ export const ChooseProductForm: React.FC<Props> = ({
           {textDetails}
         </p>
         <p>{description}</p>
-        <Button onClick={() => onSubmit({
-          productItemId: items[0].id,
-          excludedIngredients: [],
-          extraIngredients: []
-        })}
+        <Button disabled={loading}
+           onClick={handleClickAdd}
           className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10">
-          Добавить в корзину за {totalPrice} ₽
+         {loading? 'Идёт загрузка' : `Добавить в корзину за ${firstItem.price} ₴`}
         </Button>
       </div>
     </div>

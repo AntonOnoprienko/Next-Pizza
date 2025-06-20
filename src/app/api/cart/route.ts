@@ -96,25 +96,43 @@ export async function POST(req: NextRequest) {
 
     const userCart = await findOrCreateCart(token);
 
-    const findCartItem = await prisma.cartItem.findFirst({
+    const cartItems = await prisma.cartItem.findMany({
       where: {
         cartId: userCart.id,
         productItemId: data.productItemId,
+      },
+      include: {
         cartItemExcludedIngredients: {
-          every: {
-            ingredientId: {
-              in: data.excludedIngredients,
-            },
+          select: {
+            ingredientId: true,
+            
           },
         },
         cartItemExtraIngredients: {
-          every: {
-            ingredientId: {
-              in: data.extraIngredients,
-            },
+          select: {
+            ingredientId: true,
           },
         },
       },
+    });
+
+    const arraysMatch = (a: number[], b: number[]) => {
+      if (a.length !== b.length) return false;
+      const sortedA = [...a].sort();
+      const sortedB = [...b].sort();
+      return sortedA.every((val, idx) => val === sortedB[idx]);
+    };
+
+    const findCartItem = cartItems.find((item) => {
+      const excludedIds = item.cartItemExcludedIngredients.map(
+        (i) => i.ingredientId
+      );
+      const extraIds = item.cartItemExtraIngredients.map((i) => i.ingredientId);
+
+      return (
+        arraysMatch(excludedIds, data.excludedIngredients ?? []) &&
+        arraysMatch(extraIds, data.extraIngredients ?? [])
+      );
     });
 
     if (findCartItem) {
@@ -127,8 +145,10 @@ export async function POST(req: NextRequest) {
         },
       });
     } else {
-      const excluded = data.excludedIngredients?.map(id => ({ ingredientId: id })) ?? [];
-      const extra = data.extraIngredients?.map(id => ({ ingredientId: id })) ?? [];
+      const excluded =
+        data.excludedIngredients?.map((id) => ({ ingredientId: id })) ?? [];
+      const extra =
+        data.extraIngredients?.map((id) => ({ ingredientId: id })) ?? [];
 
       await prisma.cartItem.create({
         data: {

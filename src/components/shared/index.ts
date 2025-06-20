@@ -1,3 +1,4 @@
+export { CartItemToast } from './cart-item-toast';
 export { Header } from "./header";
 export { Container } from "./container";
 export { Title } from "./title";

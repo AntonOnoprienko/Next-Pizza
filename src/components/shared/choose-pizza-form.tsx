@@ -10,6 +10,7 @@ import { PizzaSize, pizzaTypes, PizzaType } from "@/src/constants/pizza";
 import { ProductItemWithExtras } from "@/src/@types/prisma";
 import { usePizzaOption } from "@/src/hooks/use-pizza-options";
 import { CreateCartItemValues } from "@/src/services/dto/cart.dto";
+import { CartItemForToast } from "./modals/choose-product-modal";
 
 
 type Props = {
@@ -19,9 +20,8 @@ type Props = {
   items: ProductItemWithExtras[];
   description?: string | null;
   loading?: boolean;
-  onSubmit?: (itemId: number, ingredients: number[]) => void;
+  onSubmit: (cartItem: CartItemForToast ) => void;
   className?: string;
-  onClickAddCart?: (values: CreateCartItemValues) => void
 };
 
 
@@ -34,7 +34,6 @@ export const ChoosePizzaForm: React.FC<Props> = ({
   loading,
   onSubmit,
   className,
-  onClickAddCart
 }) => {
 
   const {
@@ -58,14 +57,18 @@ export const ChoosePizzaForm: React.FC<Props> = ({
 
 
   const handleClickAdd = () => {
-    if (!selectedItem) return;
-    const values: CreateCartItemValues = {
+    if (selectedItem) {
+      const cartItem = {
       productItemId: selectedItem.id,
       excludedIngredients: Array.from(excludedIngredients),
-      extraIngredients: filteredIngredients
+      extraIngredients: filteredIngredients,
+      name,                    
+      imageUrl: selectedImg || './fallback.svg',    
+      price: totalPrice,
+    };
+    onSubmit(cartItem);
+
     }
-    onClickAddCart?.(values)
-    console.log(values)
   }
 
   return (
@@ -98,8 +101,8 @@ export const ChoosePizzaForm: React.FC<Props> = ({
           addIngredient={addIngredient}
           selectedIngredients={selectedIngredients} />
 
-        <Button onClick={handleClickAdd} className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10">
-          Добавить в корзину за {totalPrice} ₴
+        <Button disabled={loading} onClick={handleClickAdd} className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10">
+          {loading? 'Идёт загрузка' : `Добавить в корзину за ${totalPrice} ₴`}
         </Button>
       </div>
     </div>
