@@ -4,7 +4,7 @@ import { Title } from ".";
 import { Button } from "../ui";
 import { Ingredient, ProductItem } from "@prisma/client";
 import { CldImage } from "next-cloudinary";
-import { CartItemForToast } from "./modals/choose-product-modal";
+import { CartItemForToast } from "./cart-item-details/cart-item-details.types";
 
 type Props = {
   imageUrl: string;
@@ -41,7 +41,7 @@ export const ChooseProductForm: React.FC<Props> = ({
       excludedIngredients: [],
       extraIngredients: [],
       name,                    
-      imageUrl: firstItem.imageUrl || './fallback.svg',    
+      imageUrl: imageUrl || './fallback.svg',    
       price: firstItem.price,
     };
     onSubmit(cartItem);

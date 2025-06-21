@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Title } from ".";
 import { Button } from "../ui";
 import { Plus } from "lucide-react";
-import { Ingredient } from "@prisma/client";
 import { CldImage } from "next-cloudinary";
 
 interface Props {

@@ -8,9 +8,8 @@ import { Button } from "../ui";
 import { Ingredient } from "@prisma/client";
 import { PizzaSize, pizzaTypes, PizzaType } from "@/src/constants/pizza";
 import { ProductItemWithExtras } from "@/src/@types/prisma";
-import { usePizzaOption } from "@/src/hooks/use-pizza-options";
-import { CreateCartItemValues } from "@/src/services/dto/cart.dto";
-import { CartItemForToast } from "./modals/choose-product-modal";
+import { CartItemForToast } from "./cart-item-details/cart-item-details.types";
+import { usePizzaOption } from "@/src/hooks";
 
 
 type Props = {
@@ -101,7 +100,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
           addIngredient={addIngredient}
           selectedIngredients={selectedIngredients} />
 
-        <Button disabled={loading} onClick={handleClickAdd} className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10">
+        <Button  onClick={handleClickAdd} className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10">
           {loading? 'Идёт загрузка' : `Добавить в корзину за ${totalPrice} ₴`}
         </Button>
       </div>

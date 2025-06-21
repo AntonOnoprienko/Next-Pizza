@@ -4,11 +4,12 @@ import React from 'react';
 import { cn } from '@/src/lib/utils';
 import { Dialog, DialogContent, DialogTitle } from '@/src/components/ui/dialog';
 import { useRouter } from 'next/navigation';
-import { CartItemToast, ChoosePizzaForm, ChooseProductForm } from '../.';
+import { ChoosePizzaForm, ChooseProductForm } from '../.';
 import { ProductWithRelations } from '@/src/@types/prisma';
 import { useCartStore } from '@/src/store';
-import { CreateCartItemValues } from '@/src/services/dto/cart.dto';
-import toast from 'react-hot-toast';
+import { CartItemForToast } from '../cart-item-details/cart-item-details.types';
+import { useAddToCartToast } from '@/src/hooks';
+
 
 
 type Props = {
@@ -16,43 +17,15 @@ type Props = {
   product: ProductWithRelations;
 };
 
-export interface CartItemForToast extends CreateCartItemValues {
-  name: string;
-  imageUrl: string;
-  price: number;
-}
-
 export const ChooseProductModal: React.FC<Props> = ({ className, product }) => {
   const router = useRouter();
   const isPizza = Boolean(product.items[0].pizzaType)
-  const addCartItem = useCartStore(state => state.addCartItem);
   const loading = useCartStore(state => state.loading);
+  const addToCartToast = useAddToCartToast();
 
-  const handleAddCartItem = async (cartItem: CartItemForToast) => {
-    const values = {
-    productItemId: cartItem.productItemId,
-    excludedIngredients: cartItem.excludedIngredients,
-    extraIngredients: cartItem.extraIngredients,
+  const handleAddCartItem = (cartItem: CartItemForToast) => {
+    addToCartToast(cartItem);
   };
-  toast.promise(
-    addCartItem(values),
-    {
-      loading: <CartItemToast item={cartItem} isLoading={true} success={false} />,
-      success: <CartItemToast item={cartItem} isLoading={false} success={true} />,
-      error: 'Ошибка при добавлении товара',
-    },
-    {loading: { icon: null },
-    success: { icon: null },
-    error: { icon: null },
-    style: {
-      boxShadow: 'none',
-      border: 'none',
-      padding: 0,
-      background: 'transparent'
-    }}
-  );
-};
-
 
   return (
 
