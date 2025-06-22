@@ -19,7 +19,7 @@ export const CountButton: React.FC<CountButtonProps> = ({
   loading
 }) => {
   return (
-    <div className={cn('inline-flex items-center justify-between gap-3', className)}>
+    <div className={cn('inline-flex items-center justify-between w-[100px] h-[30px]', className)}>
       <CountIconButton
         onClick={() => onClick?.('minus')}
         disabled={value === 1 || loading}
@@ -29,7 +29,7 @@ export const CountButton: React.FC<CountButtonProps> = ({
       {loading ? (
         <Spinner size='sm' />
       ) : (
-        <span className={cn('font-bold mx-1', size === 'sm' ? 'text-sm' : 'text-md')}>
+        <span className={cn('font-bold', size === 'sm' ? 'text-sm' : 'text-md')}>
           {value}
         </span>
       )}

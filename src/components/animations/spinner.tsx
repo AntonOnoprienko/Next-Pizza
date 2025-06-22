@@ -2,10 +2,12 @@
 
 import { motion } from "motion/react";
 import React from "react";
+import { cn } from "@/src/lib/utils";
 
 interface SpinnerProps {
   size?: 'sm' | 'lg';
   strokeColor?: string;
+  className?: string;
 }
 
 const sizeMap = {
@@ -15,13 +17,14 @@ const sizeMap = {
 
 export const Spinner: React.FC<SpinnerProps> = ({
   size = 'lg',
-  strokeColor = "#FF5E00",  // обновлённый цвет
+  strokeColor = "#FF5E00",
+  className
 }) => {
   const dimension = sizeMap[size] || sizeMap.lg;
 
   return (
     <svg
-      className="inline-block"
+      className={cn('inline-block', className)}
       width={dimension}
       height={dimension}
       viewBox="22 22 44 44"
