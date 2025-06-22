@@ -81,9 +81,7 @@ export async function DELETE(
       where: { id },
     });
 
-    console.time("cart-recalc");
     const updatedCart = await updateCartTotalAmount(token);
-    console.timeEnd("cart-recalc");
 
     return NextResponse.json(updatedCart);
   } catch (error) {

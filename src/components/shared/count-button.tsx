@@ -1,11 +1,13 @@
 import { cn } from '@/src/lib/utils';
 import React from 'react';
 import { CountIconButton } from '.';
+import { Spinner } from '../animations';
 
 export interface CountButtonProps {
   value?: number;
   size?: 'sm' | 'lg';
-  onClick?: (type: 'plus' | 'minus') => void;
+  onClick?: (type: 'plus' | 'minus') => void; 
+  loading: boolean;
   className?: string;
 }
 
@@ -14,18 +16,26 @@ export const CountButton: React.FC<CountButtonProps> = ({
   onClick,
   value = 1,
   size = 'sm',
+  loading
 }) => {
   return (
     <div className={cn('inline-flex items-center justify-between gap-3', className)}>
       <CountIconButton
         onClick={() => onClick?.('minus')}
-        disabled={value === 1}
+        disabled={value === 1 || loading}
         size={size}
         type="minus"
       />
-        <span className={cn('font-bold',size === 'sm' ? 'text-sm' : 'text-md')}>{value}</span>
+      {loading ? (
+        <Spinner size='sm' />
+      ) : (
+        <span className={cn('font-bold mx-1', size === 'sm' ? 'text-sm' : 'text-md')}>
+          {value}
+        </span>
+      )}
+        
 
-      <CountIconButton onClick={() => onClick?.('plus')} size={size} type="plus"/>
+      <CountIconButton disabled={loading} onClick={() => onClick?.('plus')} size={size} type="plus"/>
     </div>
   );
 };

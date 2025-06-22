@@ -6,8 +6,8 @@ import {
   TopBar,
 } from "@/src/components/shared";
 import { Suspense } from "react";
-import { PizzaLoader } from "../../components/shared/pizza-loader";
 import { prisma } from "@/prisma/prisma-client";
+import { Spinner } from "@/src/components/animations";
 
 
 
@@ -16,7 +16,6 @@ const Home = async () => {
     include: {
       products: {
         select: {
-          id: true,
           name: true,
           imageUrl: true,
           description: true,
@@ -29,7 +28,9 @@ const Home = async () => {
             take: 1,
             select: {
               price: true,
-            },
+              pizzaType: true,
+              productId: true
+            },             
           },
         },
       },
@@ -47,7 +48,7 @@ const Home = async () => {
       <Container className="mt-10 pb-14">
         <div className="flex gap-[80px]">
           <div className="w-[250px]">
-            <Suspense fallback={<PizzaLoader />}>
+            <Suspense fallback={<Spinner />}>
               <Filters />
             </Suspense>
           </div>

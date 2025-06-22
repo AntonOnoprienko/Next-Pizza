@@ -18,6 +18,7 @@ export interface CartStateItem {
 
 export interface CartState {
   loading: boolean;
+  loadingById: Record<number, boolean>;
   error: boolean;
   totalAmount: number;
   items: CartStateItem[];
@@ -31,6 +32,7 @@ export const useCartStore = create<CartState>((set, get) => ({
   items: [],
   error: false,
   loading: true,
+  loadingById: {},
   totalAmount: 0,
 
   fetchCartItems: async () => {
@@ -48,14 +50,19 @@ export const useCartStore = create<CartState>((set, get) => ({
 
   updateItemQuantity: async (id: number, quantity: number) => {
     try {
-      set({ loading: true, error: false });
+      set((state) => ({
+      loadingById: { ...state.loadingById, [id]: true },
+      error: false,
+    }));
       const data = await Api.cart.updateItemQuantity(id, quantity);
       set(getCartDetails(data));
     } catch (error) {
       console.error(error);
       set({ error: true });
     } finally {
-      set({ loading: false });
+      set((state) => ({
+        loadingById: { ...state.loadingById, [id]: false },
+      }));
     }
   },
 

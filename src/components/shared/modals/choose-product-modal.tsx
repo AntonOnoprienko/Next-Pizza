@@ -25,6 +25,7 @@ export const ChooseProductModal: React.FC<Props> = ({ className, product }) => {
 
   const handleAddCartItem = (cartItem: CartItemForToast) => {
     addToCartToast(cartItem);
+    router.back();
   };
 
   return (

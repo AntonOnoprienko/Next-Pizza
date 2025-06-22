@@ -1,3 +1,5 @@
+'use client'
+
 import React from "react";
 import { cn } from "@/src/lib/utils";
 import Link from "next/link";
@@ -5,6 +7,8 @@ import { Title } from ".";
 import { Button } from "../ui";
 import { Plus } from "lucide-react";
 import { CldImage } from "next-cloudinary";
+import { CartItemForToast } from "./cart-item-details/cart-item-details.types";
+import { useAddToCartToast } from "@/src/hooks";
 
 interface Props {
   id: number;
@@ -13,8 +17,9 @@ interface Props {
   count?: number;
   imageUrl: string;
   className?: string;
-  ingredients: {name: string }[] | null;
+  ingredients: { name: string }[] | null;
   description: string | null,
+  isPizza: boolean;
 }
 
 export const ProductCard: React.FC<Props> = ({
@@ -25,8 +30,22 @@ export const ProductCard: React.FC<Props> = ({
   imageUrl,
   className,
   ingredients,
-  description
+  description,
+  isPizza
 }) => {
+
+  const addToCartToast = useAddToCartToast();
+
+  const handleAddCartItem = () => {
+    const cartItem: CartItemForToast = {
+      productItemId: id,
+      name,
+      imageUrl,
+      price
+    };
+    addToCartToast(cartItem);
+  };
+
   return (
     <div className={cn('h-full flex flex-col', className)}>
       <Link href={`/product/${id}`} className="flex flex-col h-full">
@@ -52,10 +71,18 @@ export const ProductCard: React.FC<Props> = ({
           <span className="text-[20px]">
             от <span className="font-bold">{price} ₴</span>
           </span>
-          <Button variant="secondary">
+
+          {isPizza ? <Button variant="secondary">
+
+            Выбрать
+          </Button> : <Button variant="secondary" onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            handleAddCartItem();
+          }}>
             <Plus size={20} className="mr-1" />
-            Добавить
-          </Button>
+            В корзину
+          </Button>}
         </div>
       </Link>
     </div>

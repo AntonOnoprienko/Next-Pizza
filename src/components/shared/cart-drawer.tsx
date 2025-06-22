@@ -16,7 +16,6 @@ import { Button } from '../ui';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { CartDrawerItem } from './cart-drawer-item';
-import { Ingredient } from '@prisma/client';
 import { useCartStore } from '@/src/store';
 import { PizzaSize, PizzaType } from '@/src/constants/pizza';
 
@@ -26,6 +25,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
 const totalAmount = useCartStore(state => state.totalAmount);
 const fetchCartItems = useCartStore(state => state.fetchCartItems);
 const items = useCartStore(state => state.items);
+const loadingById = useCartStore(state => state.loadingById);
 const updateItemQuantity = useCartStore(state => state.updateItemQuantity);
 const removeCartItem = useCartStore(state => state.removeCartItem);
 
@@ -65,10 +65,9 @@ const onClickCountButton = (id: number, quantity: number, type: 'plus' | 'minus'
                             extraIngredients={item.extraIngredients}
                             className='mb-2'
                             onClickCountButton={type => onClickCountButton(item.id, item.quantity, type)}
-                            onClickRemove={() => 
-                                {removeCartItem(item.id)
-                                console.log("Удаляем item с id", item.id)}
-                            }
+                            onClickRemove={() => removeCartItem(item.id)}
+                            loading={loadingById[item.id] ?? false}
+
                              />
 
                     ) )

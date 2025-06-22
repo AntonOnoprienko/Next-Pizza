@@ -11,7 +11,6 @@ import { ProductItemWithExtras } from "@/src/@types/prisma";
 import { CartItemForToast } from "./cart-item-details/cart-item-details.types";
 import { usePizzaOption } from "@/src/hooks";
 
-
 type Props = {
   imageUrl: string;
   name: string;
@@ -100,8 +99,8 @@ export const ChoosePizzaForm: React.FC<Props> = ({
           addIngredient={addIngredient}
           selectedIngredients={selectedIngredients} />
 
-        <Button  onClick={handleClickAdd} className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10">
-          {loading? 'Идёт загрузка' : `Добавить в корзину за ${totalPrice} ₴`}
+        <Button loading={loading}  onClick={handleClickAdd} className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10">
+          Добавить в корзину за {totalPrice} ₴
         </Button>
       </div>
     </div>

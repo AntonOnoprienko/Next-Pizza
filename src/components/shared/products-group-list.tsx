@@ -8,12 +8,11 @@ import { useCategoryStore } from "@/src/store/category";
 
 
 interface ProductItem {
-  id: number;
   name: string;
   imageUrl: string;
   description: string | null;
   ingredients: { name: string }[];
-  items: { price: number }[];
+  items: { price: number, pizzaType: number | null, productId: number}[];
 }
 
 interface Props {
@@ -37,7 +36,6 @@ export const ProductsGroupList: React.FC<Props> = ({
     threshold: 0.4
   })
   useEffect(() => {
-    console.log(items)
     if (intersection?.isIntersecting) {
       setActiveCategoryId(categoryId)
     }
@@ -48,13 +46,14 @@ export const ProductsGroupList: React.FC<Props> = ({
       <div className="grid grid-cols-3 gap-[50px] items-stretch">
         {items.map((product, i: number) => (
           <ProductCard
-            key={product.id}
-            id={product.id}
+            key={product.items[0].productId}
+            id={product.items[0].productId}
             name={product.name}
             imageUrl={product.imageUrl}
             price={product.items[0].price}
             ingredients={product.ingredients}
             description={product.description}
+            isPizza={Boolean(product.items[0].pizzaType)}
           />
         ))}
       </div>
