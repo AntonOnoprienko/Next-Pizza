@@ -1,7 +1,7 @@
-import { Nunito } from "next/font/google";
-import toast, { Toaster } from 'react-hot-toast';
 import "./globals.css";
-
+import { Nunito } from "next/font/google";
+import { Toaster } from 'react-hot-toast';
+import { CartLoader } from "@/src/components/shared";
 
 interface RootLayoutProps {
   readonly children: React.ReactNode;
@@ -17,7 +17,8 @@ const nunito = Nunito({
 const RootLayout = ({ children }: RootLayoutProps) => {
   return (
     <html lang="en">
-      <body className={nunito.variable}>        
+      <body className={nunito.variable}>
+        <CartLoader />
         {children}
         <Toaster />
       </body>

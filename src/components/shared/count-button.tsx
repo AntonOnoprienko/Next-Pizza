@@ -6,7 +6,7 @@ import { Spinner } from '../animations';
 export interface CountButtonProps {
   value?: number;
   size?: 'sm' | 'lg';
-  onClick?: (type: 'plus' | 'minus') => void; 
+  onClick?: (type: 'plus' | 'minus') => void;
   loading: boolean;
   className?: string;
 }
@@ -19,9 +19,13 @@ export const CountButton: React.FC<CountButtonProps> = ({
   loading
 }) => {
   return (
-    <div className={cn('inline-flex items-center justify-between w-[100px] h-[30px]', className)}>
+    <div className={cn('inline-flex items-center justify-between w-[100px]', className)}>
       <CountIconButton
-        onClick={() => onClick?.('minus')}
+        onClick={(e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          onClick?.('minus')
+        }}
         disabled={value === 1 || loading}
         size={size}
         type="minus"
@@ -33,9 +37,13 @@ export const CountButton: React.FC<CountButtonProps> = ({
           {value}
         </span>
       )}
-        
 
-      <CountIconButton disabled={loading} onClick={() => onClick?.('plus')} size={size} type="plus"/>
+
+      <CountIconButton disabled={loading} onClick={(e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        onClick?.('plus')
+      }} size={size} type="plus" />
     </div>
   );
 };

@@ -5,6 +5,7 @@ import { CreateCartItemValues } from "../services/dto/cart.dto";
 
 export interface CartStateItem {
   id: number;
+  productItemId: number;
   imageUrl: string;
   name: string;
   price: number;

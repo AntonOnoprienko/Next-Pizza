@@ -7,7 +7,7 @@ interface IconButtonProps {
   size?: CountButtonProps['size'];
   disabled?: boolean;
   type?: 'plus' | 'minus';
-  onClick?: () => void;
+  onClick?: (e: any) => void;
 }
 
 export const CountIconButton: React.FC<IconButtonProps> = ({

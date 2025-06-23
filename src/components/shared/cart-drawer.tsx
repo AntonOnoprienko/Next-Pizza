@@ -22,21 +22,17 @@ import { PizzaSize, PizzaType } from '@/src/constants/pizza';
 
 export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
 
-const totalAmount = useCartStore(state => state.totalAmount);
-const fetchCartItems = useCartStore(state => state.fetchCartItems);
-const items = useCartStore(state => state.items);
-const loadingById = useCartStore(state => state.loadingById);
-const updateItemQuantity = useCartStore(state => state.updateItemQuantity);
-const removeCartItem = useCartStore(state => state.removeCartItem);
+    const totalAmount = useCartStore(state => state.totalAmount);
+    const items = useCartStore(state => state.items);
+    const loadingById = useCartStore(state => state.loadingById);
+    const updateItemQuantity = useCartStore(state => state.updateItemQuantity);
+    const removeCartItem = useCartStore(state => state.removeCartItem);
 
-const onClickCountButton = (id: number, quantity: number, type: 'plus' | 'minus') => {
-    const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1;
-    updateItemQuantity(id, newQuantity);
-}
+    const onClickCountButton = (id: number, quantity: number, type: 'plus' | 'minus') => {
+        const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1;
+        updateItemQuantity(id, newQuantity);
+    }
 
-    React.useEffect(() => {
-        fetchCartItems()
-    }, [])
     return (
         <Sheet>
             <SheetTrigger asChild>{children}</SheetTrigger>
@@ -51,7 +47,7 @@ const onClickCountButton = (id: number, quantity: number, type: 'plus' | 'minus'
                 </SheetHeader>
                 <div className="-mx-6 mt-2 flex-1 overflow-auto">
                     {items && items.map(item => (
-                        
+
                         <CartDrawerItem
                             key={item.id}
                             id={item.id}
@@ -67,11 +63,9 @@ const onClickCountButton = (id: number, quantity: number, type: 'plus' | 'minus'
                             onClickCountButton={type => onClickCountButton(item.id, item.quantity, type)}
                             onClickRemove={() => removeCartItem(item.id)}
                             loading={loadingById[item.id] ?? false}
-
-                             />
-
-                    ) )
-                }
+                        />
+                    ))
+                    }
                 </div>
 
 
@@ -96,7 +90,6 @@ const onClickCountButton = (id: number, quantity: number, type: 'plus' | 'minus'
                     </div>
                 </SheetFooter>
             </SheetContent>
-
         </Sheet>
     );
 };

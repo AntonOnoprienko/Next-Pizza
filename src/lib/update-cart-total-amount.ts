@@ -10,6 +10,7 @@ export const updateCartTotalAmount = async (token: string) => {
       include: {
         productItem: {
           select: {
+            id: true,
             price: true,
             size: true,
             pizzaType: true,
@@ -85,6 +86,7 @@ export const updateCartTotalAmount = async (token: string) => {
         totalPrice: true,
         productItem: {
           select: {
+            id: true,
             price: true,
             size: true,
             pizzaType: true,

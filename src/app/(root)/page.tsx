@@ -16,6 +16,7 @@ const Home = async () => {
     include: {
       products: {
         select: {
+          id: true,
           name: true,
           imageUrl: true,
           description: true,
@@ -27,17 +28,15 @@ const Home = async () => {
           items: {
             take: 1,
             select: {
+              id: true,
               price: true,
               pizzaType: true,
-              productId: true
-            },             
+            },
           },
         },
       },
     },
   });
-
-
 
   return (
     <>

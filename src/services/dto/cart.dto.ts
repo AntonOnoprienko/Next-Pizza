@@ -13,6 +13,7 @@ export type CartItemDTO = Prisma.CartItemGetPayload<{
   include: {
     productItem: {
       select: {
+        id: true;
         price: true;
         size: true;
         pizzaType: true;
