@@ -72,6 +72,7 @@ export const ProductCard: React.FC<Props> = ({
             <CountButton
               value={count}
               loading={loading}
+              allowZero={true}
               onClick={onQuantityChange}
               size="sm"
               className="my-[5px]"
@@ -79,9 +80,13 @@ export const ProductCard: React.FC<Props> = ({
           ) : isPizza ? (
             <Button variant="secondary">Выбрать</Button>
           ) : (
-            <Button 
-              variant="secondary"
+            <Button
+              className="w-[125px]"
+              loading={loading}
+              disabledStyles="bg-[#FF5E00]"
+              variant="secondary"            
               onClick={(e) => {
+                if (loading) return;
                 e.preventDefault();
                 e.stopPropagation();
                 onAdd?.();

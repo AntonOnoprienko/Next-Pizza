@@ -3,7 +3,7 @@ import React from "react";
 import { CartButton, Container, SearchInput } from "../shared";
 import Image from "next/image";
 import { Button } from "../ui";
-import { ArrowRight, ShoppingCart, UserRound } from "lucide-react";
+import { UserRound } from "lucide-react";
 import { siteConfig } from "@/src/config/site";
 import Link from "next/link";
 

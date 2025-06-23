@@ -71,6 +71,7 @@ export const useCartStore = create<CartState>((set, get) => ({
     try {
       set((state) => ({
         loading: true,
+        loadingById: { ...state.loadingById, [id]: true },
         error: false,
         items: state.items.map((item) =>
           item.id === id ? { ...item, disabled: true } : item
@@ -84,6 +85,7 @@ export const useCartStore = create<CartState>((set, get) => ({
     } finally {
       set((state) => ({
         loading: false,
+        loadingById: { ...state.loadingById, [id]: false },
         items: state.items.map((item) => ({ ...item, disabled: false })),
       }));
     }
@@ -91,14 +93,22 @@ export const useCartStore = create<CartState>((set, get) => ({
 
   addCartItem: async (values: CreateCartItemValues) => {
     try {
-      set({ loading: true, error: false });
+      set((state) => ({
+        loading: true,
+        loadingById: { ...state.loadingById, [values.productItemId]: true },
+        error: false,
+      }));
       const data = await Api.cart.addCartItem(values);
       set(getCartDetails(data));
     } catch (error) {
       console.error(error);
       set({ error: true });
     } finally {
-      set({ loading: false });
+      set((state) => ({
+        loading: false,
+        loadingById: { ...state.loadingById, [values.productItemId]: false },
+        error: false,
+      }));
     }
   },
 }));

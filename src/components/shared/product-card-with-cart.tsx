@@ -34,6 +34,7 @@ export const ProductCardWithCart: React.FC<Props> = ({
   const loadingById = useCartStore(state => state.loadingById);
   const addToCartToast = useAddToCartToast();
   const updateQty = useCartStore((state) => state.updateItemQuantity);
+  const removeCartItem = useCartStore((state) => state.removeCartItem);
 
   const handleAdd = () => {
     const item: CartItemForToast = {
@@ -51,6 +52,9 @@ export const ProductCardWithCart: React.FC<Props> = ({
   if (newQty > 0) {
     updateQty(cartItem.id, newQty);
   }
+  if (newQty === 0) {
+    removeCartItem(cartItem.id);
+  }
 };
 
   const inCart = Boolean(cartItem);
@@ -66,7 +70,7 @@ export const ProductCardWithCart: React.FC<Props> = ({
       isPizza={isPizza}
       count={cartItem?.quantity}
       inCart={inCart}
-      loading={loadingById[cartItem?.id || id] ?? false}
+      loading={loadingById[cartItem?.id || productItemId] ?? false}
       onAdd={handleAdd}
       onQuantityChange={handleQuantityChange}
     />
