@@ -49,7 +49,7 @@ export const ProductCardWithCart: React.FC<Props> = ({
   if (!cartItem) return;
   const newQty = type === 'plus' ? cartItem.quantity + 1 : cartItem.quantity - 1;
   if (newQty > 0) {
-    updateQty(cartItem.productItemId, newQty);
+    updateQty(cartItem.id, newQty);
   }
 };
 
@@ -66,7 +66,7 @@ export const ProductCardWithCart: React.FC<Props> = ({
       isPizza={isPizza}
       count={cartItem?.quantity}
       inCart={inCart}
-      loading={loadingById[cartItem?.productItemId || id] ?? false}
+      loading={loadingById[cartItem?.id || id] ?? false}
       onAdd={handleAdd}
       onQuantityChange={handleQuantityChange}
     />
