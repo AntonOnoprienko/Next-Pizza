@@ -9,6 +9,9 @@ interface HomeLayoutProps {
 export const metadata: Metadata = {
   title: "NEXT PiZZa | Главная",
   description: "The best of the best Pizza shop!",
+  other: {
+    'google-site-verification': 'google82a4f7c40d3ed69d.html',
+  },
   openGraph: {
     title: "Next Pizza — Лучшая пицца в городе",
     description: "Выбирай и заказывай пиццу онлайн. Вкусно, быстро, удобно!",
