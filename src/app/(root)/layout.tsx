@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: "NEXT PiZZa | Главная",
   description: "The best of the best Pizza shop!",
   other: {
-    'google-site-verification': 'google82a4f7c40d3ed69d.html',
+    'google-site-verification': 'zeq8yCb9T23l8MrGohHJKQXFMOAvCc940v2satzTlC8',
   },
   openGraph: {
     title: "Next Pizza — Лучшая пицца в городе",
