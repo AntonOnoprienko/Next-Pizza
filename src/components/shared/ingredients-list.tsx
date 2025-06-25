@@ -19,6 +19,14 @@ export const IngredientsList: React.FC<Props> = ({
 }) => {
   const skeletonArray = Array.from({ length: 6 });
 
+   const handlers = React.useMemo(() => {
+    const map = new Map<number, () => void>();
+    item?.extraIngredients.forEach(({ ingredient }) => {
+      map.set(ingredient.id, () => addIngredient(ingredient.id));
+    });
+    return map;
+  }, [item?.extraIngredients, addIngredient]);
+
   return (
     <div
       className={cn(
@@ -34,7 +42,7 @@ export const IngredientsList: React.FC<Props> = ({
                 name={ingredient.name}
                 imageUrl={ingredient.imageUrl}
                 price={ingredient.price}
-                onClick={() => addIngredient(ingredient.id)}
+                onClick={handlers.get(ingredient.id)!}
                 active={selectedIngredients.has(ingredient.id)}
               />
             ))

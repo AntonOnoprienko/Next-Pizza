@@ -26,4 +26,5 @@ export { CountIconButton } from "./count-icon-button";
 export { CountButton } from "./count-button";
 export { ProductCardWithCart } from "./product-card-with-cart";
 export { CartLoader } from "./cart-loader";
+export { ProductCardActions } from './product-card-actions'
 export * from "./modals";

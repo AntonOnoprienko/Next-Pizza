@@ -2,13 +2,9 @@
 
 import React from "react";
 import Link from "next/link";
-import { Plus } from "lucide-react";
 import { CldImage } from "next-cloudinary";
-
 import { cn } from "@/src/lib/utils";
-import { Title } from ".";
-import { Button } from "../ui";
-import { CountButton } from "../shared";
+import { ProductCardActions, Title } from ".";
 
 interface Props {
   id: number;
@@ -26,7 +22,7 @@ interface Props {
   className?: string;
 }
 
-export const ProductCard: React.FC<Props> = ({
+const ProductCardComponent: React.FC<Props> = ({
   id,
   name,
   price,
@@ -67,37 +63,18 @@ export const ProductCard: React.FC<Props> = ({
           <span className="text-[20px]">
             от <span className="font-bold">{price} ₴</span>
           </span>
-          
-          {inCart ? (
-            <CountButton
-              value={count}
-              loading={loading}
-              allowZero={true}
-              onClick={onQuantityChange}
-              size="sm"
-              className="my-[5px]"
-            />
-          ) : isPizza ? (
-            <Button variant="secondary">Выбрать</Button>
-          ) : (
-            <Button
-              className="w-[125px]"
-              loading={loading}
-              disabledStyles="bg-[#FF5E00]"
-              variant="secondary"            
-              onClick={(e) => {
-                if (loading) return;
-                e.preventDefault();
-                e.stopPropagation();
-                onAdd?.();
-              }}
-            >
-              <Plus size={20} className="mr-1" />
-              В корзину
-            </Button>
-          )}
+
+          <ProductCardActions
+            inCart={inCart}
+            count={count}
+            isPizza={isPizza}
+            loading={loading}
+            onAdd={onAdd}
+            onQuantityChange={onQuantityChange} />
         </div>
       </Link>
     </div>
   );
 };
+
+export const ProductCard = React.memo(ProductCardComponent);
