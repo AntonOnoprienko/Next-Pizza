@@ -36,6 +36,11 @@ export const ProductsGroupList: React.FC<Props> = ({
   const intersection = useIntersection(intersectionRef, {
     threshold: 0.4
   })
+
+  const getMinPrice = (items: { price: number }[]) => {
+  return items.reduce((min, item) => (item.price < min ? item.price : min), items[0].price);
+};
+
   useEffect(() => {
     if (intersection?.isIntersecting) {
       setActiveCategoryId(categoryId)
@@ -52,7 +57,7 @@ export const ProductsGroupList: React.FC<Props> = ({
             productItemId={product.items[0].id}
             name={product.name}
             imageUrl={product.imageUrl}
-            price={product.items[0].price}
+            price={getMinPrice(product.items)}
             ingredients={product.ingredients}
             description={product.description}
             isPizza={Boolean(product.items[0].pizzaType)}

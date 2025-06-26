@@ -56,6 +56,7 @@ const ProductCardComponent: React.FC<Props> = ({
 
         <p className="text-sm text-gray-400">
           {description}
+          
           {ingredients?.map((i) => i.name).join(", ")}
         </p>
 

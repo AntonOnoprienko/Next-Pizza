@@ -6,37 +6,18 @@ import {
   TopBar,
 } from "@/src/components/shared";
 import { Suspense } from "react";
-import { prisma } from "@/prisma/prisma-client";
 import { Spinner } from "@/src/components/animations";
+import { findPizzas, GetSearchParams } from "@/src/lib";
 
 
 
-const Home = async () => {
-  const categories = await prisma.category.findMany({
-    include: {
-      products: {
-        select: {
-          id: true,
-          name: true,
-          imageUrl: true,
-          description: true,
-          ingredients: {
-            select: {
-              name: true,
-            },
-          },
-          items: {
-            take: 1,
-            select: {
-              id: true,
-              price: true,
-              pizzaType: true,
-            },
-          },
-        },
-      },
-    },
-  });
+interface PageProps {
+  searchParams: GetSearchParams;
+}
+
+const Home = async ({ searchParams }: PageProps) => {
+  const categories = await findPizzas(searchParams);
+
 
   return (
     <>

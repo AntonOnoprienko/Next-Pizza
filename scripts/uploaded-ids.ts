@@ -1,5 +1,7 @@
 export const uploadedIds = [
-  "ingredients/xdlpbg2g1jshq3eiqs4a",
-  "ingredients/okj8smpccmdm62u5hluw",
-  "ingredients/ziy9g1ljntxxbo66s3we",
+  "pizza/e1ut4ksr5lxaegnh787k",
+  "pizza/gsdcexuv0lobrbbp2vnp",
+  "pizza/enea0lutval6tigpeiyy",
+  "pizza/tvda2rk01m1dolliq0ve",
+  "pizza/zggaw5c6alk0iezkmepl",
 ];

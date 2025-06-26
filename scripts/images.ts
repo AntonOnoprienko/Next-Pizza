@@ -1,5 +1,7 @@
 export const imageUrls = [
-  "https://cdn.dodostatic.net/static/Img/Ingredients/11eee5d51d4c576da0f0db611c8947bd.png",
-  "https://cdn.dodostatic.net/static/Img/Ingredients/11ef5ed5f8f64595a6d6a99c1fe6f7f0.png",
-  "https://cdn.dodostatic.net/static/Img/Ingredients/11ee9d3660793feda24a236677d3013e.png"
+  'https://media.dodostatic.net/image/r:760x760/0195ca1dc5f173a592c39dc1173d5769.avif',
+  'https://media.dodostatic.net/image/r:760x760/0195ca1dcb2f7341b78534772343b047.avif',
+  'https://media.dodostatic.net/image/r:760x760/0195ca1dda067488a0f6ac9260753e88.avif',
+  'https://media.dodostatic.net/image/r:760x760/0195ca1dd245703b928696ff5da8a2f5.avif',
+  'https://media.dodostatic.net/image/r:760x760/0195ca1de11e796eac71704c12ca328c.avif', 
 ];

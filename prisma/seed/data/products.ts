@@ -1,0 +1,20 @@
+
+export const products = [
+  { name: 'Омлет с ветчиной и грибами', imageUrl: "products/su8unqxridmyjipf6pnx", categoryId: 2, description: "Горячий сытный омлет с поджаристой корочкой, ветчина, шампиньоны и моцарелла" },
+  { name: 'Омлет с пепперони', imageUrl: "products/hhehapcdsvor4ocu0sgt", categoryId: 2, description:"Сытный и сбалансированный завтрак — омлет с поджаристой корочкой, пикантная пепперони, томаты и моцарелла" },
+  { name: 'Кофе Латте', imageUrl: "products/h7srhjic4nbab0pgjr72", categoryId: 2 },
+  { name: 'Дэнвич ветчина и сыр', imageUrl: "products/oh1n2c7ddkydpkqyidna", categoryId: 3, description: "Поджаристая чиабатта и знакомое сочетание ветчины, цыпленка, моцареллы со свежими томатами, соусом ранч и чесноком" },
+  { name: 'Куриные наггетсы', imageUrl: "products/sqa3mmycr952w8e1lrye", categoryId: 3, description: "Нежное куриное мясо в хрустящей панировке" },
+  { name: 'Картофель из печи с соусом', imageUrl: "products/s6tdqtgfp8bmikcahj77", categoryId: 3 },
+  { name: 'Додстер', imageUrl: "products/z3jxpmsebino10gq3wc2", categoryId: 3, description: "Легендарная горячая закуска с цыпленком, томатами, моцареллой, соусом ранч в тонкой пшеничной лепешке" },
+  { name: 'Острый Додстер', imageUrl: "products/u1ttreifdsyodneaywlh", categoryId: 3 },
+  { name: 'Банановый молочный коктейль', imageUrl: "products/gp4cyp8pnmxqlrjrjo7h", categoryId: 4 },
+  { name: 'Карамельное яблоко молочный коктейль', imageUrl: "products/nlltkya1q1km85hor6ka", categoryId: 4 },
+  { name: 'Молочный коктейль с печеньем Орео', imageUrl: "products/qmlhqw972q7koyu4oe72", categoryId: 4 },
+  { name: 'Классический молочный коктейль', imageUrl: "products/j53xtaqfrtololzybh1k", categoryId: 4 },
+  { name: 'Ореховый капучино', imageUrl: "products/dvcn12aymak4gnhsgqwp", categoryId: 5 },
+  { name: 'Кофе Карамельный капучино', imageUrl: "products/hfazwwo6pj9uqopcwsyr", categoryId: 5 },
+  { name: 'Кофе Кокосовый латте', imageUrl: "products/yuagjc3nqvio7pjspxs8", categoryId: 5 },
+  { name: 'Кофе Американо', imageUrl: "products/r8hb4mwfhvt9bxvrbfnt", categoryId: 5 },
+  { name: 'Кофе Латте', imageUrl: "products/q8wnbanddbabc5ktr0n8", categoryId: 5 },
+];

@@ -17,7 +17,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
 
   useQueryFilters(filters);
 
-  const items:Record<"value" | "text", string>[] = ingredients.map((item) => ({ value: String(item.id), text: item.name }));
+  const items: Record<"value" | "text", string>[] = ingredients.map((item) => ({ value: String(item.id), text: item.name }));
 
   const updatePrices = (prices: number[]) => {
     filters.setPrices('priceFrom', prices[0]);
@@ -28,7 +28,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
     <div className={className}>
       <Title text="Фильтрация" size="sm" className="mb-5 font-bold" />
 
-    
+
       <CheckboxFiltersGroup
         title="Тип теста"
         name="pizzaTypes"
@@ -36,8 +36,8 @@ export const Filters: React.FC<Props> = ({ className }) => {
         onClickCheckbox={filters.setPizzaTypes}
         selected={filters.pizzaTypes}
         items={[
-          { text: 'Тонкое', value: '1' },
-          { text: 'Традиционное', value: '2' },
+          { text: 'Традиционное', value: '1' },
+          { text: 'Тонкое', value: '2' },
         ]}
       />
 
@@ -54,7 +54,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
         ]}
       />
 
-      
+
       <div className="mt-5 border-y border-y-neutral-100 py-6 pb-7">
         <p className="font-bold mb-3">Цена от и до:</p>
         <div className="flex gap-3 mb-5">
@@ -73,6 +73,13 @@ export const Filters: React.FC<Props> = ({ className }) => {
             placeholder="1000"
             value={String(filters.prices.priceTo)}
             onChange={(e) => filters.setPrices('priceTo', Number(e.target.value))}
+            onBlur={() => {
+              if (filters.prices.priceTo != null &&
+                filters.prices.priceFrom != null &&
+                filters.prices.priceTo < filters.prices.priceFrom) {
+                filters.setPrices('priceTo', filters.prices.priceFrom);
+              }
+            }}
           />
         </div>
 

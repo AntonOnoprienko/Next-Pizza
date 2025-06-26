@@ -1,3 +1,5 @@
+//git bash  npx ts-node --compiler-options '{"module":"CommonJS"}' scripts/upload-images.ts
+
 import { v2 as cloudinary } from 'cloudinary';
 import { imageUrls } from './images';
 import { writeFileSync } from 'fs';
@@ -17,7 +19,7 @@ async function uploadAllImages() {
   for (const url of imageUrls) {
     try {
       const result = await cloudinary.uploader.upload(url, {
-        folder: 'ingredients',
+        folder: 'pizza',
       });
       resultIds.push(`"${result.public_id}"`);
       console.log(`✅ ${result.public_id}`);
