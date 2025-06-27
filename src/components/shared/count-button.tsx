@@ -1,7 +1,7 @@
 import { cn } from '@/src/lib/utils';
 import React from 'react';
 import { CountIconButton } from '.';
-import { Spinner } from '../animations';
+import dynamic from 'next/dynamic';
 
 export interface CountButtonProps {
   value?: number;
@@ -11,6 +11,9 @@ export interface CountButtonProps {
   allowZero?: boolean;
   className?: string;
 }
+
+
+const Spinner = dynamic(() => import('../animations/').then(mod => mod.Spinner), { ssr: false })
 
 export const CountButton: React.FC<CountButtonProps> = ({
   className,

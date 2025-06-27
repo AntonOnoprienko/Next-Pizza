@@ -14,6 +14,8 @@ export const CartItemDetailsImage: React.FC<Props> = ({ src, name, className }) 
         width={60}
         height={60}
         crop="fill"
+        quality="auto"
+        format="auto"
         priority
         className={cn('w-[60px] h-[60px]', className)}
     />

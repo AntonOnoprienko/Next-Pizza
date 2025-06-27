@@ -100,6 +100,7 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
                   height={32}
                   quality="auto"
                   format="auto"
+                  loading="lazy"
                 />
                 <span>{item.name}</span>
               </Link>
