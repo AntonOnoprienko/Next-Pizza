@@ -1,7 +1,7 @@
 import "./globals.css";
 import { Nunito } from "next/font/google";
 import { Toaster } from 'react-hot-toast';
-import { CartLoader } from "@/src/components/shared";
+import dynamic from "next/dynamic";
 
 interface RootLayoutProps {
   readonly children: React.ReactNode;
@@ -13,6 +13,10 @@ const nunito = Nunito({
   weight: ["400", "500", "600", "700", "800", "900"],
 });
 
+const CartLoader = dynamic(() => import('@/src/components/shared/cart-loader').then(mod => mod.default), {
+  ssr: false,
+  loading: () => null
+});
 
 const RootLayout = ({ children }: RootLayoutProps) => {
   return (

@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useCartStore } from "@/src/store/cart";
 
-export const CartLoader = () => {
+const CartLoader = () => {
   const fetchCartItems = useCartStore((state) => state.fetchCartItems);
 
   useEffect(() => {
@@ -12,3 +12,5 @@ export const CartLoader = () => {
 
   return null;
 };
+
+export default CartLoader;
