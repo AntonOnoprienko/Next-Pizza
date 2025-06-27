@@ -1,6 +1,5 @@
 import "./globals.css";
 import { Nunito } from "next/font/google";
-import { Toaster } from 'react-hot-toast';
 import dynamic from "next/dynamic";
 
 interface RootLayoutProps {
@@ -13,9 +12,14 @@ const nunito = Nunito({
   weight: ["400", "500", "600", "700", "800", "900"],
 });
 
-const CartLoader = dynamic(() => import('@/src/components/shared/cart-loader').then(mod => mod.default), {
+const CartLoader = dynamic(() => import('@/src/components/shared/').then(mod => mod.CartLoader), {
   ssr: false,
   loading: () => null
+});
+
+const DynamicToaster = dynamic(() => import('react-hot-toast').then(mod => mod.Toaster), {
+  ssr: false,
+  loading: () => null, 
 });
 
 const RootLayout = ({ children }: RootLayoutProps) => {
@@ -24,7 +28,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
       <body className={nunito.variable}>
         <CartLoader />
         {children}
-        <Toaster />
+        <DynamicToaster />
       </body>
     </html>
   );

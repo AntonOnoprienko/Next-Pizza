@@ -1,6 +1,7 @@
 export default function Head() {
   return (
     <>
+    <link rel="canonical" href="https://next-pizza.up.railway.app/" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

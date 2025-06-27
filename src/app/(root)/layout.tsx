@@ -33,6 +33,8 @@ export const metadata: Metadata = {
   },
 };
 
+
+
 const HomeLayout = ({ children, modal }: HomeLayoutProps) => {
   return (
     <main className="min-h-screen">
