@@ -19,7 +19,7 @@ async function uploadAllImages() {
   for (const url of imageUrls) {
     try {
       const result = await cloudinary.uploader.upload(url, {
-        folder: 'pizza',
+        folder: 'products',
       });
       resultIds.push(`"${result.public_id}"`);
       console.log(`✅ ${result.public_id}`);

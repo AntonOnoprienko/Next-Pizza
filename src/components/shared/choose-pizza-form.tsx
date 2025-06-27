@@ -1,9 +1,9 @@
 'use client'
 
 
-import React from "react";
+import React, { Suspense } from "react";
 import { cn } from "@/src/lib/utils";
-import { DescriptionAndIngredients, GroupVariants, IngredientsList, PizzaImage, Title } from ".";
+import { DescriptionAndIngredients, ExtraIngredientsListSkeleton, GroupVariants, IngredientsList, PizzaImage, Title } from ".";
 import { Button } from "../ui";
 import { Ingredient } from "@prisma/client";
 import { PizzaSize, pizzaTypes, PizzaType } from "@/src/constants/pizza";
@@ -95,9 +95,14 @@ export const ChoosePizzaForm: React.FC<Props> = ({
           onClick={value => setType(Number(value) as PizzaType)}
           className="mt-1" />
 
-        <IngredientsList item={selectedItem}
+        <Suspense fallback={<ExtraIngredientsListSkeleton />}>
+        <IngredientsList
+          item={selectedItem}
           addIngredient={addIngredient}
-          selectedIngredients={selectedIngredients} />
+          selectedIngredients={selectedIngredients}
+        />
+      </Suspense>
+
 
         <Button loading={loading}  onClick={handleClickAdd} className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10">
           Добавить в корзину за {totalPrice} ₴

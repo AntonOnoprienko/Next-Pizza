@@ -48,6 +48,8 @@ const ProductCardComponent: React.FC<Props> = ({
             height={215}
             crop="fill"
             loading="lazy"
+            quality="auto"
+            format="auto"
             className="w-[215px] h-[215px] transition-transform duration-300 ease-in-out group-hover:translate-y-2"
           />
         </div>

@@ -1,5 +1,5 @@
 import { Product } from "@prisma/client";
-import { generatePizzaVariants, generateProductItem } from "../utilits/helpers";
+import { categoryMap, generatePizzaVariants, generateProductItem } from "../utilits/helpers";
 
 export const seedProductItems = async (pizzas: Product[]) => {
   const [pizza1, pizza2, pizza3, pizza4, pizza5, pizza6, pizza7, pizza8, pizza9] =
@@ -109,23 +109,33 @@ export const seedProductItems = async (pizzas: Product[]) => {
 }),
 
     // Остальные продукты без размеров/типов
-    generateProductItem({ productId: 1 }),
-    generateProductItem({ productId: 2 }),
-    generateProductItem({ productId: 3 }),
-    generateProductItem({ productId: 4 }),
-    generateProductItem({ productId: 5 }),
-    generateProductItem({ productId: 6 }),
-    generateProductItem({ productId: 7 }),
-    generateProductItem({ productId: 8 }),
-    generateProductItem({ productId: 9 }),
-    generateProductItem({ productId: 10 }),
-    generateProductItem({ productId: 11 }),
-    generateProductItem({ productId: 12 }),
-    generateProductItem({ productId: 13 }),
-    generateProductItem({ productId: 14 }),
-    generateProductItem({ productId: 15 }),
-    generateProductItem({ productId: 16 }),
-    generateProductItem({ productId: 17 }),
+  generateProductItem({ productId: 1, category: categoryMap[3] }),
+  generateProductItem({ productId: 2, category: categoryMap[3] }),
+  generateProductItem({ productId: 3, category: categoryMap[5] }),
+  generateProductItem({ productId: 4, category: categoryMap[3] }),
+  generateProductItem({ productId: 5, category: categoryMap[3] }),
+  generateProductItem({ productId: 6, category: categoryMap[3] }),
+  generateProductItem({ productId: 7, category: categoryMap[3] }),
+  generateProductItem({ productId: 8, category: categoryMap[3] }),
+  generateProductItem({ productId: 9, category: categoryMap[4] }),
+  generateProductItem({ productId: 10, category: categoryMap[4] }),
+  generateProductItem({ productId: 11, category: categoryMap[4] }),
+  generateProductItem({ productId: 12, category: categoryMap[4] }),
+  generateProductItem({ productId: 13, category: categoryMap[5] }),
+  generateProductItem({ productId: 14, category: categoryMap[5] }),
+  generateProductItem({ productId: 15, category: categoryMap[5] }),
+  generateProductItem({ productId: 16, category: categoryMap[5] }),
+  generateProductItem({ productId: 17, category: categoryMap[5] }),
+  generateProductItem({ productId: 18, category: categoryMap[7] }),
+  generateProductItem({ productId: 19, category: categoryMap[7] }),
+  generateProductItem({ productId: 20, category: categoryMap[7] }),
+  generateProductItem({ productId: 21, category: categoryMap[7] }),
+  generateProductItem({ productId: 22, category: categoryMap[7] }),
+  generateProductItem({ productId: 23, category: categoryMap[7] }),
+  generateProductItem({ productId: 24, category: categoryMap[3] }),
+  generateProductItem({ productId: 25, category: categoryMap[3] }),
+  generateProductItem({ productId: 26, category: categoryMap[4] }),
+  generateProductItem({ productId: 27, category: categoryMap[4] }),
   ];
 
   return productItemsData;

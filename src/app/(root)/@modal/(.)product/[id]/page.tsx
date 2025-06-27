@@ -6,12 +6,12 @@ export default async function ProductModalPage({ params: { id } }: { params: { i
   const product = await prisma.product.findFirst({
   where: { id: Number(id) },
   include: {
-    ingredients: true, // базовые ингредиенты продукта
+    ingredients: true, 
     items: {
       include: {
-        extraIngredients: { // связь ProductItemExtraIngredient с ингредиентом
+        extraIngredients: { 
           include: {
-            ingredient: true // сам объект ингредиента
+            ingredient: true 
           }
         }
       }
