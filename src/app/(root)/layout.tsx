@@ -9,6 +9,9 @@ interface HomeLayoutProps {
 export const metadata: Metadata = {
   title: "NEXT PiZZa | Главная",
   description: "The best of the best Pizza shop!",
+  icons: {
+    icon: '/favicon.ico'
+  },
   other: {
     'google-site-verification': 'zeq8yCb9T23l8MrGohHJKQXFMOAvCc940v2satzTlC8',
   },
