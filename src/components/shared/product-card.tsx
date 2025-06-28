@@ -44,8 +44,8 @@ const ProductCardComponent: React.FC<Props> = ({
           <DynamicCldImage
             src={imageUrl}
             alt={name}
-            width={215}
-            height={215}
+            width={256}
+            height={256}
             crop="fill"
             loadMode="lazy"
             quality="auto"

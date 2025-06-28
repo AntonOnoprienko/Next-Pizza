@@ -28,8 +28,8 @@ const DynamicCldImageWithFallback = dynamic(
         src="/fallback.svg"
         alt="loading fallback"
         className="object-cover"
-        width={215}
-        height={215}
+        width={256}
+        height={256}
       />
     ),
   }
