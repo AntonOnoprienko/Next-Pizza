@@ -19,7 +19,32 @@ interface DynamicCldImageProps {
   fallbackImage?: boolean;
 }
 
+const DynamicCldImageWithFallback = dynamic(
+  () => import('next-cloudinary').then(mod => mod.CldImage),
+  {
+    ssr: false,
+    loading: () => (
+      <img
+        src="/fallback.svg"
+        alt="loading fallback"
+        className="object-cover"
+        width={215}
+        height={215}
+      />
+    ),
+  }
+);
+
+const DynamicCldImageWithoutFallback = dynamic(
+  () => import('next-cloudinary').then(mod => mod.CldImage),
+  {
+    ssr: false,
+    loading: () => null,
+  }
+);
+
 export const DynamicCldImage: React.FC<DynamicCldImageProps> = ({
+  fallbackImage = false,
   src,
   alt,
   width,
@@ -31,27 +56,13 @@ export const DynamicCldImage: React.FC<DynamicCldImageProps> = ({
   format = 'auto',
   loadMode = 'lazy',
   priority = false,
-  fallbackImage = false,
 }) => {
-  const DynamicCldImageComponent = dynamic(
-    () => import('next-cloudinary').then(mod => mod.CldImage),
-    {
-      ssr: false,
-      loading: () =>
-        fallbackImage ? (
-          <img
-            src="/fallback.svg"
-            alt="loading fallback"
-            width={width}
-            height={height}
-            className={cn('object-cover', className)}
-          />
-        ) : null,
-    }
-  );
+  const Component = fallbackImage
+    ? DynamicCldImageWithFallback
+    : DynamicCldImageWithoutFallback;
 
   return (
-    <DynamicCldImageComponent
+    <Component
       src={src}
       alt={alt}
       width={width}
