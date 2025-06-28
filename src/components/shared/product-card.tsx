@@ -40,7 +40,7 @@ const ProductCardComponent: React.FC<Props> = ({
   return (
     <div className={cn("h-full flex flex-col", className)}>
       <Link href={`/product/${id}`} className="flex flex-col h-full group">
-        <div className="flex justify-center p-4 bg-secondary rounded-lg h-[296px]">
+        <div className="flex justify-center p-4 bg-secondary rounded-lg">
           <DynamicCldImage
             src={imageUrl}
             alt={name}
