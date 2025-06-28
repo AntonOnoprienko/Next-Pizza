@@ -66,6 +66,7 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
       {showAll && (
         <div className="mb-5">
           <Input
+            aria-label="Фильтрация по ингредиентам"
             placeholder={searchInputPlaceholder}
             value={searchQuery}
             className="bg-gray-50 border-none"

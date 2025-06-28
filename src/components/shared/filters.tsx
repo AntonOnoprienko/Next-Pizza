@@ -30,6 +30,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
 
 
       <CheckboxFiltersGroup
+        aria-label="Фильтрация по типу теста"
         title="Тип теста"
         name="pizzaTypes"
         className="mb-5"
@@ -42,6 +43,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
       />
 
       <CheckboxFiltersGroup
+        aria-label="Фильтрация по размеру пиццы"
         title="Размеры"
         name="sizes"
         className="mb-5"
@@ -59,6 +61,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
         <p className="font-bold mb-3">Цена от и до:</p>
         <div className="flex gap-3 mb-5">
           <Input
+            aria-label="Фильтрация цена от"
             type="number"
             placeholder="0"
             min={0}
@@ -67,6 +70,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
             onChange={(e) => filters.setPrices('priceFrom', Number(e.target.value))}
           />
           <Input
+            aria-label="Фильтрация цена до"
             type="number"
             min={100}
             max={1000}

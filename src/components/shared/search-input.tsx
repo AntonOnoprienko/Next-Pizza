@@ -71,11 +71,12 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
       >
         <Search className="absolute top-1/2 translate-y-[-50%] left-3 h-5 text-gray-400" />
         <input
+          aria-label="Поиск по названию"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="rounded-2xl outline-none w-full bg-gray-100 pl-11"
           type="text"
-          placeholder="Найти пиццу..."
+          placeholder="Найти продукт..."
           onFocus={() => setFocused(true)}
         />
         {products.length > 0 && (
