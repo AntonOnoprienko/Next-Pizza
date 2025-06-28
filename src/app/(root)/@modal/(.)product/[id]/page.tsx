@@ -1,7 +1,9 @@
-import { prisma } from "@/prisma/prisma-client"
-import { ModalLoader } from "@/src/components/shared";
 import dynamic from "next/dynamic";
+import { prisma } from "@/prisma/prisma-client";
+import { ModalLoader } from "@/src/components/shared";
 import { notFound } from "next/navigation"
+
+
 
 const ChooseProductModal = dynamic(
   () => import('@/src/components/shared/modals').then(mod => mod.ChooseProductModal),

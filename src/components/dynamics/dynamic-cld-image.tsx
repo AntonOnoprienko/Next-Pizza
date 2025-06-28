@@ -50,11 +50,11 @@ export const DynamicCldImage: React.FC<DynamicCldImageProps> = ({
   width,
   height,
   className,
-  crop = 'fill',
+  crop,
   gravity = 'auto',
   quality = 'auto',
   format = 'auto',
-  loadMode = 'lazy',
+  loadMode,
   priority = false,
 }) => {
   const Component = fallbackImage

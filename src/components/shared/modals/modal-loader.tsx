@@ -1,24 +1,15 @@
-'use client';
+//only server component very Important
 
-import React from 'react';
-import { Loader } from 'lucide-react';
-import { cn } from '@/src/lib/utils';
-import { DialogOverlay } from '../../ui/dialog';
+import { Loader } from "lucide-react";
 
 export const ModalLoader: React.FC = () => {
   return (
-    <>
-      <DialogOverlay />
-      <div
-        className={cn(
-          "fixed inset-0 z-50 flex items-center justify-center",         
-          "pointer-events-none"
-        )}
+    <div
+        className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center pointer-events-none"
         aria-label="Loading"
         role="status"
       >
         <Loader className="animate-spin text-white" size={64} />
       </div>
-    </>
   );
 };

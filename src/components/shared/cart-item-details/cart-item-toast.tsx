@@ -38,6 +38,7 @@ export const CartItemToast = ({ item, isLoading, success, error }: Props) => {
           alt={item.name}
           width={56}
           height={56}
+          priority
           quality="auto"
           format="auto"
           className="rounded-md object-cover" />
