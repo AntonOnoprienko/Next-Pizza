@@ -1,11 +1,12 @@
-'use client';
+
 
 import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
-
 import { cn } from '@/src/lib/utils';
-import { Loader } from 'lucide-react';
+import dynamic from 'next/dynamic';
+
+const Spinner = dynamic(() => import('../animations').then(mod => mod.Spinner), { ssr: false });
 
 const buttonVariants = cva(
   'inline-flex items-center justify-center whitespace-nowrap rounded-md active:translate-y-[1px] text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
@@ -55,7 +56,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         )}
         ref={ref}
         {...props}>
-        {!loading ? children : <Loader className="w-5 h-5 animate-spin" />}
+        {!loading ? children : <Spinner size='sm' strokeColor='#ffff' />}
       </Comp>
     );
   },

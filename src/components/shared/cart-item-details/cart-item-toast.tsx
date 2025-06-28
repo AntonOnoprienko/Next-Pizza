@@ -1,5 +1,4 @@
 import React from 'react';
-import { CldImage } from 'next-cloudinary';
 import { cn } from '@/src/lib/utils';
 import dynamic from 'next/dynamic';
 import { CartItemForToast } from './cart-item-details.types';
@@ -14,7 +13,7 @@ type Props = {
 const Spinner = dynamic(() => import('../../animations').then(mod => mod.Spinner), { ssr: false });
 const AnimatedSuccessCheck = dynamic(() => import('../../animations').then(mod => mod.AnimatedSuccessCheck), { ssr: false });
 const AnimatedError = dynamic(() => import('../../animations').then(mod => mod.AnimatedError), { ssr: false });
-
+const CldImage = dynamic(() => import('next-cloudinary').then(mod => mod.CldImage), { ssr: false });
 export const CartItemToast = ({ item, isLoading, success, error }: Props) => {
   const getTitle = () => {
     if (isLoading) return 'Добавляем...';

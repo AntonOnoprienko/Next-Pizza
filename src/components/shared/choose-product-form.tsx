@@ -3,8 +3,8 @@ import { cn } from "@/src/lib/utils";
 import { Title } from ".";
 import { Button } from "../ui";
 import { Ingredient, ProductItem } from "@prisma/client";
-import { CldImage } from "next-cloudinary";
 import { CartItemForToast } from "./cart-item-details/cart-item-details.types";
+import dynamic from "next/dynamic";
 
 type Props = {
   imageUrl: string;
@@ -18,7 +18,7 @@ type Props = {
 };
 
 
-
+const CldImage = dynamic(() => import('next-cloudinary').then(mod => mod.CldImage), { ssr: false });
 export const ChooseProductForm: React.FC<Props> = ({
   name,
   items,

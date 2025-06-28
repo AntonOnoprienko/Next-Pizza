@@ -7,12 +7,12 @@ import { useClickAway, useDebounce } from "react-use";
 import Link from "next/link";
 import { Api } from "@/src/services/api-client";
 import { Product } from "@prisma/client";
-import { CldImage } from "next-cloudinary";
+import dynamic from "next/dynamic";
 
 type Props = {
   className?: string;
 };
-
+const CldImage = dynamic(() => import('next-cloudinary').then(mod => mod.CldImage), { ssr: false });
 export const SearchInput: React.FC<Props> = ({ className }) => {
   const [searchQuery, setSearchQuery] = React.useState<string>("");
   const [focused, setFocused] = React.useState<boolean>(false);

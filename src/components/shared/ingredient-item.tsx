@@ -1,7 +1,8 @@
+
 import React from 'react';
 import { cn } from '@/src/lib/utils';
 import { CircleCheck } from 'lucide-react';
-import { CldImage } from 'next-cloudinary';
+import dynamic from 'next/dynamic';
 
 type Props = {
   imageUrl: string;
@@ -12,6 +13,7 @@ type Props = {
   className?: string;
 };
 
+const CldImage = dynamic(() => import('next-cloudinary').then(mod => mod.CldImage), { ssr: false });
  const IngredientItemComponent: React.FC<Props> = ({
   className,
   active,

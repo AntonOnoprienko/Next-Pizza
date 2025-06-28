@@ -1,10 +1,10 @@
-'use client';
+'use client'
 
 import React from "react";
 import Link from "next/link";
-import { CldImage } from "next-cloudinary";
 import { cn } from "@/src/lib/utils";
 import { ProductCardActions, Title } from ".";
+import dynamic from "next/dynamic";
 
 interface Props {
   id: number;
@@ -21,7 +21,21 @@ interface Props {
   onQuantityChange?: (type: "plus" | "minus") => void;
   className?: string;
 }
-
+const CldImage = dynamic(
+  () => import("next-cloudinary").then((mod) => mod.CldImage),
+  {
+    ssr: false,
+    loading: () => (
+      <img
+        src="/fallback.svg"
+        alt="loading fallback"
+        width={215}
+        height={215}
+        className="w-[215px] h-[215px]"
+      />
+    ),
+  }
+);
 const ProductCardComponent: React.FC<Props> = ({
   id,
   name,

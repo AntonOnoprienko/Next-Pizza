@@ -1,8 +1,6 @@
-'use client'
-
 import React from 'react';
-import { CldImage } from 'next-cloudinary';
 import { cn } from '@/src/lib/utils';
+import dynamic from 'next/dynamic';
 
 type Props = {
   publicId: string;
@@ -17,6 +15,7 @@ const sizeMap = {
   40: 500,
 } as const;
 
+const CldImage = dynamic(() => import('next-cloudinary').then(mod => mod.CldImage), { ssr: false });
 export const PizzaImage: React.FC<Props> = ({ publicId, size, alt, className }) => {
   const dimension = sizeMap[size];
 
