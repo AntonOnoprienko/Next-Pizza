@@ -1,6 +1,6 @@
 import React from 'react';
 import { cn } from '@/src/lib/utils';
-import dynamic from 'next/dynamic';
+import { DynamicCldImage } from '../dynamics';
 
 type Props = {
   publicId: string;
@@ -15,13 +15,12 @@ const sizeMap = {
   40: 500,
 } as const;
 
-const CldImage = dynamic(() => import('next-cloudinary').then(mod => mod.CldImage), { ssr: false });
 export const PizzaImage: React.FC<Props> = ({ publicId, size, alt, className }) => {
   const dimension = sizeMap[size];
 
   return (
     <div className={cn('flex items-center justify-center flex-1 relative w-full', className)}>
-      <CldImage
+      <DynamicCldImage 
         src={publicId}
         alt={alt}
         width={dimension}

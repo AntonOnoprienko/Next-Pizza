@@ -38,7 +38,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
             <SheetTrigger asChild>{children}</SheetTrigger>
             <SheetContent className="flex flex-col justify-between pb-0 bg-[#F4F1EE]">
                 <SheetHeader className="mb-2">
-                    <SheetTitle>
+                    <SheetTitle aria-live="polite" aria-atomic="true">
                         В корзине <span className="font-bold">{items.length + " товар(а)"}</span>
                     </SheetTitle>
                     <SheetDescription>

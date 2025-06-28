@@ -16,6 +16,7 @@ export const CartButton: React.FC<Props> = ({ className }) => {
     return (
         <CartDrawer>
             <Button
+                aria-label={`Корзина, сумма товаров ${totalAmount || 0} гривен, количество товаров ${items?.reduce((acc, item) => acc + item.quantity, 0) ?? 0}`}
                 loading={loading}
                 disabledStyles="bg-[#FF5E00]"
                 className={cn('group relative', { 'w-[105px]': loading },

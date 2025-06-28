@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { cn } from "@/src/lib/utils";
 import { ProductCardActions, Title } from ".";
-import dynamic from "next/dynamic";
+import { DynamicCldImage } from "../dynamics";
 
 interface Props {
   id: number;
@@ -21,21 +21,7 @@ interface Props {
   onQuantityChange?: (type: "plus" | "minus") => void;
   className?: string;
 }
-const CldImage = dynamic(
-  () => import("next-cloudinary").then((mod) => mod.CldImage),
-  {
-    ssr: false,
-    loading: () => (
-      <img
-        src="/fallback.svg"
-        alt="loading fallback"
-        width={215}
-        height={215}
-        className="w-[215px] h-[215px]"
-      />
-    ),
-  }
-);
+
 const ProductCardComponent: React.FC<Props> = ({
   id,
   name,
@@ -55,7 +41,7 @@ const ProductCardComponent: React.FC<Props> = ({
     <div className={cn("h-full flex flex-col", className)}>
       <Link href={`/product/${id}`} className="flex flex-col h-full group">
         <div className="flex justify-center p-6 bg-secondary rounded-lg h-[260px]">
-          <CldImage
+          <DynamicCldImage
             src={imageUrl}
             alt={name}
             width={215}
@@ -64,15 +50,17 @@ const ProductCardComponent: React.FC<Props> = ({
             loading="lazy"
             quality="auto"
             format="auto"
-            className="w-[215px] h-[215px] transition-transform duration-300 ease-in-out group-hover:translate-y-2"
+            fallbackImage={true}
+            className="transition-transform duration-300 ease-in-out group-hover:translate-y-2"
+
           />
         </div>
 
-        <Title text={name} size="sm" className="mb-1 mt-3 font-bold" />
+        <Title text={name} size="md" className="mb-1 mt-3 font-bold" />
 
         <p className="text-sm text-gray-400">
           {description}
-          
+
           {ingredients?.map((i) => i.name).join(", ")}
         </p>
 

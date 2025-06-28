@@ -22,7 +22,7 @@ export const Header: React.FC<Props> = ({ className }) => {
               <h1 className="text-2xl uppercase font-black">
                 {siteConfig.ru.title}
               </h1>
-              <p className="text-sm text-gray-400 leading-3">
+              <p className="text-sm text-gray-600 leading-3">
                 {siteConfig.ru.slogan}
               </p>
             </div>

@@ -27,12 +27,13 @@ export const CountButton: React.FC<CountButtonProps> = ({
   return (
     <div className={cn('inline-flex items-center justify-between w-[100px]', className)}>
       <CountIconButton
+        aria-label="Уменьшить количество"
         onClick={(e) => {
           e.preventDefault()
           e.stopPropagation()
           onClick?.('minus')
         }}
-          disabled={(!allowZero && value === 1) || loading}
+        disabled={(!allowZero && value === 1) || loading}
         size={size}
         type="minus"
       />
@@ -45,11 +46,14 @@ export const CountButton: React.FC<CountButtonProps> = ({
       )}
 
 
-      <CountIconButton disabled={loading} onClick={(e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        onClick?.('plus')
-      }} size={size} type="plus" />
+      <CountIconButton
+        aria-label="Увеличить количество"
+        disabled={loading}
+        onClick={(e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          onClick?.('plus')
+        }} size={size} type="plus" />
     </div>
   );
 };

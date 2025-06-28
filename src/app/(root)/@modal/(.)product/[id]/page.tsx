@@ -1,6 +1,15 @@
 import { prisma } from "@/prisma/prisma-client"
-import { ChooseProductModal } from "@/src/components/shared/modals/choose-product-modal"
+import { ModalLoader } from "@/src/components/shared";
+import dynamic from "next/dynamic";
 import { notFound } from "next/navigation"
+
+const ChooseProductModal = dynamic(
+  () => import('@/src/components/shared/modals').then(mod => mod.ChooseProductModal),
+  {
+    ssr: false,
+    loading: () => <ModalLoader />,
+  }
+);
 
 export default async function ProductModalPage({ params: { id } }: { params: { id: string } }) {
   const product = await prisma.product.findFirst({
@@ -24,5 +33,5 @@ export default async function ProductModalPage({ params: { id } }: { params: { i
     return notFound()
   }
 
-  return  <ChooseProductModal product={product} />
+  return <ChooseProductModal product={product} />;
 }

@@ -1,7 +1,8 @@
 import toast from 'react-hot-toast';
-import { CartItemToast } from '@/src/components/shared';
+
 import { CartItemForToast } from '@/src/components/shared/cart-item-details/cart-item-details.types';
 import { useCartStore } from '@/src/store';
+import { DynamicCartItemToast } from '../components/dynamics';
 
 export const useAddToCartToast = () => {
   const addToCart = useCartStore(state => state.addCartItem);
@@ -16,9 +17,9 @@ export const useAddToCartToast = () => {
     return toast.promise(
       addToCart(values),
       {
-        loading: <CartItemToast item={item} isLoading={true} success={false} />,
-        success: <CartItemToast item={item} isLoading={false} success={true} />,
-        error: <CartItemToast item={item} isLoading={false} success={false} error={true} />,
+        loading: <DynamicCartItemToast item={item} isLoading={true} success={false} />,
+        success: <DynamicCartItemToast item={item} isLoading={false} success={true} />,
+        error: <DynamicCartItemToast item={item} isLoading={false} success={false} error={true} />,
       },
       {
         loading: { icon: null },

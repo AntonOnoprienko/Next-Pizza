@@ -2,7 +2,7 @@
 import React from 'react';
 import { cn } from '@/src/lib/utils';
 import { CircleCheck } from 'lucide-react';
-import dynamic from 'next/dynamic';
+import { DynamicCldImage } from '../dynamics';
 
 type Props = {
   imageUrl: string;
@@ -13,7 +13,6 @@ type Props = {
   className?: string;
 };
 
-const CldImage = dynamic(() => import('next-cloudinary').then(mod => mod.CldImage), { ssr: false });
  const IngredientItemComponent: React.FC<Props> = ({
   className,
   active,
@@ -27,8 +26,8 @@ const CldImage = dynamic(() => import('next-cloudinary').then(mod => mod.CldImag
       className={cn('flex items-center flex-col p-1 rounded-md w-32 text-center relative cursor-pointer shadow-md bg-white border border-white', { 'border-primary': active },
         className)}>
       {active && <CircleCheck className="absolute top-2 right-2 text-primary" />}
-      <CldImage
-            src={imageUrl}
+      <DynamicCldImage
+        src={imageUrl}
             alt={name}
             width={110}
             height={110}
@@ -37,7 +36,7 @@ const CldImage = dynamic(() => import('next-cloudinary').then(mod => mod.CldImag
             quality="auto"
             format="auto"
             loading="lazy"
-          />
+      />
       <div className="flex flex-col justify-between h-14">
         <span className="text-xs">{name}</span>
         <span className="font-bold">{price} ₴</span>

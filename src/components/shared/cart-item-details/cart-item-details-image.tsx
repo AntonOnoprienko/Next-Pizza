@@ -1,14 +1,12 @@
-import { cn } from '@/src/lib/utils';
-import dynamic from 'next/dynamic';
+import { DynamicCldImage } from '../../dynamics';
 
 interface Props {
     src: string;
     name: string
     className?: string;
 }
-const CldImage = dynamic(() => import('next-cloudinary').then(mod => mod.CldImage), { ssr: false });
 export const CartItemDetailsImage: React.FC<Props> = ({ src, name, className }) => {
-    return <CldImage
+    return <DynamicCldImage
         src={src}
         alt={name}
         width={60}
@@ -17,6 +15,6 @@ export const CartItemDetailsImage: React.FC<Props> = ({ src, name, className }) 
         quality="auto"
         format="auto"
         priority
-        className={cn('w-[60px] h-[60px]', className)}
+        className={className}
     />
 };

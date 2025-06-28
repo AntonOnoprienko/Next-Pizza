@@ -8,6 +8,7 @@ import Link from "next/link";
 import { Api } from "@/src/services/api-client";
 import { Product } from "@prisma/client";
 import dynamic from "next/dynamic";
+import { DynamicCldImage } from "../dynamics";
 
 type Props = {
   className?: string;
@@ -91,8 +92,7 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
                 href={`/product/${item.id}`}
                 onClick={onClickItem}
               >
-
-                <CldImage
+                <DynamicCldImage 
                   className="rounded-sm"
                   src={item.imageUrl}
                   alt={item.name}

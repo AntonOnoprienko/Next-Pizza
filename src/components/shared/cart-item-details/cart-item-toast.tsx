@@ -1,7 +1,8 @@
 import React from 'react';
 import { cn } from '@/src/lib/utils';
-import dynamic from 'next/dynamic';
 import { CartItemForToast } from './cart-item-details.types';
+import { DynamicCldImage } from '../../dynamics';
+import { AnimatedError, AnimatedSuccessCheck, Spinner } from '../../animations';
 
 type Props = {
   item: CartItemForToast;
@@ -10,10 +11,7 @@ type Props = {
   error?: boolean;
 };
 
-const Spinner = dynamic(() => import('../../animations').then(mod => mod.Spinner), { ssr: false });
-const AnimatedSuccessCheck = dynamic(() => import('../../animations').then(mod => mod.AnimatedSuccessCheck), { ssr: false });
-const AnimatedError = dynamic(() => import('../../animations').then(mod => mod.AnimatedError), { ssr: false });
-const CldImage = dynamic(() => import('next-cloudinary').then(mod => mod.CldImage), { ssr: false });
+
 export const CartItemToast = ({ item, isLoading, success, error }: Props) => {
   const getTitle = () => {
     if (isLoading) return 'Добавляем...';
@@ -35,15 +33,14 @@ export const CartItemToast = ({ item, isLoading, success, error }: Props) => {
       )}
     >
       <div className="flex-shrink-0">
-        <CldImage
+        <DynamicCldImage
           src={item.imageUrl}
           alt={item.name}
           width={56}
           height={56}
           quality="auto"
           format="auto"
-          className="rounded-md object-cover"
-        />
+          className="rounded-md object-cover" />
       </div>
 
       <div className="flex-1">
