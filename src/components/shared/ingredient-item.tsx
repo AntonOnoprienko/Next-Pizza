@@ -35,7 +35,7 @@ type Props = {
             gravity="auto"
             quality="auto"
             format="auto"
-            loading="lazy"
+            loadMode="lazy"
       />
       <div className="flex flex-col justify-between h-14">
         <span className="text-xs">{name}</span>

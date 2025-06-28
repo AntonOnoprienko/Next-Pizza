@@ -47,7 +47,7 @@ const ProductCardComponent: React.FC<Props> = ({
             width={215}
             height={215}
             crop="fill"
-            loading="lazy"
+            loadMode="lazy"
             quality="auto"
             format="auto"
             fallbackImage={true}
@@ -58,7 +58,7 @@ const ProductCardComponent: React.FC<Props> = ({
 
         <Title text={name} size="md" className="mb-1 mt-3 font-bold" />
 
-        <p className="text-sm text-gray-400">
+        <p className="text-sm text-gray-600">
           {description}
 
           {ingredients?.map((i) => i.name).join(", ")}

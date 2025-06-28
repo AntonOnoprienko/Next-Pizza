@@ -14,7 +14,7 @@ interface DynamicCldImageProps {
   gravity?: string;
   quality?: string | number;
   format?: string;
-  loading?: 'lazy' | 'eager';
+  loadMode?: 'lazy' | 'eager';
   priority?: boolean;
   fallbackImage?: boolean;
 }
@@ -29,7 +29,7 @@ export const DynamicCldImage: React.FC<DynamicCldImageProps> = ({
   gravity = 'auto',
   quality = 'auto',
   format = 'auto',
-  loading = 'lazy',
+  loadMode = 'lazy',
   priority = false,
   fallbackImage = false,
 }) => {
@@ -60,7 +60,7 @@ export const DynamicCldImage: React.FC<DynamicCldImageProps> = ({
       gravity={gravity}
       quality={quality}
       format={format}
-      loading={loading}
+      loading={loadMode}
       priority={priority}
       className={cn(className, `w-[${width}px] h-[${height}px]`)}
     />

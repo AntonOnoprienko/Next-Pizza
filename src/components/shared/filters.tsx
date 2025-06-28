@@ -26,7 +26,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
 
   return (
     <div className={className}>
-      <Title text="Фильтрация" size="sm" className="mb-5 font-bold" />
+      <Title text="Фильтрация" size="md" className="mb-5 font-bold" />
 
 
       <CheckboxFiltersGroup
