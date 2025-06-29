@@ -50,7 +50,7 @@ export const DynamicCldImage: React.FC<DynamicCldImageProps> = ({
   width,
   height,
   className,
-  crop,
+  crop = 'fill',
   gravity = 'auto',
   quality = 'auto',
   format = 'auto',

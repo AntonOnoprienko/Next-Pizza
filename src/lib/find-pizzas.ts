@@ -1,4 +1,5 @@
 import { prisma  } from "@/prisma/prisma-client";
+import { logSizeTracker } from "./log-size-tracker";
 
 export interface GetSearchParams {
   query?: string;
@@ -93,6 +94,6 @@ export const findPizzas = async (params: GetSearchParams) => {
       },
     },
   });
-
+  logSizeTracker('Категории HOMEPAGE', categories);
   return categories;
 };

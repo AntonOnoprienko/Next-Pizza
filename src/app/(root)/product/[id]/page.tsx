@@ -1,14 +1,11 @@
 
 import React from "react";
-import { cn } from "@/src/lib/utils";
 import { prisma } from "@/prisma/prisma-client";
 import { notFound } from "next/navigation";
-import {
-  Container,
-  GroupVariants,
-  PizzaImage,
-  Title,
-} from "@/src/components/shared";
+import { Container } from "@/src/components/shared";
+import dynamic from "next/dynamic";
+import { Loader } from "lucide-react";
+import { logSizeTracker } from "@/src/lib/log-size-tracker";
 
 type Props = {
   params: {
@@ -16,54 +13,49 @@ type Props = {
   };
 };
 
+const ChooseProductClientWrapper = dynamic(() => import('@/src/components/shared').then(mod => mod.ChooseProductClientWrapper), {
+  ssr: false,
+  loading: () => <div className="flex justify-center items-center" style={{ height: 'calc(100vh - 220px)' }}>
+    <Loader size={64} className="animate-spin mr-2" />
+  </div >
+})
+
 const ProductPage = async ({ params }: Props) => {
   const product = await prisma.product.findFirst({
     where: { id: Number(params.id) },
+    include: {
+      ingredients: true,
+      category: {
+        include: {
+          products: {
+            include: {
+              items: true,
+            },
+          },
+        },
+      },
+      items: {
+        include: {
+          extraIngredients: {
+            include: {
+              ingredient: true
+            }
+          }
+        }
+      },
+    },
   });
 
   if (!product) {
     return notFound();
   }
 
+  logSizeTracker('ProductPage', product);
+
+
   return (
-    <Container className="flex flex-col my-10">
-      <div className="flex flex-1">
-        <PizzaImage
-          publicId={product.imageUrl}
-          size={40}
-          alt={product.name}
-        />
-        <div className="w-[490px] bg-[#F7F6F5] p-7">
-          <Title
-            text={product.name}
-            size="md"
-            className="font-extrabold mb-1"
-          />
-          <p className="text-gray-400">
-            Lorem ipsum dolot. Ea distinctio, laborum perferendis libero
-            voluptas, enim sequi fuga
-          </p>
-          {/* <GroupVariants
-            value="2"
-            items={[
-              {
-                name: "Маленькая",
-                value: "1",
-              },
-              {
-                name: "Средняя",
-                value: "2",
-              },
-              { 
-                name: "Большая",
-                value: "3",
-                disabled: true
-              },
-            ]}
-            
-          /> */}
-        </div>
-      </div>
+    <Container className="flex flex-col my-2">
+      <ChooseProductClientWrapper product={product} />
     </Container>
   );
 };

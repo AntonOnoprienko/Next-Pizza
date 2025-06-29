@@ -23,7 +23,6 @@ const DynamicFilters = dynamic(() => import('@/src/components/shared/').then(mod
 
 const Home = async ({ searchParams }: PageProps) => {
   const categories = await findPizzas(searchParams);
-
   return (
     <>
       <Container className="mt-10">
