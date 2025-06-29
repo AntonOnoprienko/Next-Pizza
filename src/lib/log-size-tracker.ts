@@ -5,6 +5,6 @@ export const logSizeTracker = (label: string, obj: any) => {
   const sizeInKB = sizeInBytes / 1024;
 
   console.log(
-    `%c📦💾 ${label}: ${sizeInKB.toFixed(2)} КБ`
+    `----------📦💾 ${label}: ${sizeInKB.toFixed(2)} КБ`
   );
 };
