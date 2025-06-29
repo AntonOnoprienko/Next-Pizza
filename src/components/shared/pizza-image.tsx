@@ -25,7 +25,6 @@ export const PizzaImage: React.FC<Props> = ({ publicId, size, alt, className }) 
         alt={alt}
         width={dimension}
         height={dimension}
-        priority
         crop="fill"
         gravity="auto"
         quality="auto"
