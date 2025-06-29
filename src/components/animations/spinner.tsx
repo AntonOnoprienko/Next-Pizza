@@ -17,7 +17,7 @@ const sizeMap = {
 
 export const Spinner: React.FC<SpinnerProps> = ({
   size = 'lg',
-  strokeColor = "var(--primary)",
+  strokeColor = "#FF5E00",
   className
 }) => {
   const dimension = sizeMap[size] || sizeMap.lg;

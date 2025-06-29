@@ -27,13 +27,13 @@ const ProductCardActionsComponent: React.FC<Props> = ({ inCart, count, isPizza, 
                     className="my-[5px]"
                 />
             ) : isPizza ? (
-                <Button >Выбрать</Button>
+                <Button variant="secondary" >Выбрать</Button>
             ) : (
                 <Button
                     className="w-[125px]"
                     loading={loading}
-                    disabledStyles="bg-[#FF7518]"
-                    
+                    disabledStyles="bg-[#FF5E00]"
+                    variant="secondary"
                     onClick={(e) => {
                         if (loading) return;
                         e.preventDefault();
