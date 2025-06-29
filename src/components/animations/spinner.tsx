@@ -15,6 +15,7 @@ const sizeMap = {
   lg: 48,
 };
 
+
 export const Spinner: React.FC<SpinnerProps> = ({
   size = 'lg',
   strokeColor = "#FF5E00",
