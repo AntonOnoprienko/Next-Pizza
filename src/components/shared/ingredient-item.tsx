@@ -13,7 +13,7 @@ type Props = {
   className?: string;
 };
 
- const IngredientItemComponent: React.FC<Props> = ({
+const IngredientItemComponent: React.FC<Props> = ({
   className,
   active,
   price,
@@ -28,14 +28,15 @@ type Props = {
       {active && <CircleCheck className="absolute top-2 right-2 text-primary" />}
       <DynamicCldImage
         src={imageUrl}
-            alt={name}
-            width={110}
-            height={110}
-            crop="fill"
-            gravity="auto"
-            quality="auto"
-            format="auto"
-            loadMode="lazy"
+        alt={name}
+        width={110}
+        height={110}
+        crop="fill"
+        gravity="auto"
+        quality="auto"
+        format="auto"
+        loadMode="lazy"
+        fallbackImage
       />
       <div className="flex flex-col justify-between h-14">
         <span className="text-xs">{name}</span>

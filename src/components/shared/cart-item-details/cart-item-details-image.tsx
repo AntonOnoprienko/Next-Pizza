@@ -16,5 +16,6 @@ export const CartItemDetailsImage: React.FC<Props> = ({ src, name, className }) 
         format="auto"
         priority
         className={cn('w-[60px] h-[60px]', className)}
+        fallbackImage
     />
 };

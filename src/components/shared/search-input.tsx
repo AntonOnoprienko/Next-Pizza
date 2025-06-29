@@ -102,6 +102,7 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
                   quality="auto"
                   format="auto"
                   loadMode="lazy"
+                  fallbackImage
                 />
                 <span>{item.name}</span>
               </Link>

@@ -61,6 +61,7 @@ export const ChooseProductForm: React.FC<Props> = ({
           gravity="auto"
           quality="auto"
           format="auto"
+          fallbackImage
         />
       </div>
       <div className="w-[490px] bg-[#F7F6F5] p-7">
