@@ -5,3 +5,5 @@ export { calcTotalPizzaPrice } from './calc-total-pizza-price';
 export { updateCartTotalAmount} from './update-cart-total-amount';
 export { findPizzas } from './find-pizzas'; 
 export type { GetSearchParams } from './find-pizzas';
+export { logSizeTracker } from './log-size-tracker';
+export { generateCustomizationHash } from './hash';

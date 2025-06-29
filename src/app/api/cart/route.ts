@@ -2,7 +2,7 @@ import { prisma } from "@/prisma/prisma-client";
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 import { CreateCartItemValues } from "@/src/services/dto/cart.dto";
-import { findOrCreateCart, updateCartTotalAmount } from "@/src/lib";
+import { findOrCreateCart, generateCustomizationHash, updateCartTotalAmount } from "@/src/lib";
 
 export const dynamic = "force-dynamic";
 
@@ -96,52 +96,20 @@ export async function POST(req: NextRequest) {
 
     const userCart = await findOrCreateCart(token);
 
-    const cartItems = await prisma.cartItem.findMany({
+    const customizationHash = generateCustomizationHash(data);
+
+    const existingItem = await prisma.cartItem.findFirst({
       where: {
         cartId: userCart.id,
-        productItemId: data.productItemId,
-      },
-      include: {
-        cartItemExcludedIngredients: {
-          select: {
-            ingredientId: true,
-            
-          },
-        },
-        cartItemExtraIngredients: {
-          select: {
-            ingredientId: true,
-          },
-        },
+        customizationHash,
       },
     });
 
-    const arraysMatch = (a: number[], b: number[]) => {
-      if (a.length !== b.length) return false;
-      const sortedA = [...a].sort();
-      const sortedB = [...b].sort();
-      return sortedA.every((val, idx) => val === sortedB[idx]);
-    };
-
-    const findCartItem = cartItems.find((item) => {
-      const excludedIds = item.cartItemExcludedIngredients.map(
-        (i) => i.ingredientId
-      );
-      const extraIds = item.cartItemExtraIngredients.map((i) => i.ingredientId);
-
-      return (
-        arraysMatch(excludedIds, data.excludedIngredients ?? []) &&
-        arraysMatch(extraIds, data.extraIngredients ?? [])
-      );
-    });
-
-    if (findCartItem) {
+    if (existingItem) {
       await prisma.cartItem.update({
-        where: {
-          id: findCartItem.id,
-        },
+        where: { id: existingItem.id },
         data: {
-          quantity: findCartItem.quantity + 1,
+          quantity: existingItem.quantity + 1,
         },
       });
     } else {
@@ -154,6 +122,7 @@ export async function POST(req: NextRequest) {
         data: {
           cartId: userCart.id,
           productItemId: data.productItemId,
+          customizationHash,
           cartItemExcludedIngredients: { create: excluded },
           cartItemExtraIngredients: { create: extra },
         },
@@ -166,9 +135,9 @@ export async function POST(req: NextRequest) {
     response.cookies.set("cartToken", token);
     return response;
   } catch (error) {
-    console.log("[CART_POST] Server Error", error);
+    console.log("[CART_POST_HASH] Server Error", error);
     return NextResponse.json(
-      { message: "Не удалось создать корзину" },
+      { message: "Не удалось обновить корзину" },
       { status: 500 }
     );
   }

@@ -27,5 +27,6 @@ export { ProductCardWithCart } from "./product-card-with-cart";
 export { ProductCardActions } from './product-card-actions'
 export { ExtraIngredientsListSkeleton} from './extra-ingredients-list-skeleton'
 export { CartLoader } from './cart-loader';
-export { ChooseProductClientWrapper } from './choose-product-client-wrapper'
+export { ChooseProductClientWrapper } from './choose-product-client-wrapper';
+export { ChooseProductFormRenderer} from './choose-product-form-renderer';
 export * from "./modals";
