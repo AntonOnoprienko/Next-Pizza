@@ -74,6 +74,7 @@ export const useFilters = (): ReturnProps => {
       setSizes: toggleSizes,
       setSelectedIngredients: toggleIngredients,
     }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [sizes, pizzaTypes, selectedIngredients, prices],
   );
 };

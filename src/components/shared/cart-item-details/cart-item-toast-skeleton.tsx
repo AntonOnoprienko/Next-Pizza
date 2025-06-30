@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { cn } from '@/src/lib/utils';
+import Image from 'next/image';
 
 export const CartItemToastSkeleton: React.FC<{ className?: string }> = ({
   className,
@@ -17,7 +18,7 @@ export const CartItemToastSkeleton: React.FC<{ className?: string }> = ({
       )}
     >
       <div className="flex-shrink-0 rounded-md overflow-hidden w-14 h-14">
-        <img
+        <Image
           src="/fallback.svg"
           alt="loading fallback"
           width={56}

@@ -17,7 +17,8 @@ describe('useIngredients', () => {
 
   it('должен правильно загружать ингредиенты и переключать loading', async () => {
     const fakeIngredients = [
-      { id: 1, name: 'Tomato', createdAt: new Date(), updatedAt: new Date() }, { id: 2, name: 'Cheese', createdAt: new Date(), updatedAt: new Date() },
+      { id: 1, name: 'Tomato', createdAt: new Date(), updatedAt: new Date() },
+      { id: 2, name: 'Cheese', createdAt: new Date(), updatedAt: new Date() },
     ];
 
     mockGetAll.mockResolvedValueOnce(fakeIngredients);

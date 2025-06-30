@@ -28,5 +28,6 @@ export const useQueryFilters = (filters: Filters) => {
     }
 
     isMounted.current = true;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters]);
 };

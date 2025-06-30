@@ -66,7 +66,7 @@ export const usePizzaOption = (
     if (!availableSizes.includes(size)) {
       setSize(availableSizes[0] as PizzaSize);
     }
-  }, [type, items]);
+  }, [type, items, size]);
 
   return {
     size,

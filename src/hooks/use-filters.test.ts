@@ -29,7 +29,9 @@ describe('useFilters hook', () => {
 
     // Проверяем, что стейт инициализирован правильно
     expect(Array.from(result.current.selectedIngredients)).toEqual([
-      '1', '2', '3',
+      '1',
+      '2',
+      '3',
     ]);
     expect(Array.from(result.current.sizes)).toEqual(['10', '20']);
     expect(Array.from(result.current.pizzaTypes)).toEqual(['5']);
