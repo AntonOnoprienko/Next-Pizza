@@ -10,12 +10,7 @@ export const AnimatedError = () => {
       animate={{
         y: 0,
         opacity: 1,
-        rotate: [0,
--10,
-10,
--5,
-5,
-0],
+        rotate: [0, -10, 10, -5, 5, 0],
       }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
       className="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center shadow-md"
