@@ -11,7 +11,22 @@ interface DynamicCldImageProps {
   width: number;
   height: number;
   className?: string;
-  crop?: "auto" | "crop" | "fill" | "fill_pad" | "fit" | "imagga_crop" | "imagga_scale" | "lfill" | "limit" | "lpad" | "mfit" | "mpad" | "pad" | "scale" | "thumb";
+  crop?:
+    | 'auto'
+    | 'crop'
+    | 'fill'
+    | 'fill_pad'
+    | 'fit'
+    | 'imagga_crop'
+    | 'imagga_scale'
+    | 'lfill'
+    | 'limit'
+    | 'lpad'
+    | 'mfit'
+    | 'mpad'
+    | 'pad'
+    | 'scale'
+    | 'thumb';
   gravity?: string;
   quality?: string | number;
   format?: string;
@@ -21,16 +36,18 @@ interface DynamicCldImageProps {
 }
 
 // Компонент для fallback изображения
-const LoaderFallback: React.FC<{ width: number; height: number }> = React.memo(({ width, height }) => (
-  <img
-    src="/fallback.svg"
-    alt="loading fallback"
-    className="object-cover"
-    width={width}
-    height={height}
-    style={{ width, height }}
-  />
-));
+const LoaderFallback: React.FC<{ width: number; height: number }> = React.memo(
+  ({ width, height }) => (
+    <img
+      src="/fallback.svg"
+      alt="loading fallback"
+      className="object-cover"
+      width={width}
+      height={height}
+      style={{ width, height }}
+    />
+  ),
+);
 
 // Кеш для компонентов с fallback
 const fallbackComponentCache = new Map<string, React.ComponentType<any>>();
@@ -38,20 +55,26 @@ const fallbackComponentCache = new Map<string, React.ComponentType<any>>();
 // Фабрика для динамического компонента с fallback
 function getDynamicCldImageWithFallback(width: number, height: number) {
   const key = `${width}x${height}`;
+
   if (!fallbackComponentCache.has(key)) {
-    const Component = dynamic(() => import('next-cloudinary').then(mod => mod.CldImage), {
-      ssr: false,
-      loading: () => <LoaderFallback width={width} height={height} />,
-    });
+    const Component = dynamic(
+      () => import('next-cloudinary').then((mod) => mod.CldImage),
+      {
+        ssr: false,
+        loading: () => <LoaderFallback width={width} height={height} />,
+      },
+    );
+
     fallbackComponentCache.set(key, Component);
   }
+
   return fallbackComponentCache.get(key)!;
 }
 
 // Динамический компонент без fallback
 const DynamicCldImageWithoutFallback = dynamic(
-  () => import('next-cloudinary').then(mod => mod.CldImage),
-  { ssr: false, loading: () => null }
+  () => import('next-cloudinary').then((mod) => mod.CldImage),
+  { ssr: false, loading: () => null },
 );
 
 // Основной компонент

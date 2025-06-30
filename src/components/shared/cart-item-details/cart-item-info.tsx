@@ -1,12 +1,12 @@
-import { mapPizzaType, PizzaSize, PizzaType } from "@/src/constants/pizza";
-import { cn } from "@/src/lib/utils";
+import { mapPizzaType, PizzaSize, PizzaType } from '@/src/constants/pizza';
+import { cn } from '@/src/lib/utils';
 
 interface Props {
   name: string;
-  size?: PizzaSize ;
+  size?: PizzaSize;
   type?: PizzaType;
-  extraIngredients?: {name: string, price: number}[];
-  excludedIngredients?: {name: string}[];
+  extraIngredients?: { name: string; price: number }[];
+  excludedIngredients?: { name: string }[];
   className?: string;
 }
 
@@ -16,7 +16,7 @@ export const CartItemInfo: React.FC<Props> = ({
   type,
   extraIngredients,
   excludedIngredients,
-  className
+  className,
 }) => {
   const typeName = type !== undefined ? mapPizzaType[type] : undefined;
 
@@ -34,13 +34,13 @@ export const CartItemInfo: React.FC<Props> = ({
 
       {extraIngredients && extraIngredients.length > 0 && (
         <p className="text-xs text-green-600 mt-1">
-          + {extraIngredients.map(i => i.name).join(', ')}
+          + {extraIngredients.map((i) => i.name).join(', ')}
         </p>
       )}
 
       {excludedIngredients && excludedIngredients.length > 0 && (
         <p className="text-xs text-red-500 mt-1">
-          – {excludedIngredients.map(i => i.name).join(', ')}
+          – {excludedIngredients.map((i) => i.name).join(', ')}
         </p>
       )}
     </div>

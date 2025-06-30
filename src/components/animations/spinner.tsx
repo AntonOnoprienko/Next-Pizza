@@ -1,8 +1,8 @@
-'use client'
+'use client';
 
-import { motion } from "motion/react";
-import React from "react";
-import { cn } from "@/src/lib/utils";
+import { motion } from 'motion/react';
+import React from 'react';
+import { cn } from '@/src/lib/utils';
 
 interface SpinnerProps {
   size?: 'sm' | 'lg';
@@ -15,11 +15,10 @@ const sizeMap = {
   lg: 48,
 };
 
-
 export const Spinner: React.FC<SpinnerProps> = ({
   size = 'lg',
-  strokeColor = "#FF5E00",
-  className
+  strokeColor = '#FF5E00',
+  className,
 }) => {
   const dimension = sizeMap[size] || sizeMap.lg;
 
@@ -49,7 +48,7 @@ export const Spinner: React.FC<SpinnerProps> = ({
         transition={{
           repeat: Infinity,
           duration: 1.4,
-          ease: "easeInOut",
+          ease: 'easeInOut',
         }}
         transform="rotate(-90 44 44)"
       />

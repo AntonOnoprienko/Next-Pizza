@@ -1,5 +1,5 @@
-import { CartStateItem } from "../store/cart";
-import { CartDTO } from "../services/dto/cart.dto";
+import { CartStateItem } from '../store/cart';
+import { CartDTO } from '../services/dto/cart.dto';
 
 interface ReturnProps {
   items: CartStateItem[];
@@ -7,7 +7,7 @@ interface ReturnProps {
 }
 
 export const getCartDetails = (data: CartDTO): ReturnProps => {
-  const items = data.cartItems.map(item => ({
+  const items = data.cartItems.map((item) => ({
     id: item.id,
     productItemId: item.productItem.id,
     quantity: item.quantity,
@@ -16,12 +16,14 @@ export const getCartDetails = (data: CartDTO): ReturnProps => {
     type: item.productItem.pizzaType,
     imageUrl: item.productItem.imageUrl || item.productItem.product.imageUrl,
     name: item.productItem.product.name,
-    excludedIngredients: item.cartItemExcludedIngredients?.map(e => e.ingredient),
-    extraIngredients: item.cartItemExtraIngredients?.map(e => e.ingredient)
+    excludedIngredients: item.cartItemExcludedIngredients?.map(
+      (e) => e.ingredient,
+    ),
+    extraIngredients: item.cartItemExtraIngredients?.map((e) => e.ingredient),
   }));
 
   return {
     items,
-    totalAmount: data.totalAmount
+    totalAmount: data.totalAmount,
   };
 };

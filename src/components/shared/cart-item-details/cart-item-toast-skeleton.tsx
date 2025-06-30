@@ -3,15 +3,17 @@
 import React from 'react';
 import { cn } from '@/src/lib/utils';
 
-export const CartItemToastSkeleton: React.FC<{ className?: string }> = ({ className }) => {
+export const CartItemToastSkeleton: React.FC<{ className?: string }> = ({
+  className,
+}) => {
   return (
     <div
       role="status"
       aria-live="polite"
       className={cn(
-        "w-full min-w-[320px] max-w-sm rounded-xl shadow-md border border-zinc-200 dark:border-zinc-800",
-        "flex items-center gap-4 p-4 bg-white dark:bg-zinc-900 animate-pulse",
-        className
+        'w-full min-w-[320px] max-w-sm rounded-xl shadow-md border border-zinc-200 dark:border-zinc-800',
+        'flex items-center gap-4 p-4 bg-white dark:bg-zinc-900 animate-pulse',
+        className,
       )}
     >
       <div className="flex-shrink-0 rounded-md overflow-hidden w-14 h-14">

@@ -1,6 +1,5 @@
-import { prisma } from "../../prisma-client";
-import { _ingredients } from "./ingredients";
-
+import { prisma } from '../../prisma-client';
+import { _ingredients } from './ingredients';
 
 export const seedPizzas = async () => {
   const pizza1 = await prisma.product.create({
@@ -75,7 +74,7 @@ export const seedPizzas = async () => {
   const pizza7 = await prisma.product.create({
     data: {
       name: 'Охотничья',
-      imageUrl: "pizza/acjxblzhwovyrmljmggu",
+      imageUrl: 'pizza/acjxblzhwovyrmljmggu',
       categoryId: 1,
       description: 'Cоус барбекю, моцарелла, фирменный томатный соус, ',
       ingredients: {
@@ -87,7 +86,7 @@ export const seedPizzas = async () => {
   const pizza8 = await prisma.product.create({
     data: {
       name: 'Четыре сыра',
-      imageUrl: "pizza/ui2li5g6mtywvcuffbtb",
+      imageUrl: 'pizza/ui2li5g6mtywvcuffbtb',
       categoryId: 1,
       description: 'Сыр блю чиз, фирменный соус альфредо ',
       ingredients: {
@@ -99,7 +98,7 @@ export const seedPizzas = async () => {
   const pizza9 = await prisma.product.create({
     data: {
       name: 'Креветки блю чиз',
-      imageUrl: "pizza/gsdcexuv0lobrbbp2vnp",
+      imageUrl: 'pizza/gsdcexuv0lobrbbp2vnp',
       categoryId: 1,
       description: 'Сыр блю чиз, моцарелла, фирменный соус альфредо, ',
       ingredients: {
@@ -108,5 +107,15 @@ export const seedPizzas = async () => {
     },
   });
 
-  return [pizza1, pizza2, pizza3, pizza4, pizza5, pizza6, pizza7, pizza8, pizza9];
+  return [
+    pizza1,
+    pizza2,
+    pizza3,
+    pizza4,
+    pizza5,
+    pizza6,
+    pizza7,
+    pizza8,
+    pizza9,
+  ];
 };

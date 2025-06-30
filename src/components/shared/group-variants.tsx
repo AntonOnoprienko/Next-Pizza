@@ -1,4 +1,4 @@
-'use clients'
+'use clients';
 
 import React from 'react';
 import { cn } from '@/src/lib/utils';
@@ -16,11 +16,19 @@ interface Props {
   className?: string;
 }
 
-
-export const GroupVariants: React.FC<Props> = ({ className, items, onClick, value }) => {
-  
+export const GroupVariants: React.FC<Props> = ({
+  className,
+  items,
+  onClick,
+  value,
+}) => {
   return (
-    <div className={cn(className, 'flex justify-between bg-[#f3f3f7] rounded-3xl p-1 select-none')}>
+    <div
+      className={cn(
+        className,
+        'flex justify-between bg-[#f3f3f7] rounded-3xl p-1 select-none',
+      )}
+    >
       {items.map((item) => (
         <button
           key={item.name}
@@ -31,7 +39,8 @@ export const GroupVariants: React.FC<Props> = ({ className, items, onClick, valu
               'bg-white shadow': item.value === value,
               'text-gray-500 opacity-50 pointer-events-none': item.disabled,
             },
-          )}>
+          )}
+        >
           {item.name}
         </button>
       ))}

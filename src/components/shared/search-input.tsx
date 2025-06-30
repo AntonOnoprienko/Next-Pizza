@@ -1,21 +1,25 @@
-"use client";
+'use client';
 
-import React from "react";
-import { cn } from "@/src/lib/utils";
-import { Search } from "lucide-react";
-import { useClickAway, useDebounce } from "react-use";
-import Link from "next/link";
-import { Api } from "@/src/services/api-client";
-import { Product } from "@prisma/client";
-import dynamic from "next/dynamic";
-import { DynamicCldImage } from "../dynamics";
+import React from 'react';
+import { cn } from '@/src/lib/utils';
+import { Search } from 'lucide-react';
+import { useClickAway, useDebounce } from 'react-use';
+import Link from 'next/link';
+import { Api } from '@/src/services/api-client';
+import { Product } from '@prisma/client';
+import dynamic from 'next/dynamic';
+import { DynamicCldImage } from '../dynamics';
 
 type Props = {
   className?: string;
 };
-const CldImage = dynamic(() => import('next-cloudinary').then(mod => mod.CldImage), { ssr: false });
+const CldImage = dynamic(
+  () => import('next-cloudinary').then((mod) => mod.CldImage),
+  { ssr: false },
+);
+
 export const SearchInput: React.FC<Props> = ({ className }) => {
-  const [searchQuery, setSearchQuery] = React.useState<string>("");
+  const [searchQuery, setSearchQuery] = React.useState<string>('');
   const [focused, setFocused] = React.useState<boolean>(false);
   const [products, setProducts] = React.useState<Product[]>([]);
 
@@ -30,23 +34,26 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
       const fetchData = async () => {
         if (!searchQuery.trim()) {
           setProducts([]);
+
           return;
         }
         try {
           const response = await Api.products.search(searchQuery);
+
           setProducts(response);
         } catch (e) {
           console.log(e);
         }
       };
+
       fetchData();
     },
     250,
-    [searchQuery]
+    [searchQuery],
   );
 
   const onClickItem = React.useCallback(() => {
-    setSearchQuery("");
+    setSearchQuery('');
     setFocused(false);
     setProducts([]);
   }, []);
@@ -55,18 +62,18 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
     <>
       <div
         className={cn(
-          "fixed inset-0 bg-black/50 transition-opacity duration-200 z-30",
+          'fixed inset-0 bg-black/50 transition-opacity duration-200 z-30',
           focused
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
+            ? 'opacity-100 pointer-events-auto'
+            : 'opacity-0 pointer-events-none',
         )}
       />
 
       <div
         ref={ref}
         className={cn(
-          "flex rounded-2xl flex-1 justify-between relative h-11 z-30",
-          className
+          'flex rounded-2xl flex-1 justify-between relative h-11 z-30',
+          className,
         )}
       >
         <Search className="absolute top-1/2 translate-y-[-50%] left-3 h-5 text-gray-400" />
@@ -82,8 +89,8 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
         {products.length > 0 && (
           <div
             className={cn(
-              "absolute w-full bg-white rounded-xl py-2 top-14 shadow-md transition-all duration-200 invisible opacity-0 z-30",
-              focused && "visible opacity-100 top-12"
+              'absolute w-full bg-white rounded-xl py-2 top-14 shadow-md transition-all duration-200 invisible opacity-0 z-30',
+              focused && 'visible opacity-100 top-12',
             )}
           >
             {products.map((item) => (
@@ -93,7 +100,7 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
                 href={`/product/${item.id}`}
                 onClick={onClickItem}
               >
-                <DynamicCldImage 
+                <DynamicCldImage
                   className="rounded-sm"
                   src={item.imageUrl}
                   alt={item.name}

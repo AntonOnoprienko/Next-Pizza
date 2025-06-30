@@ -6,13 +6,11 @@ export interface CartItemProps {
   name: string;
   price: number;
   quantity: number;
-  disabled?: boolean;
 
   size?: PizzaSize;
   type?: PizzaType;
-  extraIngredients?: {name: string, price: number}[];
-  excludedIngredients?: {name: string}[];
-  
+  extraIngredients?: { name: string; price: number }[];
+  excludedIngredients?: { name: string }[];
 }
 
 // types.ts
@@ -22,7 +20,6 @@ export interface CartItemProps {
   name: string;
   price: number;
   quantity: number;
-  disabled?: boolean;
 
   size?: PizzaSize;
   type?: PizzaType;
@@ -39,4 +36,3 @@ export interface CartItemForToast {
   excludedIngredients?: number[];
   extraIngredients?: number[];
 }
-

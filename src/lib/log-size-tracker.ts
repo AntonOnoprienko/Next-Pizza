@@ -4,7 +4,5 @@ export const logSizeTracker = (label: string, obj: any) => {
   const sizeInBytes = new Blob([JSON.stringify(obj)]).size;
   const sizeInKB = sizeInBytes / 1024;
 
-  console.log(
-    `----------📦💾 ${label}: ${sizeInKB.toFixed(2)} КБ`
-  );
+  console.log(`----------📦💾 ${label}: ${sizeInKB.toFixed(2)} КБ`);
 };

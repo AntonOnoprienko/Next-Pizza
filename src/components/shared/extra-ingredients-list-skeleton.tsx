@@ -1,19 +1,21 @@
 import React from 'react';
-import { Skeleton } from '@/src/components/ui/skeleton';
+import { Skeleton } from '@/src/components/ui/';
 import { cn } from '@/src/lib/utils';
 
 type Props = {
   className?: string;
 };
 
-export const ExtraIngredientsListSkeleton: React.FC<Props> = ({ className }) => {
+export const ExtraIngredientsListSkeleton: React.FC<Props> = ({
+  className,
+}) => {
   const skeletonArray = Array.from({ length: 6 });
 
   return (
     <div
       className={cn(
         'bg-gray-50 px-5 py-3 rounded-md h-[390px] overflow-auto scrollbar mt-2',
-        className
+        className,
       )}
     >
       <div className="grid grid-cols-3 gap-3 mt-2">

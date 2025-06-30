@@ -1,5 +1,5 @@
-import { prisma  } from "@/prisma/prisma-client";
-import { logSizeTracker } from "./log-size-tracker";
+import { prisma } from '@/prisma/prisma-client';
+import { logSizeTracker } from './log-size-tracker';
 
 export interface GetSearchParams {
   query?: string;
@@ -15,21 +15,34 @@ const DEFAULT_MIN_PRICE = 0;
 const DEFAULT_MAX_PRICE = 1000;
 
 export const findPizzas = async (params: GetSearchParams) => {
-  const sizes = params.sizes?.split(",").map(Number).filter(n => !isNaN(n));
-  const pizzaTypes = params.pizzaTypes?.split(",").map(Number).filter(n => !isNaN(n));
-  const ingredientsIdArr = params.ingredients?.split(",").map(Number).filter(n => !isNaN(n));
+  const sizes = params.sizes
+    ?.split(',')
+    .map(Number)
+    .filter((n) => !isNaN(n));
+  const pizzaTypes = params.pizzaTypes
+    ?.split(',')
+    .map(Number)
+    .filter((n) => !isNaN(n));
+  const ingredientsIdArr = params.ingredients
+    ?.split(',')
+    .map(Number)
+    .filter((n) => !isNaN(n));
 
   const hasPriceFilter = params.priceFrom != null || params.priceTo != null;
-  const minPrice = hasPriceFilter ? Number(params.priceFrom) || DEFAULT_MIN_PRICE : undefined;
-  const maxPrice = hasPriceFilter ? Number(params.priceTo) || DEFAULT_MAX_PRICE : undefined;
+  const minPrice = hasPriceFilter
+    ? Number(params.priceFrom) || DEFAULT_MIN_PRICE
+    : undefined;
+  const maxPrice = hasPriceFilter
+    ? Number(params.priceTo) || DEFAULT_MAX_PRICE
+    : undefined;
 
-  const orderBy = { id: "asc" as const };
+  const orderBy = { id: 'asc' as const };
 
   const productWhere = {
     ...(params.query && {
       name: {
         contains: params.query,
-        mode: "insensitive" as const,
+        mode: 'insensitive' as const,
       },
     }),
     ...(ingredientsIdArr?.length && {
@@ -41,24 +54,26 @@ export const findPizzas = async (params: GetSearchParams) => {
         },
       },
     }),
-    ...((sizes?.length || pizzaTypes?.length || hasPriceFilter) ? {
-      items: {
-        some: {
-          ...(sizes?.length && {
-            size: { in: sizes },
-          }),
-          ...(pizzaTypes?.length && {
-            pizzaType: { in: pizzaTypes },
-          }),
-          ...(hasPriceFilter && {
-            price: {
-              gte: minPrice,
-              lte: maxPrice,
+    ...(sizes?.length || pizzaTypes?.length || hasPriceFilter
+      ? {
+          items: {
+            some: {
+              ...(sizes?.length && {
+                size: { in: sizes },
+              }),
+              ...(pizzaTypes?.length && {
+                pizzaType: { in: pizzaTypes },
+              }),
+              ...(hasPriceFilter && {
+                price: {
+                  gte: minPrice,
+                  lte: maxPrice,
+                },
+              }),
             },
-          }),
-        },
-      },
-    } : {}),
+          },
+        }
+      : {}),
   };
 
   const categories = await prisma.category.findMany({
@@ -94,6 +109,8 @@ export const findPizzas = async (params: GetSearchParams) => {
       },
     },
   });
+
   logSizeTracker('Категории HOMEPAGE', categories);
+
   return categories;
 };

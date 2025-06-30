@@ -1,9 +1,4 @@
-import {
-  Cart,
-  Product,
-  ProductItem,
-  Prisma,
-} from "@prisma/client";
+import { Cart, Product, ProductItem, Prisma } from '@prisma/client';
 
 export type ProductItemDTO = ProductItem & {
   product: Product;
@@ -47,9 +42,8 @@ export type CartItemDTO = Prisma.CartItemGetPayload<{
     };
   };
 }> & {
-  totalPrice: number; 
+  totalPrice: number;
 };
-
 
 export interface CartDTO extends Cart {
   cartItems: CartItemDTO[];

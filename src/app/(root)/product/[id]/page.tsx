@@ -1,11 +1,9 @@
-
-import React from "react";
-import { prisma } from "@/prisma/prisma-client";
-import { notFound } from "next/navigation";
-import { Container } from "@/src/components/shared";
-import dynamic from "next/dynamic";
-import { Loader } from "lucide-react";
-import { logSizeTracker } from "@/src/lib/log-size-tracker";
+import React from 'react';
+import { prisma } from '@/prisma/prisma-client';
+import { notFound } from 'next/navigation';
+import { Container, FullPageLoader } from '@/src/components/shared';
+import dynamic from 'next/dynamic';
+import { logSizeTracker } from '@/src/lib/log-size-tracker';
 
 type Props = {
   params: {
@@ -13,12 +11,16 @@ type Props = {
   };
 };
 
-const ChooseProductClientWrapper = dynamic(() => import('@/src/components/shared').then(mod => mod.ChooseProductClientWrapper), {
-  ssr: false,
-  loading: () => <div className="flex justify-center items-center" style={{ height: 'calc(100vh - 220px)' }}>
-    <Loader size={64} className="animate-spin mr-2" />
-  </div >
-})
+const ChooseProductClientWrapper = dynamic(
+  () =>
+    import('@/src/components/shared').then(
+      (mod) => mod.ChooseProductClientWrapper,
+    ),
+  {
+    ssr: false,
+    loading: () => <FullPageLoader />,
+  },
+);
 
 const ProductPage = async ({ params }: Props) => {
   const product = await prisma.product.findFirst({
@@ -38,10 +40,10 @@ const ProductPage = async ({ params }: Props) => {
         include: {
           extraIngredients: {
             include: {
-              ingredient: true
-            }
-          }
-        }
+              ingredient: true,
+            },
+          },
+        },
       },
     },
   });
@@ -51,7 +53,6 @@ const ProductPage = async ({ params }: Props) => {
   }
 
   logSizeTracker('ProductPage', product);
-
 
   return (
     <Container className="flex flex-col my-2">

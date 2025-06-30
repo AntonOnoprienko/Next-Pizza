@@ -11,5 +11,5 @@ export const generateCustomizationHash = (input: {
     extra: [...(input.extraIngredients ?? [])].sort(),
   };
 
-  return crypto.createHash("md5").update(JSON.stringify(data)).digest("hex");
+  return crypto.createHash('md5').update(JSON.stringify(data)).digest('hex');
 };

@@ -1,15 +1,14 @@
-import { Product } from "@prisma/client";
+import { Product } from '@prisma/client';
 
 export const categoryMap = {
-  1: "Пиццы",
-  2: "Комбо",       
-  3: "Закуски",
-  4: "Коктейли",
-  5: "Кофе",
-  6: "Напитки",
-  7: "Десерты",
+  1: 'Пиццы',
+  2: 'Комбо',
+  3: 'Закуски',
+  4: 'Коктейли',
+  5: 'Кофе',
+  6: 'Напитки',
+  7: 'Десерты',
 };
-
 
 const pizzaPriceRangesUAH = {
   20: [130, 170],
@@ -18,17 +17,18 @@ const pizzaPriceRangesUAH = {
 };
 
 const categoriesBasePriceRangeUAH: Record<string, [number, number]> = {
-  "Пиццы": [0, 0], // отдельная логика ниже
-  "Комбо": [250, 550],
-  "Закуски": [70, 120],
-  "Коктейли": [60, 90],
-  "Кофе": [70, 90],
-  "Напитки": [30, 90],
-  "Десерты": [50, 180],
+  Пиццы: [0, 0], // отдельная логика ниже
+  Комбо: [250, 550],
+  Закуски: [70, 120],
+  Коктейли: [60, 90],
+  Кофе: [70, 90],
+  Напитки: [30, 90],
+  Десерты: [50, 180],
 };
 
 function randomDecimalNumber(min: number, max: number, decimals = 0): number {
   const val = Math.random() * (max - min) + min;
+
   return parseFloat(val.toFixed(decimals));
 }
 
@@ -47,11 +47,13 @@ export const generateProductItem = ({
 }) => {
   let price: number;
 
-  if (category === "Пиццы" && size) {
+  if (category === 'Пиццы' && size) {
     const [min, max] = pizzaPriceRangesUAH[size];
+
     price = randomDecimalNumber(min, max);
   } else if (category && categoriesBasePriceRangeUAH[category]) {
     const [min, max] = categoriesBasePriceRangeUAH[category];
+
     price = randomDecimalNumber(min, max);
   } else {
     // fallback если категория не указана или не найдена
@@ -59,6 +61,7 @@ export const generateProductItem = ({
   }
 
   const variance = price * 0.05;
+
   price = price + (Math.random() * variance * 2 - variance);
   price = Math.round(price);
 
@@ -87,6 +90,7 @@ export function generatePizzaVariants(product: Product, images: PizzaImageMap) {
   // Сначала traditional
   for (const size of traditionalSizes) {
     const imageUrl = images.traditional[size];
+
     if (!imageUrl) continue;
 
     const item = generateProductItem({
@@ -94,7 +98,7 @@ export function generatePizzaVariants(product: Product, images: PizzaImageMap) {
       pizzaType: 1,
       size,
       imageUrl,
-      category: "Пиццы",
+      category: 'Пиццы',
     });
 
     if (size === 30 || size === 40) {
@@ -107,6 +111,7 @@ export function generatePizzaVariants(product: Product, images: PizzaImageMap) {
   // Затем thin с той же ценой
   for (const size of thinSizes) {
     const imageUrl = images.thin[size];
+
     if (!imageUrl) continue;
 
     const item = {
@@ -122,4 +127,3 @@ export function generatePizzaVariants(product: Product, images: PizzaImageMap) {
 
   return items;
 }
-

@@ -1,4 +1,11 @@
-import { Category, Ingredient, Prisma, Product, ProductItem, ProductItemExtraIngredient } from "@prisma/client";
+import {
+  Category,
+  Ingredient,
+  Prisma,
+  Product,
+  ProductItem,
+  ProductItemExtraIngredient,
+} from '@prisma/client';
 
 export type ProductWithRelations = Product & {
   ingredients: Ingredient[];
@@ -22,5 +29,5 @@ export type ProductItemWithExtras = Prisma.ProductItemGetPayload<{
 export type ProductwithCategory = ProductWithRelations & {
   category: Category & {
     products: (Product & { items: ProductItem[] })[];
-  }
+  };
 };

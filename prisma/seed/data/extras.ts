@@ -1,6 +1,6 @@
-import { prisma } from "../../prisma-client";
-import { Product } from "@prisma/client";
-import { seedProductItems } from "./product-items";
+import { prisma } from '../../prisma-client';
+import { Product } from '@prisma/client';
+import { seedProductItems } from './product-items';
 
 const ingredientIds = Array.from({ length: 21 }, (_, i) => i + 1);
 

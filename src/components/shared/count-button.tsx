@@ -1,4 +1,3 @@
-
 import { cn } from '@/src/lib/utils';
 import React from 'react';
 import { CountIconButton } from '.';
@@ -13,8 +12,10 @@ export interface CountButtonProps {
   className?: string;
 }
 
-
-const Spinner = dynamic(() => import('../animations/').then(mod => mod.Spinner), { ssr: false })
+const Spinner = dynamic(
+  () => import('../animations/').then((mod) => mod.Spinner),
+  { ssr: false },
+);
 
 export const CountButton: React.FC<CountButtonProps> = ({
   className,
@@ -22,38 +23,47 @@ export const CountButton: React.FC<CountButtonProps> = ({
   value = 1,
   size = 'sm',
   loading,
-  allowZero
+  allowZero,
 }) => {
   return (
-    <div className={cn('inline-flex items-center justify-between w-[100px]', className)}>
+    <div
+      className={cn(
+        'inline-flex items-center justify-between w-[100px]',
+        className,
+      )}
+    >
       <CountIconButton
         aria-label="Уменьшить количество"
         onClick={(e) => {
-          e.preventDefault()
-          e.stopPropagation()
-          onClick?.('minus')
+          e.preventDefault();
+          e.stopPropagation();
+          onClick?.('minus');
         }}
         disabled={(!allowZero && value === 1) || loading}
         size={size}
         type="minus"
       />
       {loading ? (
-        <Spinner size='sm' />
+        <Spinner size="sm" />
       ) : (
-        <span className={cn('font-bold', size === 'sm' ? 'text-sm' : 'text-md')}>
+        <span
+          className={cn('font-bold', size === 'sm' ? 'text-sm' : 'text-md')}
+        >
           {value}
         </span>
       )}
-
 
       <CountIconButton
         aria-label="Увеличить количество"
         disabled={loading}
         onClick={(e) => {
-          e.preventDefault()
-          e.stopPropagation()
-          onClick?.('plus')
-        }} size={size} type="plus" />
+          e.preventDefault();
+          e.stopPropagation();
+          onClick?.('plus');
+        }}
+        size={size}
+        type="plus"
+      />
     </div>
   );
 };

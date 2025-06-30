@@ -1,14 +1,18 @@
-import { prisma } from "@/prisma/prisma-client";
-import { NextRequest, NextResponse } from "next/server";
-import crypto from "crypto";
-import { CreateCartItemValues } from "@/src/services/dto/cart.dto";
-import { findOrCreateCart, generateCustomizationHash, updateCartTotalAmount } from "@/src/lib";
+import { prisma } from '@/prisma/prisma-client';
+import { NextRequest, NextResponse } from 'next/server';
+import crypto from 'crypto';
+import { CreateCartItemValues } from '@/src/services/dto/cart.dto';
+import {
+  findOrCreateCart,
+  generateCustomizationHash,
+  updateCartTotalAmount,
+} from '@/src/lib';
 
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic';
 
 export async function GET(req: NextRequest) {
   try {
-    const token = req.cookies.get("cartToken")?.value;
+    const token = req.cookies.get('cartToken')?.value;
 
     if (!token) {
       return NextResponse.json({ totalAmount: 0, cartItems: [] });
@@ -20,7 +24,7 @@ export async function GET(req: NextRequest) {
       },
       include: {
         cartItems: {
-          orderBy: { createdAt: "desc" },
+          orderBy: { createdAt: 'desc' },
           include: {
             productItem: {
               include: {
@@ -57,17 +61,19 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(cart);
   } catch (error) {
-    console.log("[CART_GET] Server Error", error);
+    console.log('[CART_GET] Server Error', error);
+
     return NextResponse.json(
-      { message: "Не удалось получить корзину" },
-      { status: 500 }
+      { message: 'Не удалось получить корзину' },
+      { status: 500 },
     );
   }
 }
 
 export async function POST(req: NextRequest) {
   try {
-    let token = req.cookies.get("cartToken")?.value;
+    let token = req.cookies.get('cartToken')?.value;
+
     if (!token) {
       token = crypto.randomUUID();
     }
@@ -76,13 +82,13 @@ export async function POST(req: NextRequest) {
 
     if (
       !data.productItemId ||
-      typeof data.productItemId !== "number" ||
+      typeof data.productItemId !== 'number' ||
       (data.excludedIngredients && !Array.isArray(data.excludedIngredients)) ||
       (data.extraIngredients && !Array.isArray(data.extraIngredients))
     ) {
       return NextResponse.json(
-        { message: "Невалидные данные" },
-        { status: 400 }
+        { message: 'Невалидные данные' },
+        { status: 400 },
       );
     }
 
@@ -91,7 +97,7 @@ export async function POST(req: NextRequest) {
     });
 
     if (!productItemExists) {
-      return NextResponse.json({ message: "Товар не найден" }, { status: 404 });
+      return NextResponse.json({ message: 'Товар не найден' }, { status: 404 });
     }
 
     const userCart = await findOrCreateCart(token);
@@ -132,13 +138,16 @@ export async function POST(req: NextRequest) {
     const updatedCart = await updateCartTotalAmount(token);
 
     const response = NextResponse.json(updatedCart);
-    response.cookies.set("cartToken", token);
+
+    response.cookies.set('cartToken', token);
+
     return response;
   } catch (error) {
-    console.log("[CART_POST_HASH] Server Error", error);
+    console.log('[CART_POST_HASH] Server Error', error);
+
     return NextResponse.json(
-      { message: "Не удалось обновить корзину" },
-      { status: 500 }
+      { message: 'Не удалось обновить корзину' },
+      { status: 500 },
     );
   }
 }

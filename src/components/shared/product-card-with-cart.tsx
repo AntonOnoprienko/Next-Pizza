@@ -28,15 +28,16 @@ const ProductCardWithCartComponent: React.FC<Props> = ({
   isPizza,
 }) => {
   const cartItem = useCartStore(
-  React.useCallback(
-    (state) => state.items.find((item) => item.productItemId === productItemId),
-    [productItemId]
-  )
-);
+    React.useCallback(
+      (state) =>
+        state.items.find((item) => item.productItemId === productItemId),
+      [productItemId],
+    ),
+  );
 
   const loading = useCartStore(
-  (state) => state.loadingById[cartItem?.id || productItemId] ?? false
-);
+    (state) => state.loadingById[cartItem?.id || productItemId] ?? false,
+  );
 
   const addToCartToast = useAddToCartToast();
   const updateQty = useCartStore((state) => state.updateItemQuantity);
@@ -49,19 +50,25 @@ const ProductCardWithCartComponent: React.FC<Props> = ({
       imageUrl,
       price,
     };
-    addToCartToast(item);
-  }, [productItemId, name, imageUrl, price, addToCartToast])
 
-  const handleQuantityChange = React.useCallback((type: 'plus' | 'minus') => {
-    if (!cartItem) return;
-    const newQty = type === 'plus' ? cartItem.quantity + 1 : cartItem.quantity - 1;
-    if (newQty > 0) {
-      updateQty(cartItem.id, newQty);
-    }
-    if (newQty === 0) {
-      removeCartItem(cartItem.id);
-    }
-  }, [cartItem, updateQty, removeCartItem])
+    addToCartToast(item);
+  }, [productItemId, name, imageUrl, price, addToCartToast]);
+
+  const handleQuantityChange = React.useCallback(
+    (type: 'plus' | 'minus') => {
+      if (!cartItem) return;
+      const newQty =
+        type === 'plus' ? cartItem.quantity + 1 : cartItem.quantity - 1;
+
+      if (newQty > 0) {
+        updateQty(cartItem.id, newQty);
+      }
+      if (newQty === 0) {
+        removeCartItem(cartItem.id);
+      }
+    },
+    [cartItem, updateQty, removeCartItem],
+  );
 
   const inCart = Boolean(cartItem);
 

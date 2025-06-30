@@ -11,6 +11,7 @@ export const useIngredients = () => {
       try {
         setLoading(true);
         const ingredients = await Api.ingredients.getAll();
+
         setIngredients(ingredients);
       } catch (error) {
         console.log(error);

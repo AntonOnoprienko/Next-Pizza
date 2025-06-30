@@ -1,6 +1,6 @@
 // Only rendered on the server — safe to use in SSR layout files
 
-import { Loader } from "lucide-react";
+import { Loader } from 'lucide-react';
 
 export const ModalLoader = () => {
   if (process.env.NODE_ENV === 'production') return null;

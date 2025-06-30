@@ -1,7 +1,7 @@
-import { create } from "zustand";
-import { Api } from "../services/api-client";
-import { getCartDetails } from "../lib/get-cart-details";
-import { CreateCartItemValues } from "../services/dto/cart.dto";
+import { create } from 'zustand';
+import { Api } from '../services/api-client';
+import { getCartDetails } from '../lib/get-cart-details';
+import { CreateCartItemValues } from '../services/dto/cart.dto';
 
 export interface CartStateItem {
   id: number;
@@ -13,13 +13,14 @@ export interface CartStateItem {
 
   size?: number | null;
   type?: number | null;
-  extraIngredients?: {name: string, price: number}[];
-  excludedIngredients?: {name: string}[];
+  extraIngredients?: { name: string; price: number }[];
+  excludedIngredients?: { name: string }[];
 }
 
 export interface CartState {
   loading: boolean;
   loadingById: Record<number, boolean>;
+
   error: boolean;
   totalAmount: number;
   items: CartStateItem[];
@@ -34,12 +35,14 @@ export const useCartStore = create<CartState>((set, get) => ({
   error: false,
   loading: true,
   loadingById: {},
+
   totalAmount: 0,
 
   fetchCartItems: async () => {
     try {
       set({ loading: true, error: false });
       const data = await Api.cart.getCart();
+
       set(getCartDetails(data));
     } catch (error) {
       console.error(error);
@@ -52,10 +55,11 @@ export const useCartStore = create<CartState>((set, get) => ({
   updateItemQuantity: async (id: number, quantity: number) => {
     try {
       set((state) => ({
-      loadingById: { ...state.loadingById, [id]: true },
-      error: false,
-    }));
+        loadingById: { ...state.loadingById, [id]: true },
+        error: false,
+      }));
       const data = await Api.cart.updateItemQuantity(id, quantity);
+
       set(getCartDetails(data));
     } catch (error) {
       console.error(error);
@@ -73,11 +77,10 @@ export const useCartStore = create<CartState>((set, get) => ({
         loading: true,
         loadingById: { ...state.loadingById, [id]: true },
         error: false,
-        items: state.items.map((item) =>
-          item.id === id ? { ...item, disabled: true } : item
-        ),
       }));
+
       const data = await Api.cart.removeCartItem(id);
+
       set(getCartDetails(data));
     } catch (error) {
       console.error(error);
@@ -86,7 +89,6 @@ export const useCartStore = create<CartState>((set, get) => ({
       set((state) => ({
         loading: false,
         loadingById: { ...state.loadingById, [id]: false },
-        items: state.items.map((item) => ({ ...item, disabled: false })),
       }));
     }
   },
@@ -99,6 +101,7 @@ export const useCartStore = create<CartState>((set, get) => ({
         error: false,
       }));
       const data = await Api.cart.addCartItem(values);
+
       set(getCartDetails(data));
     } catch (error) {
       console.error(error);

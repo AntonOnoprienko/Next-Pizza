@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { Header } from "@/src/components/shared";
+import type { Metadata } from 'next';
+import { Header } from '@/src/components/shared';
 
 interface HomeLayoutProps {
   readonly children: React.ReactNode;
@@ -7,33 +7,44 @@ interface HomeLayoutProps {
 }
 
 export const metadata: Metadata = {
-  title: "NEXT PiZZa | Главная",
-  description: "The best of the best Pizza shop!",
+  title: 'Next Pizza | Главная',
+  description:
+    'Лучшая пицца в городе — заказывай онлайн в Next Pizza. Вкусно, быстро, удобно!',
+  keywords: [
+    'Next Pizza',
+    'пиццерия',
+    'пицца онлайн',
+    'доставка пиццы',
+    'пицца Харьков',
+    'меню пиццы',
+  ],
   icons: {
-    icon: '/favicon.ico'
+    icon: '/favicon.ico',
   },
   other: {
     'google-site-verification': 'zeq8yCb9T23l8MrGohHJKQXFMOAvCc940v2satzTlC8',
   },
   openGraph: {
-    title: "Next Pizza — Лучшая пицца в городе",
-    description: "Выбирай и заказывай пиццу онлайн. Вкусно, быстро, удобно!",
-    url: "https://next-pizza.up.railway.app",
-    siteName: "NextPizza",
+    title: 'Next Pizza — Лучшая пицца в городе',
+    description: 'Выбирай и заказывай пиццу онлайн. Вкусно, быстро, удобно!',
+    url: 'https://next-pizza.up.railway.app',
+    siteName: 'Next Pizza',
     images: [
       {
-        url: "https://next-pizza.up.railway.app/og-image.png",
+        url: 'https://next-pizza.up.railway.app/og-image.png',
         width: 1200,
         height: 630,
-        alt: "NextPizza — Лучшая пицца в городе",
+        alt: 'Next Pizza — Лучшая пицца в городе',
       },
     ],
-    locale: "uk_UA",
-    type: "website",
+    locale: 'ru_RU',
+    type: 'website',
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
-
-
 
 const HomeLayout = ({ children, modal }: HomeLayoutProps) => {
   return (

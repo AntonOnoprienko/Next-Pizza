@@ -1,10 +1,11 @@
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
-export const CLOUDINARY_BASE_URL = 'https://res.cloudinary.com/dkvao65cp/image/upload';
+export const CLOUDINARY_BASE_URL =
+  'https://res.cloudinary.com/dkvao65cp/image/upload';
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 export function getCloudinaryUrl(publicId: string) {

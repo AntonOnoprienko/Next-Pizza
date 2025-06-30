@@ -15,12 +15,22 @@ const sizeMap = {
   40: 500,
 } as const;
 
-export const PizzaImage: React.FC<Props> = ({ publicId, size, alt, className }) => {
+export const PizzaImage: React.FC<Props> = ({
+  publicId,
+  size,
+  alt,
+  className,
+}) => {
   const dimension = sizeMap[size];
 
   return (
-    <div className={cn('flex items-center justify-center flex-1 relative w-full', className)}>
-      <DynamicCldImage 
+    <div
+      className={cn(
+        'flex items-center justify-center flex-1 relative w-full',
+        className,
+      )}
+    >
+      <DynamicCldImage
         src={publicId}
         alt={alt}
         width={dimension}

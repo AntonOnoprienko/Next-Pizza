@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { cn } from '@/src/lib/utils';
 import { CircleCheck } from 'lucide-react';
@@ -22,10 +21,17 @@ const IngredientItemComponent: React.FC<Props> = ({
   onClick,
 }) => {
   return (
-    <div onClick={onClick}
-      className={cn('flex items-center flex-col p-1 rounded-md w-32 text-center relative cursor-pointer shadow-md bg-white border border-white', { 'border-primary': active },
-        className)}>
-      {active && <CircleCheck className="absolute top-2 right-2 text-primary" />}
+    <div
+      onClick={onClick}
+      className={cn(
+        'flex items-center flex-col p-1 rounded-md w-32 text-center relative cursor-pointer shadow-md bg-white border border-white',
+        { 'border-primary': active },
+        className,
+      )}
+    >
+      {active && (
+        <CircleCheck className="absolute top-2 right-2 text-primary" />
+      )}
       <DynamicCldImage
         src={imageUrl}
         alt={name}
@@ -46,4 +52,4 @@ const IngredientItemComponent: React.FC<Props> = ({
   );
 };
 
-export const IngredientItem = React.memo(IngredientItemComponent)
+export const IngredientItem = React.memo(IngredientItemComponent);

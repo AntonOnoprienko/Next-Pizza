@@ -1,10 +1,10 @@
 import { cn } from '@/src/lib/utils';
 import React from 'react';
 
-import * as CartItem from './cart-item-details';
-import { CartItemProps } from './cart-item-details/cart-item-details.types';
+import * as CartItem from '../cart-item-details';
+import { CartItemProps } from '../cart-item-details/cart-item-details.types';
 import { Trash2Icon } from 'lucide-react';
-import { CountButton } from '.';
+import { CountButton } from '..';
 
 interface Props extends CartItemProps {
   onClickCountButton?: (type: 'plus' | 'minus') => void;
@@ -13,7 +13,7 @@ interface Props extends CartItemProps {
   loading: boolean;
 }
 
-export const CartDrawerItem: React.FC<Props> = ({
+const CartDrawerItemComponent: React.FC<Props> = ({
   imageUrl,
   name,
   size,
@@ -22,35 +22,32 @@ export const CartDrawerItem: React.FC<Props> = ({
   excludedIngredients,
   price,
   quantity,
-  disabled,
   loading,
   onClickCountButton,
   onClickRemove,
   className,
 }) => {
   return (
-    <div
-      className={cn(
-        'flex bg-white p-5 gap-6',
-        {
-          'opacity-50 pointer-events-none': disabled,
-        },
-        className,
-      )}>
-      <CartItem.Image src={imageUrl} name={name}  />
+    <div className={cn('flex bg-white p-5 gap-6', className)}>
+      <CartItem.Image src={imageUrl} name={name} />
 
       <div className="flex-1">
-        <CartItem.Info 
-        name={name} 
-        size={size} 
-        type={type} 
-        extraIngredients={extraIngredients} 
-        excludedIngredients={excludedIngredients}   />
+        <CartItem.Info
+          name={name}
+          size={size}
+          type={type}
+          extraIngredients={extraIngredients}
+          excludedIngredients={excludedIngredients}
+        />
 
         <hr className="my-3" />
 
         <div className="flex items-center justify-between">
-          <CountButton onClick={onClickCountButton} value={quantity} loading={loading} />
+          <CountButton
+            onClick={onClickCountButton}
+            value={quantity}
+            loading={loading}
+          />
 
           <div className="flex items-center gap-3">
             <CartItem.Price value={price} />
@@ -65,3 +62,5 @@ export const CartDrawerItem: React.FC<Props> = ({
     </div>
   );
 };
+
+export const CartDrawerItem = React.memo(CartDrawerItemComponent);

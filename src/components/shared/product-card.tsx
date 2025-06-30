@@ -1,10 +1,10 @@
-'use client'
+'use client';
 
-import React from "react";
-import Link from "next/link";
-import { cn } from "@/src/lib/utils";
-import { ProductCardActions, Title } from ".";
-import { DynamicCldImage } from "../dynamics";
+import React from 'react';
+import Link from 'next/link';
+import { cn } from '@/src/lib/utils';
+import { ProductCardActions, Title } from '.';
+import { DynamicCldImage } from '../dynamics';
 
 interface Props {
   id: number;
@@ -18,7 +18,7 @@ interface Props {
   inCart: boolean;
   loading?: boolean;
   onAdd?: () => void;
-  onQuantityChange?: (type: "plus" | "minus") => void;
+  onQuantityChange?: (type: 'plus' | 'minus') => void;
   className?: string;
 }
 
@@ -38,7 +38,7 @@ const ProductCardComponent: React.FC<Props> = ({
   className,
 }) => {
   return (
-    <div className={cn("h-full flex flex-col", className)}>
+    <div className={cn('h-full flex flex-col', className)}>
       <Link href={`/product/${id}`} className="flex flex-col h-full group">
         <div className="flex justify-center p-4 bg-secondary rounded-lg">
           <DynamicCldImage
@@ -52,7 +52,6 @@ const ProductCardComponent: React.FC<Props> = ({
             format="auto"
             fallbackImage={true}
             className="transition-transform duration-300 ease-in-out group-hover:translate-y-2"
-
           />
         </div>
 
@@ -61,7 +60,7 @@ const ProductCardComponent: React.FC<Props> = ({
         <p className="text-sm text-gray-600">
           {description}
 
-          {ingredients?.map((i) => i.name).join(", ")}
+          {ingredients?.map((i) => i.name).join(', ')}
         </p>
 
         <div className="flex justify-between items-center mt-auto pt-4">
@@ -75,7 +74,8 @@ const ProductCardComponent: React.FC<Props> = ({
             isPizza={isPizza}
             loading={loading}
             onAdd={onAdd}
-            onQuantityChange={onQuantityChange} />
+            onQuantityChange={onQuantityChange}
+          />
         </div>
       </Link>
     </div>

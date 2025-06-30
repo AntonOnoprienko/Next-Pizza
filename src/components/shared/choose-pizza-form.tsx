@@ -1,15 +1,21 @@
-'use client'
+'use client';
 
-
-import React, { Suspense } from "react";
-import { cn } from "@/src/lib/utils";
-import { DescriptionAndIngredients, ExtraIngredientsListSkeleton, GroupVariants, IngredientsList, PizzaImage, Title } from ".";
-import { Button } from "../ui";
-import { Ingredient } from "@prisma/client";
-import { PizzaSize, pizzaTypes, PizzaType } from "@/src/constants/pizza";
-import { ProductItemWithExtras } from "@/src/@types/prisma";
-import { CartItemForToast } from "./cart-item-details/cart-item-details.types";
-import { usePizzaOption } from "@/src/hooks";
+import React, { Suspense } from 'react';
+import { cn } from '@/src/lib/utils';
+import {
+  DescriptionAndIngredients,
+  ExtraIngredientsListSkeleton,
+  GroupVariants,
+  IngredientsList,
+  PizzaImage,
+  Title,
+} from '.';
+import { Button } from '../ui';
+import { Ingredient } from '@prisma/client';
+import { PizzaSize, pizzaTypes, PizzaType } from '@/src/constants/pizza';
+import { ProductItemWithExtras } from '@/src/@types/prisma';
+import { CartItemForToast } from './cart-item-details/cart-item-details.types';
+import { usePizzaOption } from '@/src/hooks';
 
 type Props = {
   imageUrl: string;
@@ -18,10 +24,9 @@ type Props = {
   items: ProductItemWithExtras[];
   description?: string | null;
   loading?: boolean;
-  onSubmit: (cartItem: CartItemForToast ) => void;
+  onSubmit: (cartItem: CartItemForToast) => void;
   className?: string;
 };
-
 
 export const ChoosePizzaForm: React.FC<Props> = ({
   name,
@@ -33,7 +38,6 @@ export const ChoosePizzaForm: React.FC<Props> = ({
   onSubmit,
   className,
 }) => {
-
   const {
     size,
     type,
@@ -48,32 +52,28 @@ export const ChoosePizzaForm: React.FC<Props> = ({
     excludeIngredient,
     availablePizzaSize,
     textDetails,
-    filteredIngredients
+    filteredIngredients,
   } = usePizzaOption(items, imageUrl);
-
-
-
 
   const handleClickAdd = () => {
     if (selectedItem) {
       const cartItem = {
-      productItemId: selectedItem.id,
-      excludedIngredients: Array.from(excludedIngredients),
-      extraIngredients: filteredIngredients,
-      name,                    
-      imageUrl: selectedImg || './fallback.svg',    
-      price: totalPrice,
-    };
-    onSubmit(cartItem);
+        productItemId: selectedItem.id,
+        excludedIngredients: Array.from(excludedIngredients),
+        extraIngredients: filteredIngredients,
+        name,
+        imageUrl: selectedImg || './fallback.svg',
+        price: totalPrice,
+      };
 
+      onSubmit(cartItem);
     }
-  }
+  };
 
   return (
-    <div className={cn(className, "flex flex-1")}>
+    <div className={cn(className, 'flex flex-1')}>
       <PizzaImage publicId={selectedImg} size={size} alt={name} />
       <div className="w-[490px] bg-[rgb(252,252,252)] p-7">
-
         <Title text={name} size="md" className="font-extrabold mb-1" />
 
         <DescriptionAndIngredients
@@ -81,30 +81,36 @@ export const ChoosePizzaForm: React.FC<Props> = ({
           ingredients={ingredients}
           excludedIngredients={excludedIngredients}
           onToggleExclude={excludeIngredient}
-          textDetails={textDetails} />
+          textDetails={textDetails}
+        />
 
         <GroupVariants
           items={availablePizzaSize}
           value={String(size)}
-          onClick={value => setSize(Number(value) as PizzaSize)}
-          className="mt-2" />
+          onClick={(value) => setSize(Number(value) as PizzaSize)}
+          className="mt-2"
+        />
 
         <GroupVariants
           items={pizzaTypes}
           value={String(type)}
-          onClick={value => setType(Number(value) as PizzaType)}
-          className="mt-1" />
+          onClick={(value) => setType(Number(value) as PizzaType)}
+          className="mt-1"
+        />
 
         <Suspense fallback={<ExtraIngredientsListSkeleton />}>
-        <IngredientsList
-          item={selectedItem}
-          addIngredient={addIngredient}
-          selectedIngredients={selectedIngredients}
-        />
-      </Suspense>
+          <IngredientsList
+            item={selectedItem}
+            addIngredient={addIngredient}
+            selectedIngredients={selectedIngredients}
+          />
+        </Suspense>
 
-
-        <Button loading={loading}  onClick={handleClickAdd} className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10">
+        <Button
+          loading={loading}
+          onClick={handleClickAdd}
+          className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10"
+        >
           Добавить в корзину за {totalPrice} ₴
         </Button>
       </div>

@@ -1,8 +1,13 @@
-import React from "react";
-import { useSet } from "react-use";
-import { calcTotalPizzaPrice } from "@/src/lib/calc-total-pizza-price";
-import { PizzaSize, PizzaType, mapPizzaType, pizzaSizes } from "@/src/constants/pizza";
-import { ProductItemWithExtras } from "@/src/@types/prisma";
+import React from 'react';
+import { useSet } from 'react-use';
+import { calcTotalPizzaPrice } from '@/src/lib/calc-total-pizza-price';
+import {
+  PizzaSize,
+  PizzaType,
+  mapPizzaType,
+  pizzaSizes,
+} from '@/src/constants/pizza';
+import { ProductItemWithExtras } from '@/src/@types/prisma';
 
 export const usePizzaOption = (
   items: ProductItemWithExtras[],
@@ -11,42 +16,52 @@ export const usePizzaOption = (
   const [size, setSize] = React.useState<PizzaSize>(30);
   const [type, setType] = React.useState<PizzaType>(1);
 
-  const [selectedIngredients, { toggle: addIngredient }] = useSet(new Set<number>());
-  const [excludedIngredients, { toggle: excludeIngredient }] = useSet(new Set<number>());
+  const [selectedIngredients, { toggle: addIngredient }] = useSet(
+    new Set<number>(),
+  );
+  const [excludedIngredients, { toggle: excludeIngredient }] = useSet(
+    new Set<number>(),
+  );
 
-  const selectedItem = items.find(item => item.size === size && item.pizzaType === type);
+  const selectedItem = items.find(
+    (item) => item.size === size && item.pizzaType === type,
+  );
   const selectedImg = selectedItem?.imageUrl || imageUrl;
   const selectedPrice = selectedItem?.price || 0;
 
-  const totalPrice = calcTotalPizzaPrice(selectedPrice, selectedItem?.extraIngredients ?? [], selectedIngredients);
+  const totalPrice = calcTotalPizzaPrice(
+    selectedPrice,
+    selectedItem?.extraIngredients ?? [],
+    selectedIngredients,
+  );
   const textDetails = `${size}см , ${mapPizzaType[type]} тесто.`;
 
   const availableSizesSet = new Set(
-    items
-      .filter(item => item.pizzaType === type)
-      .map(item => item.size)
+    items.filter((item) => item.pizzaType === type).map((item) => item.size),
   );
 
-  const availablePizzaSize = pizzaSizes.map(item => ({
+  const availablePizzaSize = pizzaSizes.map((item) => ({
     ...item,
     disabled: !availableSizesSet.has(Number(item.value) as PizzaSize),
   }));
-  
-  const allowedIngredients = React.useMemo(() => 
-  new Set(selectedItem?.extraIngredients.map(e => e.ingredientId)), 
-  [selectedItem]
-);
 
-const filteredIngredients = React.useMemo(() => 
-  Array.from(selectedIngredients).filter(id => allowedIngredients.has(id)), 
-  [selectedIngredients, allowedIngredients]
-);
+  const allowedIngredients = React.useMemo(
+    () => new Set(selectedItem?.extraIngredients.map((e) => e.ingredientId)),
+    [selectedItem],
+  );
 
+  const filteredIngredients = React.useMemo(
+    () =>
+      Array.from(selectedIngredients).filter((id) =>
+        allowedIngredients.has(id),
+      ),
+    [selectedIngredients, allowedIngredients],
+  );
 
   React.useEffect(() => {
     const availableSizes = items
-      .filter(item => item.pizzaType === type)
-      .map(item => item.size);
+      .filter((item) => item.pizzaType === type)
+      .map((item) => item.size);
 
     if (!availableSizes.includes(size)) {
       setSize(availableSizes[0] as PizzaSize);
@@ -68,6 +83,6 @@ const filteredIngredients = React.useMemo(() =>
     excludeIngredient,
     availablePizzaSize,
     textDetails,
-    filteredIngredients
+    filteredIngredients,
   };
 };

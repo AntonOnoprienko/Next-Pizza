@@ -1,5 +1,6 @@
-'use client'
-import { motion } from "motion/react";
+'use client';
+
+import { motion } from 'motion/react';
 
 export const AnimatedSuccessCheck = () => (
   <motion.svg

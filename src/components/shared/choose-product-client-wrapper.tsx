@@ -1,23 +1,24 @@
-'use client'
+'use client';
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { useCartStore } from '@/src/store';
 import { useAddToCartToast } from '@/src/hooks';
-import { ChooseProductFormRenderer} from '.';
+import { ChooseProductFormRenderer } from '.';
 import { CartItemForToast } from './cart-item-details/cart-item-details.types';
 import { ProductwithCategory } from '@/src/@types/prisma';
-
-
 
 type Props = {
   className?: string;
   product: ProductwithCategory;
 };
 
-export const ChooseProductClientWrapper: React.FC<Props> = ({ className, product }) => {
+export const ChooseProductClientWrapper: React.FC<Props> = ({
+  className,
+  product,
+}) => {
   const router = useRouter();
-  const loading = useCartStore(state => state.loading);
+  const loading = useCartStore((state) => state.loading);
   const addToCartToast = useAddToCartToast();
 
   const handleAddCartItem = (cartItem: CartItemForToast) => {
@@ -25,9 +26,10 @@ export const ChooseProductClientWrapper: React.FC<Props> = ({ className, product
   };
 
   return (
-    <ChooseProductFormRenderer 
-    product={product} 
-    loading={loading} 
-    onSubmit={handleAddCartItem} />
+    <ChooseProductFormRenderer
+      product={product}
+      loading={loading}
+      onSubmit={handleAddCartItem}
+    />
   );
 };

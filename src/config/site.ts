@@ -1,4 +1,3 @@
-
 export const siteConfig = {
   en: {
     title: 'Next Pizza',

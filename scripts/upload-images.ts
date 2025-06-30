@@ -21,6 +21,7 @@ async function uploadAllImages() {
       const result = await cloudinary.uploader.upload(url, {
         folder: 'products',
       });
+
       resultIds.push(`"${result.public_id}"`);
       console.log(`✅ ${result.public_id}`);
     } catch (err) {
@@ -28,7 +29,7 @@ async function uploadAllImages() {
     }
   }
 
-  const content = `export const uploadedIds = [\n${resultIds.map(id => `  ${id},`).join('\n')}\n];\n`;
+  const content = `export const uploadedIds = [\n${resultIds.map((id) => `  ${id},`).join('\n')}\n];\n`;
 
   writeFileSync('./scripts/uploaded-ids.ts', content, 'utf-8');
   console.log('\n📁 Файл saved to scripts/uploaded-ids.ts');

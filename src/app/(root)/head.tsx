@@ -6,20 +6,20 @@ export default function Head() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            "name": "Next Pizza",
-            "image": "https://next-pizza.up.railway.app/og-image.png",
-            "url": "https://next-pizza.up.railway.app",
-            "logo": "https://next-pizza.up.railway.app/og-image.png",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Харьков",
-              "addressCountry": "UA"
-            }
+            '@context': 'https://schema.org',
+            '@type': 'LocalBusiness',
+            name: 'Next Pizza',
+            image: 'https://next-pizza.up.railway.app/og-image.png',
+            url: 'https://next-pizza.up.railway.app',
+            logo: 'https://next-pizza.up.railway.app/og-image.png',
+            address: {
+              '@type': 'PostalAddress',
+              addressLocality: 'Харьков',
+              addressCountry: 'UA',
+            },
           }),
         }}
       />
     </>
-  )
+  );
 }
