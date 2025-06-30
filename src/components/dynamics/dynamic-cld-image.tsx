@@ -3,6 +3,7 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 import { cn } from '@/src/lib/utils';
+import Image from 'next/image';
 
 // Типы
 interface DynamicCldImageProps {
@@ -38,7 +39,7 @@ interface DynamicCldImageProps {
 // Компонент для fallback изображения
 const LoaderFallback: React.FC<{ width: number; height: number }> = React.memo(
   ({ width, height }) => (
-    <img
+    <Image
       src="/fallback.svg"
       alt="loading fallback"
       className="object-cover"
@@ -48,7 +49,7 @@ const LoaderFallback: React.FC<{ width: number; height: number }> = React.memo(
     />
   ),
 );
-
+LoaderFallback.displayName = 'LoaderFallback';
 // Кеш для компонентов с fallback
 const fallbackComponentCache = new Map<string, React.ComponentType<any>>();
 
