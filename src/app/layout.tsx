@@ -9,11 +9,7 @@ interface RootLayoutProps {
 const nunito = Nunito({
   subsets: ['cyrillic'],
   variable: '--font-nunito',
-  weight: ['500',
-'600',
-'700',
-'800',
-'900'],
+  weight: ['500', '600', '700', '800', '900'],
 });
 
 const CartLoader = dynamic(
