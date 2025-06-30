@@ -1,0 +1,15 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["prettier"],
+  "rules": {
+    "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1 }],
+    "padding-line-between-statements": "off",
+    "array-element-newline": "off",
+    "object-curly-newline": "off",
+    "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
+    "prettier/prettier": ["error", { "endOfLine": "lf", "singleQuote": true }]
+  }
+}

@@ -88,13 +88,13 @@ model Cart {
 }
 
 model CartItem {
-  id            Int      @id @default(autoincrement())
-  productItemId Int
-  cartId        Int
-  quantity      Int      @default(1)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  totalPrice    Int      @default(0)
+  id                Int      @id @default(autoincrement())
+  productItemId     Int
+  cartId            Int
+  quantity          Int      @default(1)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  totalPrice        Int      @default(0)
   customizationHash String?
 
   cart        Cart        @relation(fields: [cartId], references: [id])
@@ -111,7 +111,7 @@ model CartItemExcludedIngredients {
   cartItemId   Int
   ingredientId Int
 
-  cartItem   CartItem   @relation(fields: [cartItemId], references: [id])
+  cartItem   CartItem   @relation(fields: [cartItemId], references: [id], onDelete: Cascade)
   ingredient Ingredient @relation(fields: [ingredientId], references: [id])
 
   @@id([cartItemId, ingredientId])
@@ -121,7 +121,7 @@ model CartItemExtraIngredients {
   cartItemId   Int
   ingredientId Int
 
-  cartItem   CartItem   @relation(fields: [cartItemId], references: [id])
+  cartItem   CartItem   @relation(fields: [cartItemId], references: [id], onDelete: Cascade)
   ingredient Ingredient @relation(fields: [ingredientId], references: [id])
 
   @@id([cartItemId, ingredientId])

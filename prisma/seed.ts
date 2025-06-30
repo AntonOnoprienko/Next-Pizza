@@ -1,4 +1,4 @@
-import { prisma } from "./prisma-client";
+import { prisma } from './prisma-client';
 import {
   _ingredients,
   categories,
@@ -6,7 +6,7 @@ import {
   products,
   seedPizzas,
   seedProductItems,
-} from "./seed/data";
+} from './seed/data';
 
 async function up() {
   await prisma.ingredient.createMany({
@@ -19,6 +19,7 @@ async function up() {
     data: products,
   });
   const pizzas = await seedPizzas();
+
   await seedProductItems(pizzas);
   await extrasSeed(pizzas);
 }
