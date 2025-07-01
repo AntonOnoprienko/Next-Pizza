@@ -66,7 +66,7 @@ export const CheckoutForm = () => {
               )}
             </div>
           </WhiteBlock>
-          <WhiteBlock title="2. Персональные данные">
+          <WhiteBlock title="2. Персональные данные" className="min-h-[210px]">
             <div className="grid grid-cols-2 gap-5">
               <Input name="firstName" className="text-base" placeholder="Имя" />
               <Input

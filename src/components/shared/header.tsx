@@ -29,6 +29,7 @@ export const Header: React.FC<Props> = ({
               width={35}
               height={35}
               priority
+              className="w-[35px] h-[35px]"
             />
             <div>
               <h1 className="text-2xl uppercase font-black">
