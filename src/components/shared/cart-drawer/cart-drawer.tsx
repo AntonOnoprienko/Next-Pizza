@@ -3,28 +3,19 @@
 import React from 'react';
 import { cn } from '@/src/lib/utils';
 import { Sheet, SheetContent, SheetTrigger } from '@/src/components/ui/sheet';
-
-import { useCartStore } from '@/src/store';
 import { PizzaSize, PizzaType } from '@/src/constants/pizza';
 import { CartDrawerHeader, CartDrawerItem, CartFooter, EmptyCart } from '.';
+import { useCart } from '@/src/hooks';
 
 export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const totalAmount = useCartStore((state) => state.totalAmount);
-  const items = useCartStore((state) => state.items);
-  const loadingById = useCartStore((state) => state.loadingById);
-  const updateItemQuantity = useCartStore((state) => state.updateItemQuantity);
-  const removeCartItem = useCartStore((state) => state.removeCartItem);
-  const isLoading = Object.values(loadingById).some(Boolean);
-
-  const onClickCountButton = React.useCallback(
-    (id: number, quantity: number, type: 'plus' | 'minus') => {
-      const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1;
-
-      updateItemQuantity(id, newQuantity);
-    },
-    [updateItemQuantity],
-  );
-
+  const {
+    items,
+    loadingById,
+    totalAmount,
+    countHandlers,
+    removeHandlers,
+    isActionsLoading,
+  } = useCart();
   const cartItemList = items.map((item) => (
     <CartDrawerItem
       key={item.id}
@@ -32,10 +23,8 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
       size={item.size as PizzaSize}
       type={item.type as PizzaType}
       className="mb-2"
-      onClickCountButton={(type) =>
-        onClickCountButton(item.id, item.quantity, type)
-      }
-      onClickRemove={() => removeCartItem(item.id)}
+      onClickCountButton={countHandlers[item.id]}
+      onClickRemove={removeHandlers[item.id]}
       loading={loadingById[item.id] ?? false}
     />
   ));
@@ -58,7 +47,10 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
                 {cartItemList}
               </div>
 
-              <CartFooter isLoading={isLoading} totalAmount={totalAmount} />
+              <CartFooter
+                isLoading={isActionsLoading}
+                totalAmount={totalAmount}
+              />
             </>
           ) : (
             <EmptyCart />

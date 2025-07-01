@@ -74,7 +74,6 @@ export const useCartStore = create<CartState>((set, get) => ({
   removeCartItem: async (id: number) => {
     try {
       set((state) => ({
-        loading: true,
         loadingById: { ...state.loadingById, [id]: true },
         error: false,
       }));
@@ -87,7 +86,6 @@ export const useCartStore = create<CartState>((set, get) => ({
       set({ error: true });
     } finally {
       set((state) => ({
-        loading: false,
         loadingById: { ...state.loadingById, [id]: false },
       }));
     }
@@ -96,7 +94,6 @@ export const useCartStore = create<CartState>((set, get) => ({
   addCartItem: async (values: CreateCartItemValues) => {
     try {
       set((state) => ({
-        loading: true,
         loadingById: { ...state.loadingById, [values.productItemId]: true },
         error: false,
       }));
@@ -108,7 +105,6 @@ export const useCartStore = create<CartState>((set, get) => ({
       set({ error: true });
     } finally {
       set((state) => ({
-        loading: false,
         loadingById: { ...state.loadingById, [values.productItemId]: false },
         error: false,
       }));

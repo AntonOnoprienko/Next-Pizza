@@ -23,7 +23,7 @@ type Props = {
   ingredients: Ingredient[];
   items: ProductItemWithExtras[];
   description?: string | null;
-  loading?: boolean;
+  loadingById: Record<number, boolean>;
   onSubmit: (cartItem: CartItemForToast) => void;
   className?: string;
 };
@@ -34,7 +34,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
   imageUrl,
   ingredients,
   description,
-  loading,
+  loadingById,
   onSubmit,
   className,
 }) => {
@@ -69,6 +69,9 @@ export const ChoosePizzaForm: React.FC<Props> = ({
       onSubmit(cartItem);
     }
   };
+  const isLoading = selectedItem
+    ? (loadingById[selectedItem.id] ?? false)
+    : false;
 
   return (
     <div className={cn(className, 'flex flex-1')}>
@@ -107,7 +110,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
         </Suspense>
 
         <Button
-          loading={loading}
+          loading={isLoading}
           onClick={handleClickAdd}
           className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10"
         >

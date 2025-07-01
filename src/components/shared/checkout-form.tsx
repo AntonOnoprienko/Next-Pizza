@@ -1,3 +1,4 @@
+'use client';
 import { ArrowRight, Package, Percent, Truck } from 'lucide-react';
 import {
   CheckoutCartItem,
@@ -8,14 +9,40 @@ import {
 } from '.';
 import { Button, Input, Skeleton, Textarea } from '../ui';
 import { cn } from '@/src/lib/utils';
+import { useCart } from '@/src/hooks';
+import { PizzaSize, PizzaType } from '@/src/constants/pizza';
+import React from 'react';
+import { CheckoutItemSkeleton } from './checkout/chekout-item-skeleton';
 
 export const CheckoutForm = () => {
-  const loading = false;
-  const totalPrice = 125;
-  const totalAmount = 412;
-  const vatPrice = 50;
-  const DELIVERY_PRICE = 300;
+  const {
+    items,
+    loadingById,
+    totalAmount,
+    countHandlers,
+    removeHandlers,
+    isCartLoading,
+    isActionsLoading,
+  } = useCart();
 
+  const vatPrice = 540;
+  const DELIVERY_PRICE = 100;
+
+  const cartItemList = items.map((item) => (
+    <CheckoutCartItem
+      key={item.id}
+      {...item}
+      size={item.size as PizzaSize}
+      type={item.type as PizzaType}
+      className="mb-2"
+      onClickCountButton={countHandlers[item.id]}
+      onClickRemove={() => {
+        if (loadingById[item.id]) return;
+        removeHandlers[item.id]();
+      }}
+      loading={loadingById[item.id] ?? false}
+    />
+  ));
   return (
     <Container className="mt-10">
       <Title
@@ -27,31 +54,17 @@ export const CheckoutForm = () => {
         {/* Левая часть*/}
         <div className="flex flex-col gap-10 flex-1 mb-20">
           <WhiteBlock title="1. Корзина">
-            <CheckoutCartItem
-              loading={false}
-              id={1}
-              imageUrl={'products/wkxhn2pflsed8zpzyezi'}
-              name={'Пицца'}
-              price={200}
-              quantity={5}
-              excludedIngredients={[
-                { name: 'Сыр' },
-                { name: 'Сыр' },
-                { name: 'Сыр' },
-              ]}
-              extraIngredients={[
-                { name: 'Помидор', price: 50 },
-                { name: 'Помидор', price: 50 },
-                { name: 'Помидор', price: 50 },
-                { name: 'Помидор', price: 50 },
-                { name: 'Помидор', price: 50 },
-                { name: 'Помидор', price: 50 },
-                { name: 'Помидор', price: 50 },
-                { name: 'Помидор', price: 50 },
-              ]}
-              size={20}
-              type={1}
-            />
+            <div className="flex flex-col gap-5">
+              {isCartLoading ? (
+                <>
+                  <CheckoutItemSkeleton />
+                  <CheckoutItemSkeleton />
+                  <CheckoutItemSkeleton />
+                </>
+              ) : (
+                cartItemList
+              )}
+            </div>
           </WhiteBlock>
           <WhiteBlock title="2. Персональные данные">
             <div className="grid grid-cols-2 gap-5">
@@ -85,11 +98,11 @@ export const CheckoutForm = () => {
           <WhiteBlock className={cn('p-6 sticky top-4')}>
             <div className="flex flex-col gap-1">
               <span className="text-xl">Итого:</span>
-              {loading ? (
+              {isCartLoading ? (
                 <Skeleton className="h-11 w-48" />
               ) : (
                 <span className="h-11 text-[34px] font-extrabold">
-                  {totalPrice} ₴
+                  {totalAmount} ₴
                 </span>
               )}
             </div>
@@ -102,7 +115,7 @@ export const CheckoutForm = () => {
                 </div>
               }
               value={
-                loading ? (
+                isCartLoading ? (
                   <Skeleton className="h-6 w-16 rounded-[6px]" />
                 ) : (
                   `${totalAmount} ₴`
@@ -117,7 +130,7 @@ export const CheckoutForm = () => {
                 </div>
               }
               value={
-                loading ? (
+                isCartLoading ? (
                   <Skeleton className="h-6 w-16 rounded-[6px]" />
                 ) : (
                   `${vatPrice} ₴`
@@ -132,7 +145,7 @@ export const CheckoutForm = () => {
                 </div>
               }
               value={
-                loading ? (
+                isCartLoading ? (
                   <Skeleton className="h-6 w-16 rounded-[6px]" />
                 ) : (
                   `${DELIVERY_PRICE} ₴`
@@ -141,7 +154,7 @@ export const CheckoutForm = () => {
             />
 
             <Button
-              loading={loading}
+              loading={isActionsLoading}
               type="submit"
               className="w-full h-14 rounded-2xl mt-6 text-base font-bold"
             >
@@ -151,6 +164,7 @@ export const CheckoutForm = () => {
           </WhiteBlock>
         </div>
       </div>
+      <CheckoutItemSkeleton />
     </Container>
   );
 };

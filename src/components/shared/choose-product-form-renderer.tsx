@@ -5,13 +5,13 @@ import { ChooseProductForm } from './choose-product-form';
 
 type ChooseFormProps = {
   product: ProductWithRelations | ProductwithCategory;
-  loading: boolean;
+  loadingById: Record<number, boolean>;
   onSubmit: (item: CartItemForToast) => void;
 };
 
 export const ChooseProductFormRenderer: React.FC<ChooseFormProps> = ({
   product,
-  loading,
+  loadingById,
   onSubmit,
 }) => {
   const isPizza = Boolean(product.items[0].pizzaType);
@@ -23,7 +23,7 @@ export const ChooseProductFormRenderer: React.FC<ChooseFormProps> = ({
     items: product.items,
     ingredients: product.ingredients,
     onSubmit,
-    loading,
+    loadingById,
   };
 
   return isPizza ? (

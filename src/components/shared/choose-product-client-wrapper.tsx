@@ -18,7 +18,7 @@ export const ChooseProductClientWrapper: React.FC<Props> = ({
   product,
 }) => {
   const router = useRouter();
-  const loading = useCartStore((state) => state.loading);
+  const loadingById = useCartStore((state) => state.loadingById);
   const addToCartToast = useAddToCartToast();
 
   const handleAddCartItem = (cartItem: CartItemForToast) => {
@@ -28,7 +28,7 @@ export const ChooseProductClientWrapper: React.FC<Props> = ({
   return (
     <ChooseProductFormRenderer
       product={product}
-      loading={loading}
+      loadingById={loadingById}
       onSubmit={handleAddCartItem}
     />
   );

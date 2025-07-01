@@ -17,7 +17,7 @@ type Props = {
 
 export const ChooseProductModal: React.FC<Props> = ({ className, product }) => {
   const router = useRouter();
-  const loading = useCartStore((state) => state.loading);
+  const loadingById = useCartStore((state) => state.loadingById);
   const addToCartToast = useAddToCartToast();
 
   const handleAddCartItem = (cartItem: CartItemForToast) => {
@@ -38,7 +38,7 @@ export const ChooseProductModal: React.FC<Props> = ({ className, product }) => {
 
         <ChooseProductFormRenderer
           product={product}
-          loading={loading}
+          loadingById={loadingById}
           onSubmit={handleAddCartItem}
         />
       </DialogContent>

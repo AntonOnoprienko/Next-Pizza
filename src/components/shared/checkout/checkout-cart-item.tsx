@@ -1,9 +1,7 @@
 'use client';
 
 import React from 'react';
-
 import { X } from 'lucide-react';
-
 import * as CartItem from '../cart-item-details';
 import { CartItemProps } from '../cart-item-details/cart-item-details.types';
 import { cn } from '@/src/lib/utils';
@@ -15,7 +13,7 @@ interface Props extends CartItemProps {
   loading: boolean;
 }
 
-export const CheckoutCartItem: React.FC<Props> = ({
+const CheckoutCartItemComponent: React.FC<Props> = ({
   imageUrl,
   name,
   size,
@@ -60,3 +58,5 @@ export const CheckoutCartItem: React.FC<Props> = ({
     </div>
   );
 };
+
+export const CheckoutCartItem = React.memo(CheckoutCartItemComponent);
