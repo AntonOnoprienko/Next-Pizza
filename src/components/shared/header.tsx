@@ -23,7 +23,13 @@ export const Header: React.FC<Props> = ({
       <Container className="flex items-center justify-between py-8">
         <Link href="/">
           <div className="flex items-center gap-4">
-            <Image src={'/logo.png'} alt="logo" width={35} height={35} />
+            <Image
+              src={'/logo.png'}
+              alt="logo"
+              width={35}
+              height={35}
+              priority
+            />
             <div>
               <h1 className="text-2xl uppercase font-black">
                 {siteConfig.ru.title}
