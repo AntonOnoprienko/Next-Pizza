@@ -71,11 +71,19 @@ export const CheckoutForm = () => {
               <Input name="firstName" className="text-base" placeholder="Имя" />
               <Input
                 name="lastName"
-                className="text-base"
+                className="text-base h-10 w-full"
                 placeholder="Фамилия"
               />
-              <Input name="email" className="text-base" placeholder="E-Mail" />
-              <Input name="phone" className="text-base" placeholder="Телефон" />
+              <Input
+                name="email"
+                className="text-base h-10 w-full"
+                placeholder="E-Mail"
+              />
+              <Input
+                name="phone"
+                className="text-base h-10 w-full"
+                placeholder="Телефон"
+              />
             </div>
           </WhiteBlock>
           <WhiteBlock title="3. Адрес доставки">
