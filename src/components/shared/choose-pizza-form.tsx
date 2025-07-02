@@ -25,6 +25,7 @@ type Props = {
   description?: string | null;
   loadingById: Record<number, boolean>;
   onSubmit: (cartItem: CartItemForToast) => void;
+  isLCP?: boolean;
   className?: string;
 };
 
@@ -36,6 +37,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
   description,
   loadingById,
   onSubmit,
+  isLCP,
   className,
 }) => {
   const {
@@ -75,7 +77,13 @@ export const ChoosePizzaForm: React.FC<Props> = ({
 
   return (
     <div className={cn(className, 'flex flex-1')}>
-      <PizzaImage publicId={selectedImg} size={size} alt={name} />
+      <PizzaImage
+        key={imageUrl}
+        publicId={selectedImg}
+        size={size}
+        alt={name}
+        isLCP={isLCP}
+      />
       <div className="w-[490px] bg-[rgb(252,252,252)] p-7">
         <Title text={name} size="md" className="font-extrabold mb-1" />
 

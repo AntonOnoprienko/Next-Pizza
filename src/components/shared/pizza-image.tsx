@@ -6,6 +6,7 @@ type Props = {
   publicId: string;
   alt: string;
   size: 20 | 30 | 40;
+  isLCP?: boolean;
   className?: string;
 };
 
@@ -19,6 +20,7 @@ export const PizzaImage: React.FC<Props> = ({
   publicId,
   size,
   alt,
+  isLCP = false,
   className,
 }) => {
   const dimension = sizeMap[size];
@@ -35,6 +37,7 @@ export const PizzaImage: React.FC<Props> = ({
         alt={alt}
         width={dimension}
         height={dimension}
+        priority={isLCP}
         crop="fill"
         gravity="auto"
         quality="auto"

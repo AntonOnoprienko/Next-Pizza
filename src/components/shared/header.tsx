@@ -28,7 +28,7 @@ export const Header: React.FC<Props> = ({
               alt="logo"
               width={35}
               height={35}
-              priority
+              priority={true}
               className="w-[35px] h-[35px]"
             />
             <div>

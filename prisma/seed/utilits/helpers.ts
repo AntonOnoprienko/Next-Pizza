@@ -17,7 +17,7 @@ const pizzaPriceRangesUAH = {
 };
 
 const categoriesBasePriceRangeUAH: Record<string, [number, number]> = {
-  Пиццы: [0, 0], // отдельная логика ниже
+  Пиццы: [0, 0],
   Комбо: [250, 550],
   Закуски: [70, 120],
   Коктейли: [60, 90],
@@ -56,7 +56,6 @@ export const generateProductItem = ({
 
     price = randomDecimalNumber(min, max);
   } else {
-    // fallback если категория не указана или не найдена
     price = randomDecimalNumber(40, 150);
   }
 
@@ -87,7 +86,6 @@ export function generatePizzaVariants(product: Product, images: PizzaImageMap) {
 
   const sharedPrices: Record<number, number> = {};
 
-  // Сначала traditional
   for (const size of traditionalSizes) {
     const imageUrl = images.traditional[size];
 
