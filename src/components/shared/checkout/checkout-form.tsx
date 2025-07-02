@@ -49,46 +49,38 @@ export const CheckoutForm = () => {
   };
 
   return (
-    <Container className="mt-10">
-      <Title
-        size="lg"
-        text="Оформление заказа"
-        className="font-extrabold mb-8 text-[36px]"
-      />
-      <FormProvider {...form}>
-        <form
-          aria-label="Форма оформления заказа"
-          onSubmit={form.handleSubmit(onSubmit)}
-        >
-          <div className="flex gap-10">
-            {/* Левая часть*/}
-            <div className="flex flex-col gap-10 flex-1 mb-20">
-              <CheckoutCart
-                items={items}
-                isCartLoading={isCartLoading}
-                loadingById={loadingById}
-                isActionsLoading={isActionsLoading}
-                countHandlers={countHandlers}
-                removeHandlers={removeHandlers}
-              />
-              <CheckoutPersonalForm />
-              <CheckoutAddressForm />
-            </div>
-            {/*Правая часть*/}
-            <div className="w-450px">
-              <CheckoutSummary
-                deliveryPrice={DELIVERY_PRICE}
-                basePrice={basePrice}
-                taxAmount={taxAmount}
-                totalPrice={totalPrice}
-                isActionsLoading={isActionsLoading}
-                isCartLoading={isCartLoading}
-              />
-            </div>
+    <FormProvider {...form}>
+      <form
+        aria-label="Форма оформления заказа"
+        onSubmit={form.handleSubmit(onSubmit)}
+      >
+        <div className="flex gap-10">
+          {/* Левая часть*/}
+          <div className="flex flex-col gap-10 flex-1 mb-20">
+            <CheckoutCart
+              items={items}
+              isCartLoading={isCartLoading}
+              loadingById={loadingById}
+              isActionsLoading={isActionsLoading}
+              countHandlers={countHandlers}
+              removeHandlers={removeHandlers}
+            />
+            <CheckoutPersonalForm />
+            <CheckoutAddressForm />
           </div>
-        </form>
-      </FormProvider>
-      <CheckoutItemSkeleton />
-    </Container>
+          {/*Правая часть*/}
+          <div className="w-450px">
+            <CheckoutSummary
+              deliveryPrice={DELIVERY_PRICE}
+              basePrice={basePrice}
+              taxAmount={taxAmount}
+              totalPrice={totalPrice}
+              isActionsLoading={isActionsLoading}
+              isCartLoading={isCartLoading}
+            />
+          </div>
+        </div>
+      </form>
+    </FormProvider>
   );
 };

@@ -1,4 +1,4 @@
-import { FullPageLoader } from '@/src/components/shared';
+import { Container, FullPageLoader, Title } from '@/src/components/shared';
 import dynamic from 'next/dynamic';
 
 const CheckoutForm = dynamic(
@@ -10,7 +10,16 @@ const CheckoutForm = dynamic(
 );
 
 const CheckoutPage = (): JSX.Element => {
-  return <CheckoutForm />;
+  return (
+    <Container className="mt-10">
+      <Title
+        size="lg"
+        text="Оформление заказа"
+        className="font-extrabold mb-8 text-[36px]"
+      />
+      <CheckoutForm />
+    </Container>
+  );
 };
 
 export default CheckoutPage;
