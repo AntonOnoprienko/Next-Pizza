@@ -53,7 +53,6 @@ export const Header: React.FC<Props> = ({
             <UserRound size={14} />
             Войти
           </Button>
-
           {hasCart && <CartButton />}
         </div>
       </Container>
