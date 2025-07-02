@@ -1,2 +1,8 @@
 export { CheckoutItemDetails } from './checkout-item-details';
 export { CheckoutCartItem } from './checkout-cart-item';
+export { CheckoutSummary } from './checkout-summary';
+export { CheckoutForm } from './checkout-form';
+export { CheckoutItemSkeleton } from './checkout-item-skeleton';
+export { CheckoutCart } from './checkout-cart';
+export { CheckoutPersonalForm } from './checkout-personal-form';
+export { CheckoutAddressForm } from './checkout-address-form';

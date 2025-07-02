@@ -18,6 +18,7 @@ export const CountIconButton: React.FC<IconButtonProps> = ({
 }) => {
   return (
     <Button
+      aria-label="Изменение количества"
       variant="outline"
       disabled={disabled}
       onClick={onClick}

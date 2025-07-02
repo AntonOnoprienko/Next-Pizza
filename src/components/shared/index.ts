@@ -29,8 +29,11 @@ export { ExtraIngredientsListSkeleton } from './extra-ingredients-list-skeleton'
 export { CartLoader } from './cart-loader';
 export { ChooseProductClientWrapper } from './choose-product-client-wrapper';
 export { ChooseProductFormRenderer } from './choose-product-form-renderer';
-export { CheckoutForm } from './checkout-form';
 export { FullPageLoader } from './full-page-loader';
 export { WhiteBlock } from './white-block';
+export { RequiredSymbol } from './required-symbol';
+export { ErrorText } from './error-text';
+export { ClearButton } from './clear-button';
 export * from './modals';
 export * from './checkout';
+export * from './form';

@@ -48,7 +48,11 @@ const CheckoutCartItemComponent: React.FC<Props> = ({
           onClick={onClickCountButton}
           value={quantity}
         />
-        <button type="button" onClick={onClickRemove}>
+        <button
+          aria-label="Кнопка удаления"
+          type="button"
+          onClick={onClickRemove}
+        >
           <X
             className="text-gray-400 cursor-pointer hover:text-gray-600"
             size={20}
