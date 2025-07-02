@@ -10,7 +10,7 @@ module.exports = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
   },
-  moduleDirectories: ['node_modules', 'src'],  // <-- добавь это
+  moduleDirectories: ['node_modules', 'src'], // <-- добавь это
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest',
   },

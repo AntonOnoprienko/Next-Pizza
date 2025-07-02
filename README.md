@@ -7,19 +7,19 @@ Containerized with **Docker**, deployed via **Railway**, and powered by **CI/CD*
 
 ## 🧰 Stack
 
-| Layer         | Tech                                     |
-|---------------|------------------------------------------|
-| Framework     | [Next.js 14](https://nextjs.org/)        |
-| Styling       | [TailwindCSS](https://tailwindcss.com/)  |
+| Layer         | Tech                                                                        |
+| ------------- | --------------------------------------------------------------------------- |
+| Framework     | [Next.js 14](https://nextjs.org/)                                           |
+| Styling       | [TailwindCSS](https://tailwindcss.com/)                                     |
 | UI Components | [Radix UI](https://www.radix-ui.com/) + [Lucide Icons](https://lucide.dev/) |
-| State         | [Zustand](https://zustand-demo.pmnd.rs/) |
-| DB & ORM      | [Prisma ORM](https://www.prisma.io/) + PostgreSQL |
-| Auth          | [bcrypt](https://www.npmjs.com/package/bcrypt) |
-| HTTP Client   | [Axios](https://axios-http.com/)         |
-| Utils         | clsx, class-variance-authority, react-use |
-| i18n          | [next-i18next](https://github.com/i18next/next-i18next) |
-| Container     | Docker (multi-stage build)               |
-| Deployment    | [Railway](https://railway.app/)          |
-| CI/CD         | GitHub Actions                           |
+| State         | [Zustand](https://zustand-demo.pmnd.rs/)                                    |
+| DB & ORM      | [Prisma ORM](https://www.prisma.io/) + PostgreSQL                           |
+| Auth          | [bcrypt](https://www.npmjs.com/package/bcrypt)                              |
+| HTTP Client   | [Axios](https://axios-http.com/)                                            |
+| Utils         | clsx, class-variance-authority, react-use                                   |
+| i18n          | [next-i18next](https://github.com/i18next/next-i18next)                     |
+| Container     | Docker (multi-stage build)                                                  |
+| Deployment    | [Railway](https://railway.app/)                                             |
+| CI/CD         | GitHub Actions                                                              |
 
-------
+---
