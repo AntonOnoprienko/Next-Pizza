@@ -29,7 +29,6 @@ export const ChooseProductClientWrapper: React.FC<Props> = ({
     <ChooseProductFormRenderer
       product={product}
       loadingById={loadingById}
-      isLCP
       onSubmit={handleAddCartItem}
     />
   );

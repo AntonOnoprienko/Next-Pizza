@@ -13,7 +13,6 @@ type Props = {
   items: ProductItem[];
   loading?: boolean;
   onSubmit: (cartItem: CartItemForToast) => void;
-  isLCP?: boolean;
   className?: string;
   description: string | null;
 };
@@ -24,7 +23,6 @@ export const ChooseProductForm: React.FC<Props> = ({
   imageUrl,
   loading,
   onSubmit,
-  isLCP = false,
   className,
   description,
 }) => {
@@ -52,7 +50,6 @@ export const ChooseProductForm: React.FC<Props> = ({
           alt={name}
           width={350}
           height={350}
-          priority={isLCP}
           className="relative left-2 top-2 transition-all z-10 duration-300"
           crop="fill"
           gravity="auto"
