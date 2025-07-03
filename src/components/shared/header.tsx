@@ -4,7 +4,6 @@ import { CartButton, Container, SearchInput } from '../shared';
 import Image from 'next/image';
 import { Button } from '../ui';
 import { UserRound } from 'lucide-react';
-import { siteConfig } from '@/src/config/site';
 import Link from 'next/link';
 
 type Props = {
@@ -32,11 +31,9 @@ export const Header: React.FC<Props> = ({
               className="w-[35px] h-[35px]"
             />
             <div>
-              <h1 className="text-2xl uppercase font-black">
-                {siteConfig.ru.title}
-              </h1>
+              <h1 className="text-2xl uppercase font-black">Next Pizza</h1>
               <p className="text-sm text-gray-600 leading-3">
-                {siteConfig.ru.slogan}
+                Вкуснее чем в буфете
               </p>
             </div>
           </div>
