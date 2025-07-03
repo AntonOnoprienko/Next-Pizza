@@ -13,7 +13,10 @@ interface Props {
 }
 
 const DynamicCartItemToastComponent = dynamic(
-  () => import('../shared/cart-item-details').then((mod) => mod.CartItemToast),
+  () =>
+    import('../shared/cart-item-details/cart-item-toast').then(
+      (mod) => mod.CartItemToast,
+    ),
   { ssr: false, loading: () => <CartItemToastSkeleton /> },
 );
 

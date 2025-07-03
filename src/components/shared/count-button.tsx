@@ -13,7 +13,7 @@ export interface CountButtonProps {
 }
 
 const Spinner = dynamic(
-  () => import('../animations/').then((mod) => mod.Spinner),
+  () => import('../animations/spinner').then((mod) => mod.Spinner),
   { ssr: false },
 );
 

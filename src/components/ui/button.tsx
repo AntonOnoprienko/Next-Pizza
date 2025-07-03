@@ -5,7 +5,7 @@ import { cn } from '@/src/lib/utils';
 import dynamic from 'next/dynamic';
 
 const Spinner = dynamic(
-  () => import('../animations').then((mod) => mod.Spinner),
+  () => import('../animations/spinner').then((mod) => mod.Spinner),
   { ssr: false },
 );
 

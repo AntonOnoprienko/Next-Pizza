@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 
 const ChooseProductModal = dynamic(
   () =>
-    import('@/src/components/shared/modals').then(
+    import('@/src/components/shared/modals/choose-product-modal').then(
       (mod) => mod.ChooseProductModal,
     ),
   {

@@ -13,7 +13,7 @@ type Props = {
 
 const ChooseProductClientWrapper = dynamic(
   () =>
-    import('@/src/components/shared').then(
+    import('@/src/components/shared/choose-product-client-wrapper').then(
       (mod) => mod.ChooseProductClientWrapper,
     ),
   {

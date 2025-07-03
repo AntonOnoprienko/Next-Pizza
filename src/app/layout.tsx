@@ -13,7 +13,8 @@ const nunito = Nunito({
 });
 
 const CartLoader = dynamic(
-  () => import('@/src/components/shared/').then((mod) => mod.CartLoader),
+  () =>
+    import('@/src/components/shared/cart-loader').then((mod) => mod.CartLoader),
   {
     ssr: false,
     loading: () => null,

@@ -13,7 +13,7 @@ interface PageProps {
 }
 
 const DynamicFilters = dynamic(
-  () => import('@/src/components/shared/').then((mod) => mod.Filters),
+  () => import('@/src/components/shared/filters').then((mod) => mod.Filters),
   {
     ssr: false,
     loading: () => (
