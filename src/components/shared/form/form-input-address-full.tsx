@@ -264,7 +264,7 @@ export const FormInputAddressFull: React.FC<Props> = ({
       <div style={{ position: 'relative' }}>
         <Input
           className="h-12 text-md"
-          placeholder="Дом"
+          placeholder="Дом и квартира"
           value={houseValue}
           onChange={(e) =>
             setValue(houseField, e.target.value, { shouldValidate: true })

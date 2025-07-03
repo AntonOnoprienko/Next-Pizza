@@ -17,7 +17,7 @@ export const checkoutFormSchema = z.object({
   street: z
     .string()
     .min(2, { message: 'Улица должна содержать не менее двух символов' }),
-  house: z.string().min(1, { message: 'Укажите номер дома' }),
+  house: z.string().min(1, { message: 'Укажите номер дома и номер квартиры' }),
   comment: z.string().optional(),
 });
 
