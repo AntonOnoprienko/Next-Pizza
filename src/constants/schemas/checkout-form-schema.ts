@@ -8,10 +8,16 @@ export const checkoutFormSchema = z.object({
     .string()
     .min(2, { message: 'Фамилия должна содержать не менее двух символов' }),
   email: z.string().email({ message: 'Введите корректный email' }),
-  phone: z.string().min(10, { message: 'Введите корректный номер телефона' }),
-  address: z
+  phone: z.string().regex(/^\+38 \(\d{3}\) \d{3}-\d{2}-\d{2}$/, {
+    message: 'Введите корректный номер телефона',
+  }),
+  city: z
     .string()
-    .min(5, { message: 'Адрес должен содержать не менее 5 символов' }),
+    .min(2, { message: 'Город должен содержать не менее двух символов' }),
+  street: z
+    .string()
+    .min(2, { message: 'Улица должна содержать не менее двух символов' }),
+  house: z.string().min(1, { message: 'Укажите номер дома' }),
   comment: z.string().optional(),
 });
 

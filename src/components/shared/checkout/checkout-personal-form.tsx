@@ -1,4 +1,4 @@
-import { FormInput, WhiteBlock } from '..';
+import { FormInput, FormInputPhone, WhiteBlock } from '..';
 
 interface Props {
   className?: string;
@@ -22,7 +22,7 @@ export const CheckoutPersonalForm: React.FC<Props> = ({ className }) => {
           className="text-base w-full"
           placeholder="E-Mail"
         />
-        <FormInput
+        <FormInputPhone
           name="phone"
           className="text-base w-full"
           placeholder="Телефон"

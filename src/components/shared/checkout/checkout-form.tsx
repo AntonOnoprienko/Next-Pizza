@@ -1,21 +1,18 @@
 'use client';
 import {
   CheckoutSummary,
-  Container,
-  Title,
   CheckoutCart,
   CheckoutPersonalForm,
   CheckoutAddressForm,
 } from '..';
 import { useCart } from '@/src/hooks';
 import React from 'react';
-import { CheckoutItemSkeleton } from './checkout-item-skeleton';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   CheckoutFormSchema,
   checkoutFormSchema,
-} from './schemas/checkout-form-schema';
+} from '../../../constants/schemas/checkout-form-schema';
 
 export const CheckoutForm = () => {
   const {
@@ -39,7 +36,9 @@ export const CheckoutForm = () => {
       firstName: '',
       lastName: '',
       phone: '',
-      address: '',
+      city: '',
+      street: '',
+      house: '',
       comment: '',
       email: '',
     },
