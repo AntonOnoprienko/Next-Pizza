@@ -11,7 +11,7 @@ export default function Head() {
             name: 'Next Pizza',
             image: 'https://next-pizza.up.railway.app/og-image.webp',
             url: 'https://next-pizza.up.railway.app',
-            logo: 'https://next-pizza.up.railway.app/og-image.wepb',
+            logo: 'https://next-pizza.up.railway.app/og-image.webp',
             address: {
               '@type': 'PostalAddress',
               addressLocality: 'Харьков',
