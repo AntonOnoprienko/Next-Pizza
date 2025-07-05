@@ -1,3 +1,4 @@
+import { UserRole } from '@prisma/client';
 import { hashSync } from 'bcrypt';
 
 export const users = [
@@ -6,13 +7,13 @@ export const users = [
     email: 'user@gmail.com',
     password: hashSync('111111', 10),
     verified: new Date(),
-    role: 'USER',
+    role: UserRole.USER,
   },
   {
     fullName: 'Admin TEST',
     email: 'admin@gmail.com',
     password: hashSync('111111', 10),
     verified: new Date(),
-    role: 'ADMIN',
+    role: UserRole.ADMIN,
   },
 ];

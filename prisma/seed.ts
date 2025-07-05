@@ -6,6 +6,7 @@ import {
   products,
   seedPizzas,
   seedProductItems,
+  users,
 } from './seed/data';
 
 async function up() {
@@ -17,6 +18,9 @@ async function up() {
   });
   await prisma.product.createMany({
     data: products,
+  });
+  await prisma.user.createMany({
+    data: users,
   });
   const pizzas = await seedPizzas();
 

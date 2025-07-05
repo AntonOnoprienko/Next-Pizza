@@ -9,9 +9,9 @@ export default function Head() {
             '@context': 'https://schema.org',
             '@type': 'LocalBusiness',
             name: 'Next Pizza',
-            image: 'https://next-pizza.up.railway.app/og-image.png',
+            image: 'https://next-pizza.up.railway.app/og-image.webp',
             url: 'https://next-pizza.up.railway.app',
-            logo: 'https://next-pizza.up.railway.app/og-image.png',
+            logo: 'https://next-pizza.up.railway.app/og-image.wepb',
             address: {
               '@type': 'PostalAddress',
               addressLocality: 'Харьков',

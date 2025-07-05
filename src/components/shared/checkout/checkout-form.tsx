@@ -13,6 +13,7 @@ import {
   CheckoutFormSchema,
   checkoutFormSchema,
 } from '../../../constants/schemas/checkout-form-schema';
+import { createOrder } from '@/src/app/api/actions';
 
 export const CheckoutForm = () => {
   const {
@@ -45,6 +46,7 @@ export const CheckoutForm = () => {
   });
   const onSubmit: SubmitHandler<CheckoutFormSchema> = (data) => {
     console.log(data);
+    createOrder(data);
   };
 
   return (

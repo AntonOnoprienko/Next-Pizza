@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     siteName: 'Next Pizza',
     images: [
       {
-        url: 'https://next-pizza.up.railway.app/og-image.png',
+        url: 'https://next-pizza.up.railway.app/og-image.webp',
         width: 1200,
         height: 630,
         alt: 'Next Pizza - Оформление заказа',
