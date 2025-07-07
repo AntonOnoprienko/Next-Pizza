@@ -14,6 +14,8 @@ import {
   checkoutFormSchema,
 } from '../../../constants/schemas/checkout-form-schema';
 import { createOrder } from '@/src/app/api/actions';
+import toast from 'react-hot-toast';
+import { AnimatedError, AnimatedSuccessCheck } from '../../animations';
 
 export const CheckoutForm = () => {
   const {
@@ -25,6 +27,7 @@ export const CheckoutForm = () => {
     isCartLoading,
     isActionsLoading,
   } = useCart();
+  const [submitting, setSubmitting] = React.useState(false);
 
   const taxRate = 0.2;
   const DELIVERY_PRICE = 80;
@@ -44,9 +47,23 @@ export const CheckoutForm = () => {
       email: '',
     },
   });
-  const onSubmit: SubmitHandler<CheckoutFormSchema> = (data) => {
-    console.log(data);
-    createOrder(data);
+  const onSubmit: SubmitHandler<CheckoutFormSchema> = async (data) => {
+    setSubmitting(true);
+    try {
+      const url = await createOrder(data);
+      toast.success('Заказ успешно оформлен переходите на оплату...', {
+        icon: <AnimatedSuccessCheck />,
+      });
+      if (url) {
+        location.href = url;
+      }
+    } catch (err) {
+      console.error('Ошибка при создании заказа:', err);
+      toast.error('Не удалось создать заказ...', {
+        icon: <AnimatedError />,
+      });
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -78,6 +95,7 @@ export const CheckoutForm = () => {
               totalPrice={totalPrice}
               isActionsLoading={isActionsLoading}
               isCartLoading={isCartLoading}
+              loading={submitting}
             />
           </div>
         </div>

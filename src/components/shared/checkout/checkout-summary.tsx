@@ -11,6 +11,7 @@ interface Props {
   totalPrice: number;
   basePrice: number;
   taxAmount: number;
+  loading: boolean;
 }
 
 export const CheckoutSummary: React.FC<Props> = ({
@@ -20,6 +21,7 @@ export const CheckoutSummary: React.FC<Props> = ({
   deliveryPrice,
   isCartLoading,
   isActionsLoading,
+  loading,
 }) => {
   return (
     <WhiteBlock className={cn('p-6 sticky top-4')}>
@@ -81,7 +83,7 @@ export const CheckoutSummary: React.FC<Props> = ({
       />
 
       <Button
-        loading={isActionsLoading}
+        loading={isActionsLoading || loading}
         type="submit"
         className="w-full h-14 rounded-2xl mt-6 text-base font-bold"
       >

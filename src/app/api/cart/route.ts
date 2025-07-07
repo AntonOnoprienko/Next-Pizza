@@ -1,12 +1,12 @@
 import { prisma } from '@/prisma/prisma-client';
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
-import { CreateCartItemValues } from '@/src/services/dto/cart.dto';
 import {
   findOrCreateCart,
   generateCustomizationHash,
   updateCartTotalAmount,
 } from '@/src/lib';
+import { cartItemSchema } from '@/src/constants/schemas/cart-item-schema';
 
 export const dynamic = 'force-dynamic';
 
@@ -78,19 +78,17 @@ export async function POST(req: NextRequest) {
       token = crypto.randomUUID();
     }
 
-    const data = (await req.json()) as CreateCartItemValues;
+    const json = await req.json();
+    const parsed = cartItemSchema.safeParse(json);
 
-    if (
-      !data.productItemId ||
-      typeof data.productItemId !== 'number' ||
-      (data.excludedIngredients && !Array.isArray(data.excludedIngredients)) ||
-      (data.extraIngredients && !Array.isArray(data.extraIngredients))
-    ) {
+    if (!parsed.success) {
       return NextResponse.json(
-        { message: 'Невалидные данные' },
+        { message: 'Невалидные данные', errors: parsed.error.format() },
         { status: 400 },
       );
     }
+
+    const data = parsed.data;
 
     const productItemExists = await prisma.productItem.findUnique({
       where: { id: data.productItemId },
@@ -139,7 +137,13 @@ export async function POST(req: NextRequest) {
 
     const response = NextResponse.json(updatedCart);
 
-    response.cookies.set('cartToken', token);
+    response.cookies.set('cartToken', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      path: '/',
+      maxAge: 60 * 60 * 24 * 7,
+    });
 
     return response;
   } catch (error) {
