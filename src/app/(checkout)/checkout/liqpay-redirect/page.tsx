@@ -8,7 +8,6 @@ const LiqPayRedirect = dynamic(
     ),
   {
     ssr: false,
-    loading: () => <Loader size={40} className="animate-spin" />,
   },
 );
 
