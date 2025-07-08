@@ -7,7 +7,7 @@ import { generatePaymentSuccessEmail } from '@/src/lib/mails/generate-payment-su
 
 const LIQPAY_PRIVATE_KEY = process.env.LIQPAY_PRIVATE_KEY!;
 
-export function validateSignature(data: string, signature: string): boolean {
+function validateSignature(data: string, signature: string): boolean {
   const sha1 = crypto.createHash('sha1');
   sha1.update(LIQPAY_PRIVATE_KEY + data + LIQPAY_PRIVATE_KEY);
   const expectedSignature = sha1.digest('base64');
