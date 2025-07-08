@@ -109,7 +109,7 @@ export async function createOrder(
       sandbox: '1',
       email: safeData.email,
       phone: safeData.phone,
-      result_url: `${process.env.FRONTEND_URL}`,
+      result_url: `${process.env.FRONTEND_URL}/api/payment/liqpay-callback`,
       server_url: `${process.env.FRONTEND_URL}/api/payment/liqpay-callback`,
     };
 
