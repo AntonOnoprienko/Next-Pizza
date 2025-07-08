@@ -7,7 +7,7 @@ import { generatePaymentSuccessEmail } from '@/src/lib/mails/generate-payment-su
 
 const LIQPAY_PRIVATE_KEY = process.env.LIQPAY_PRIVATE_KEY!;
 
-function validateSignature(data: string, signature: string): boolean {
+export function validateSignature(data: string, signature: string): boolean {
   const sha1 = crypto.createHash('sha1');
   sha1.update(LIQPAY_PRIVATE_KEY + data + LIQPAY_PRIVATE_KEY);
   const expectedSignature = sha1.digest('base64');
@@ -35,8 +35,18 @@ export async function POST(request: NextRequest) {
     const jsonData = JSON.parse(Buffer.from(data, 'base64').toString('utf-8'));
     console.log('🧾 Декодированные данные из LiqPay:', jsonData);
 
-    if (jsonData.status === 'success' && jsonData.order_id) {
+    const isPaid =
+      jsonData.status === 'success' || jsonData.status === 'sandbox';
+
+    if (isPaid && jsonData.order_id) {
       const orderId = Number(jsonData.order_id);
+      if (!orderId) {
+        console.error('❌ Невалидный order_id');
+        return NextResponse.json(
+          { error: 'Invalid order_id' },
+          { status: 400 },
+        );
+      }
 
       console.log(`📦 Обновляем заказ ${orderId}`);
 
