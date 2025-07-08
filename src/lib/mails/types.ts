@@ -1,3 +1,8 @@
+type Ingredient = {
+  name: string;
+  price?: number;
+};
+
 export type CartItem = {
   name: string;
   quantity: number;
@@ -18,10 +23,20 @@ export interface OrderConfirmEmailProps {
 
 export interface PaymentSuccessEmailProps {
   fullName: string;
-  items: CartItem[];
+  items: CartItemWithIngredients[];
   totalAmount: number;
   orderId: number;
   paymentId: string;
   address: string;
   paymentDate: string;
 }
+
+export type CartItemWithIngredients = {
+  name: string;
+  quantity: number;
+  price: number;
+  type?: string | number;
+  size?: string | number;
+  extraIngredients?: Ingredient[];
+  excludedIngredients?: Ingredient[];
+};

@@ -21,7 +21,7 @@ export async function generatePaymentSuccessEmail({
     <center>
       <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px; margin: 20px auto; background-color:#fff; border-radius:8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
         <tr>
-          <td align="center" style="background-color:#28a745; padding: 20px; border-radius: 8px 8px 0 0;">
+          <td align="center" style="background-color:#FF5E00; padding: 20px; border-radius: 8px 8px 0 0;">
             <h1 style="color: #fff; margin: 0; font-size: 28px; font-weight: bold;">Next Pizza</h1>
           </td>
         </tr>
@@ -59,8 +59,17 @@ export async function generatePaymentSuccessEmail({
                         <div style="font-size: 12px; color: #888; margin-top: 4px; line-height: 1.3;">
                           ${type ? `Тип: ${type}; ` : ''}
                           ${size ? `Размер: ${size}; ` : ''}
-                          ${extraIngredients && extraIngredients.length ? `+ Доп.: ${extraIngredients.join(', ')}; ` : ''}
-                          ${excludedIngredients && excludedIngredients.length ? `- Искл.: ${excludedIngredients.join(', ')}` : ''}
+                          ${
+                            extraIngredients && extraIngredients.length
+                              ? `+ Доп.: ${extraIngredients.map((ing) => (typeof ing === 'string' ? ing : ing.name)).join(', ')}; `
+                              : ''
+                          }
+
+${
+  excludedIngredients && excludedIngredients.length
+    ? `- Искл.: ${excludedIngredients.map((ing) => (typeof ing === 'string' ? ing : ing.name)).join(', ')}`
+    : ''
+}
                         </div>
                       </td>
                       <td align="center" style="padding: 10px 8px; font-size: 14px;">${quantity}</td>

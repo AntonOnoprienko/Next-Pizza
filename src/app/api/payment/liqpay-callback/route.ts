@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
 import { prisma } from '@/prisma/prisma-client';
 import { sendMail } from '@/src/lib';
-import { CartItem } from '@/src/lib/mails/types';
+import { CartItem, CartItemWithIngredients } from '@/src/lib/mails/types';
 import { generatePaymentSuccessEmail } from '@/src/lib/mails/generate-payment-success-email';
 
 const LIQPAY_PRIVATE_KEY = process.env.LIQPAY_PRIVATE_KEY!;
@@ -62,7 +62,7 @@ export async function POST(request: NextRequest) {
       }
 
       const parsed = JSON.parse(order.items);
-      const items = parsed.items as CartItem[];
+      const items = parsed.items as CartItemWithIngredients[];
 
       const emailHtml = await generatePaymentSuccessEmail({
         fullName: order.fullName,
