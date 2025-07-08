@@ -57,7 +57,12 @@ export async function POST(request: NextRequest) {
 
       console.log(`✅ Заказ ${orderId} обновлён:`, order);
 
-      const items = order.items as CartItem[];
+      if (typeof order.items !== 'string') {
+        throw new Error('order.items is not a string');
+      }
+
+      const parsed = JSON.parse(order.items);
+      const items = parsed.items as CartItem[];
 
       const emailHtml = await generatePaymentSuccessEmail({
         fullName: order.fullName,
