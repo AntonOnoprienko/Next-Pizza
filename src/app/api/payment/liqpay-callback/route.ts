@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
 
       const order = await prisma.order.update({
         where: { id: orderId },
-        data: { status: 'SUCCEEDED', paymentID: jsonData.payment_id },
+        data: { status: 'SUCCEEDED', paymentID: String(jsonData.payment_id) },
       });
 
       console.log(`✅ Заказ ${orderId} обновлён:`, order);
