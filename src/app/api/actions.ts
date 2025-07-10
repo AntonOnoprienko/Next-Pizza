@@ -8,6 +8,7 @@ import { cookies } from 'next/headers';
 import { checkoutFormSchema } from '@/src/constants/schemas/checkout-form-schema';
 import { generateLiqPayData, generateLiqPaySignature } from '@/src/lib/liqpay';
 import { sendEmail } from '@/src/lib/mails/send-email';
+import { randomBytes } from 'crypto';
 
 export async function createOrder(
   data: CheckoutFormSchema,
@@ -67,11 +68,11 @@ export async function createOrder(
     }
 
     const cartData = getCartDetails(userCart);
-
+    const orderToken = randomBytes(16).toString('hex');
     const [order] = await prisma.$transaction([
       prisma.order.create({
         data: {
-          token: cartToken,
+          token: orderToken,
           fullName: `${safeData.firstName} ${safeData.lastName}`,
           email: safeData.email,
           phone: safeData.phone,
@@ -105,7 +106,7 @@ export async function createOrder(
       sandbox: '1',
       email: safeData.email,
       phone: safeData.phone,
-      result_url: `${process.env.FRONTEND_URL}`,
+      result_url: `${process.env.FRONTEND_URL}/checkout/paid?token=${orderToken}`,
       server_url: `${process.env.FRONTEND_URL}/api/payment/liqpay-callback`,
     };
 

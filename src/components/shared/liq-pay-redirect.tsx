@@ -33,11 +33,5 @@ export const LiqPayRedirect = () => {
     }
   }, [data, signature]);
 
-  return (
-    <div style={{ textAlign: 'center', paddingTop: '80px' }}>
-      <p style={{ fontSize: '18px' }}>
-        ⏳ Перенаправляем на оплату через LiqPay...
-      </p>
-    </div>
-  );
+  return null;
 };

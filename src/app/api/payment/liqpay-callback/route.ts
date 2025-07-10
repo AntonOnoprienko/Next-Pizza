@@ -3,6 +3,7 @@ import crypto from 'crypto';
 import { prisma } from '@/prisma/prisma-client';
 import { CartItemWithIngredients } from '@/src/lib/mails/types';
 import { sendEmail } from '@/src/lib/mails/send-email';
+import { mapLiqpayStatus } from '@/src/constants/order-status-liqpay';
 
 const LIQPAY_PRIVATE_KEY = process.env.LIQPAY_PRIVATE_KEY!;
 
@@ -34,10 +35,9 @@ export async function POST(request: NextRequest) {
     const jsonData = JSON.parse(Buffer.from(data, 'base64').toString('utf-8'));
     console.log('🧾 Декодированные данные из LiqPay:', jsonData);
 
-    const isPaid =
-      jsonData.status === 'success' || jsonData.status === 'sandbox';
+    const orderStatus = mapLiqpayStatus(jsonData.status);
 
-    if (isPaid && jsonData.order_id) {
+    if (jsonData.order_id && orderStatus) {
       const orderId = Number(jsonData.order_id);
       if (!orderId) {
         console.error('❌ Невалидный order_id');
@@ -47,12 +47,10 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      console.log(`📦 Обновляем заказ ${orderId}`);
-
       const order = await prisma.order
         .update({
           where: { id: orderId },
-          data: { status: 'SUCCEEDED', paymentID: String(jsonData.payment_id) },
+          data: { status: orderStatus, paymentID: String(jsonData.payment_id) },
         })
         .catch(() => null);
 

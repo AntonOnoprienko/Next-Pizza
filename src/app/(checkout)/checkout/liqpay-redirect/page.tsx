@@ -1,4 +1,4 @@
-import { Loader } from 'lucide-react';
+import { Container, Title } from '@/src/components/shared';
 import dynamic from 'next/dynamic';
 
 const LiqPayRedirect = dynamic(
@@ -12,7 +12,16 @@ const LiqPayRedirect = dynamic(
 );
 
 const LiqPayRedirectPage = () => {
-  return <LiqPayRedirect />;
+  return (
+    <Container className="mt-10">
+      <Title
+        size="lg"
+        text="Перенаправляем на оплату через LiqPay..."
+        className="font-extrabold mb-8 text-[36px]"
+      />
+      <LiqPayRedirect />;
+    </Container>
+  );
 };
 
 export default LiqPayRedirectPage;

@@ -130,7 +130,7 @@ model CartItemExtraIngredients {
 model Order {
   id          Int         @id @default(autoincrement())
   userId      Int?
-  token       String
+  token       String      @unique
   totalAmount Int
   status      OrderStatus
   paymentID   String?
