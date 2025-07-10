@@ -1,17 +1,13 @@
 'use server';
 
 import { prisma } from '@/prisma/prisma-client';
-import { CheckoutFormSchema } from '@/src/constants/schemas/checkout-form-schema';
-import {
-  generateOrderConfirmationEmail,
-  getCartDetails,
-  getMailDetails,
-  sendMail,
-} from '@/src/lib';
+import type { CheckoutFormSchema } from '@/src/constants/schemas/checkout-form-schema';
+import { getCartDetails, getMailDetails } from '@/src/lib';
 import { OrderStatus } from '@prisma/client';
 import { cookies } from 'next/headers';
 import { checkoutFormSchema } from '@/src/constants/schemas/checkout-form-schema';
 import { generateLiqPayData, generateLiqPaySignature } from '@/src/lib/liqpay';
+import { sendEmail } from '@/src/lib/mails/send-email';
 
 export async function createOrder(
   data: CheckoutFormSchema,
@@ -123,18 +119,16 @@ export async function createOrder(
     const url = `${baseUrl}/checkout/liqpay-redirect?data=${encodeURIComponent(data)}&signature=${encodeURIComponent(signature)}`;
 
     const mailItems = getMailDetails(cartData.items);
-    const emailHtml = await generateOrderConfirmationEmail({
-      fullName: `${safeData.firstName} ${safeData.lastName}`,
-      items: mailItems,
-      totalAmount: cartData.totalAmount,
-      paymentUrl: url,
-      address: `${safeData.city}, ${safeData.street}, ${safeData.house}`,
-    });
-
-    await sendMail({
+    await sendEmail({
+      type: 'order-confirmation',
       to: safeData.email,
-      subject: 'Ваш заказ подтвержден',
-      html: emailHtml,
+      props: {
+        fullName: `${safeData.firstName} ${safeData.lastName}`,
+        address: `${safeData.city}, ${safeData.street}, ${safeData.house}`,
+        items: mailItems,
+        paymentUrl: url,
+        totalAmount: cartData.totalAmount,
+      },
     });
 
     return url;

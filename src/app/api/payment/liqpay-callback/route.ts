@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
 import { prisma } from '@/prisma/prisma-client';
-import { sendMail } from '@/src/lib';
-import { CartItem, CartItemWithIngredients } from '@/src/lib/mails/types';
-import { generatePaymentSuccessEmail } from '@/src/lib/mails/generate-payment-success-email';
+import { CartItemWithIngredients } from '@/src/lib/mails/types';
+import { sendEmail } from '@/src/lib/mails/send-email';
 
 const LIQPAY_PRIVATE_KEY = process.env.LIQPAY_PRIVATE_KEY!;
 
@@ -50,10 +49,17 @@ export async function POST(request: NextRequest) {
 
       console.log(`📦 Обновляем заказ ${orderId}`);
 
-      const order = await prisma.order.update({
-        where: { id: orderId },
-        data: { status: 'SUCCEEDED', paymentID: String(jsonData.payment_id) },
-      });
+      const order = await prisma.order
+        .update({
+          where: { id: orderId },
+          data: { status: 'SUCCEEDED', paymentID: String(jsonData.payment_id) },
+        })
+        .catch(() => null);
+
+      if (!order) {
+        console.error(`❌ Заказ с id ${orderId} не найден или не обновлен`);
+        return NextResponse.json({ error: 'Order not found' }, { status: 404 });
+      }
 
       console.log(`✅ Заказ ${orderId} обновлён:`, order);
 
@@ -64,20 +70,18 @@ export async function POST(request: NextRequest) {
       const parsed = JSON.parse(order.items);
       const items = parsed.items as CartItemWithIngredients[];
 
-      const emailHtml = await generatePaymentSuccessEmail({
-        fullName: order.fullName,
-        items,
-        totalAmount: order.totalAmount,
-        address: order.address,
-        orderId,
-        paymentDate: new Date().toLocaleString('uk-UA'),
-        paymentId: order.paymentID!,
-      });
-
-      await sendMail({
+      await sendEmail({
+        type: 'payment-success',
         to: order.email,
-        subject: 'Оплата подтверждена — Спасибо за заказ!',
-        html: emailHtml,
+        props: {
+          fullName: order.fullName,
+          items,
+          totalAmount: order.totalAmount,
+          address: order.address,
+          orderId,
+          paymentDate: new Date().toLocaleString('uk-UA'),
+          paymentId: order.paymentID!,
+        },
       });
 
       console.log(`📨 Письмо отправлено клиенту: ${order.email}`);
