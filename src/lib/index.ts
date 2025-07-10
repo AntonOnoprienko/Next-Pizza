@@ -7,6 +7,4 @@ export { findPizzas } from './find-pizzas';
 export type { GetSearchParams } from './find-pizzas';
 export { logSizeTracker } from './log-size-tracker';
 export { generateCustomizationHash } from './hash';
-export { sendMail } from './mails/send-email';
 export { getMailDetails } from './get-mail-details';
-export { generateOrderConfirmationEmail } from './mails/generate-order-confirm-email';
