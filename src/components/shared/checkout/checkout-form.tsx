@@ -12,7 +12,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import {
   CheckoutFormSchema,
   checkoutFormSchema,
-} from '../../../constants/schemas/checkout-form-schema';
+} from '@/src/constants/schemas/checkout-form-schema';
 import { createOrder } from '@/src/app/api/actions';
 import toast from 'react-hot-toast';
 import { AnimatedError, AnimatedSuccessCheck } from '../../animations';

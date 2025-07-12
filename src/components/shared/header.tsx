@@ -1,10 +1,9 @@
 import { cn } from '@/src/lib/utils';
 import React from 'react';
-import { CartButton, Container, SearchInput } from '../shared';
+import { CartButton, Container, LoginButton, SearchInput } from '../shared';
 import Image from 'next/image';
-import { Button } from '../ui';
-import { UserRound } from 'lucide-react';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 
 type Props = {
   hasCart?: boolean;
@@ -46,10 +45,7 @@ export const Header: React.FC<Props> = ({
         )}
 
         <div className="flex items-center gap-3">
-          <Button variant={'outline'} className="flex items-center gap-1">
-            <UserRound size={14} />
-            Войти
-          </Button>
+          <LoginButton />
           {hasCart && <CartButton />}
         </div>
       </Container>

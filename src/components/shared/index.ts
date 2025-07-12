@@ -35,6 +35,7 @@ export { RequiredSymbol } from './required-symbol';
 export { ErrorText } from './error-text';
 export { ClearButton } from './clear-button';
 export { ClientSessionProvider } from './client-session-provider';
+export { LoginButton } from './login-button';
 export * from './modals';
 export * from './checkout';
 export * from './form';
