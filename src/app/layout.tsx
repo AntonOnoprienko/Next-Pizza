@@ -1,6 +1,8 @@
 import './globals.css';
 import { Nunito } from 'next/font/google';
 import dynamic from 'next/dynamic';
+import { ClientSessionProvider } from '../components/shared';
+import NextTopLoader from 'nextjs-toploader';
 
 interface RootLayoutProps {
   readonly children: React.ReactNode;
@@ -33,9 +35,12 @@ const RootLayout = ({ children }: RootLayoutProps) => {
   return (
     <html lang="en">
       <body className={nunito.variable}>
-        <CartLoader />
-        {children}
-        <DynamicToaster />
+        <ClientSessionProvider>
+          <CartLoader />
+          <NextTopLoader />
+          {children}
+          <DynamicToaster />
+        </ClientSessionProvider>
       </body>
     </html>
   );

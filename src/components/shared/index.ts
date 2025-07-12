@@ -34,6 +34,7 @@ export { WhiteBlock } from './white-block';
 export { RequiredSymbol } from './required-symbol';
 export { ErrorText } from './error-text';
 export { ClearButton } from './clear-button';
+export { ClientSessionProvider } from './client-session-provider';
 export * from './modals';
 export * from './checkout';
 export * from './form';
