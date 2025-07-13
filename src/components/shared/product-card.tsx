@@ -62,22 +62,22 @@ const ProductCardComponent: React.FC<Props> = ({
 
           {ingredients?.map((i) => i.name).join(', ')}
         </p>
-
-        <div className="flex justify-between items-center mt-auto pt-4">
-          <span className="text-[20px]">
-            от <span className="font-bold">{price} ₴</span>
-          </span>
-
-          <ProductCardActions
-            inCart={inCart}
-            count={count}
-            isPizza={isPizza}
-            loading={loading}
-            onAdd={onAdd}
-            onQuantityChange={onQuantityChange}
-          />
-        </div>
       </Link>
+      <div className="flex justify-between items-center mt-auto pt-4">
+        <span className="text-[20px]">
+          от <span className="font-bold">{price} ₴</span>
+        </span>
+
+        <ProductCardActions
+          id={id}
+          inCart={inCart}
+          count={count}
+          isPizza={isPizza}
+          loading={loading}
+          onAdd={onAdd}
+          onQuantityChange={onQuantityChange}
+        />
+      </div>
     </div>
   );
 };

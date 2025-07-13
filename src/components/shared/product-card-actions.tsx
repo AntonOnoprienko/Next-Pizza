@@ -3,8 +3,10 @@ import { cn } from '@/src/lib/utils';
 import { CountButton } from '.';
 import { Button } from '../ui';
 import { Plus } from 'lucide-react';
+import Link from 'next/link';
 
 type Props = {
+  id: number;
   inCart: boolean;
   count?: number;
   isPizza: boolean;
@@ -15,6 +17,7 @@ type Props = {
 };
 
 const ProductCardActionsComponent: React.FC<Props> = ({
+  id,
   inCart,
   count,
   isPizza,
@@ -35,17 +38,17 @@ const ProductCardActionsComponent: React.FC<Props> = ({
           className="my-[5px]"
         />
       ) : isPizza ? (
-        <Button variant="secondary">Выбрать</Button>
+        <Link href={`/product/${id}`}>
+          <Button variant="secondary">Выбрать</Button>
+        </Link>
       ) : (
         <Button
           className="w-[125px]"
           loading={loading}
           disabledStyles="bg-[#FF5E00]"
           variant="secondary"
-          onClick={(e) => {
+          onClick={() => {
             if (loading) return;
-            e.preventDefault();
-            e.stopPropagation();
             onAdd?.();
           }}
         >
