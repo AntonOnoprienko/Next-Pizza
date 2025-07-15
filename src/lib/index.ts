@@ -8,4 +8,3 @@ export type { GetSearchParams } from './find-pizzas';
 export { logSizeTracker } from './log-size-tracker';
 export { generateCustomizationHash } from './hash';
 export { getMailDetails } from './get-mail-details';
-export { authOptions } from './authOptions';

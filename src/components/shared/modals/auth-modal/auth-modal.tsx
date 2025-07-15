@@ -9,6 +9,7 @@ import {
 import { signIn } from 'next-auth/react';
 import React from 'react';
 import Image from 'next/image';
+import { LoginForm } from './forms/login-form';
 
 type Props = {
   open: boolean;
@@ -16,19 +17,47 @@ type Props = {
 };
 
 export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
+  const [type, setType] = React.useState<'login' | 'register'>('login');
   const handleClose = () => {
     onClose();
+  };
+
+  const onSwitchType = () => {
+    setType(type === 'login' ? 'register' : 'login');
   };
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent className="w-full max-w-[450px] bg-white p-6 sm:p-8 md:p-10 mx-4 sm:mx-auto">
         <DialogHeader>
-          <DialogTitle className="text-center ">Вход в аккаунт</DialogTitle>
-          <DialogDescription>
-            Введите свои данные или авторизуйтесь через GitHub/Google.
-          </DialogDescription>
+          <div className="flex justify-between items-center">
+            <div className="mr-2">
+              <DialogTitle className="font-bold text-2xl">
+                Вход в аккаунт
+              </DialogTitle>
+              <DialogDescription className="text-gray-400 text-base">
+                Введите свои данные или авторизуйтесь через GitHub/Google.
+              </DialogDescription>
+            </div>
+            <Image
+              src="/assets/images/phone-icon.png"
+              alt="phone-icon"
+              width={60}
+              height={60}
+            />
+          </div>
         </DialogHeader>
+        {type === 'login' ? (
+          <LoginForm onClose={handleClose} />
+        ) : (
+          <>
+            <h1>Register Form</h1>
+            <span className="bg-yellow-200 text-yellow-800 text-xs font-semibold px-2.5 py-0.5 rounded">
+              В разработке
+            </span>
+          </>
+        )}
+
         <div className="w-full border-b border-gray-300"></div>
         <div className="flex gap-2">
           <Button
@@ -53,7 +82,7 @@ export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
           </Button>
 
           <Button
-            variant="secondary"
+            disabled
             onClick={() =>
               signIn('google', {
                 callbackUrl: '/',
@@ -73,6 +102,14 @@ export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
             Google
           </Button>
         </div>
+        <Button
+          variant="outline"
+          type="button"
+          className="h-12"
+          onClick={onSwitchType}
+        >
+          {type !== 'login' ? 'Войти' : 'Регистрация'};
+        </Button>
       </DialogContent>
     </Dialog>
   );
