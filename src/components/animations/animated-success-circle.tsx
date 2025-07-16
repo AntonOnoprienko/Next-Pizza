@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
-export const AnimatedSuccessCheck = () => (
+export const AnimatedSuccessCircle = () => (
   <motion.svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 46 46"

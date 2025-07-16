@@ -1,18 +1,18 @@
+'use client';
+
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { signIn } from 'next-auth/react';
+import toast from 'react-hot-toast';
+
 import {
   LoginFormData,
   loginFormSchema,
 } from '@/src/constants/schemas/login-form-schema';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { FormInput } from '../../..';
 import { Button } from '@/src/components/ui';
-import {
-  AnimatedError,
-  AnimatedSuccessCheck,
-} from '@/src/components/animations';
-import toast from 'react-hot-toast';
-import { signIn } from 'next-auth/react';
+import { DynamicNotificationToast } from '@/src/components/dynamics';
 
 type Props = {
   onClose: () => void;
@@ -26,28 +26,62 @@ export const LoginForm: React.FC<Props> = ({ onClose }) => {
       password: '',
     },
   });
+
   const onSubmit = async (data: LoginFormData) => {
-    try {
-      const resp = await signIn('credentials', {
-        ...data,
-        redirect: false,
+    await toast
+      .promise(
+        signIn('credentials', {
+          ...data,
+          redirect: false,
+        }),
+        {
+          loading: (
+            <DynamicNotificationToast
+              isLoading
+              success={false}
+              error={false}
+              notification="Вход в аккаунт..."
+            />
+          ),
+          success: (resp) => {
+            if (resp?.ok) {
+              onClose();
+              return (
+                <DynamicNotificationToast
+                  isLoading={false}
+                  success
+                  error={false}
+                  notification="Вы успешно вошли в аккаунт"
+                />
+              );
+            } else {
+              throw new Error();
+            }
+          },
+          error: (
+            <DynamicNotificationToast
+              isLoading={false}
+              success={false}
+              error
+              notification="Не удалось войти в аккаунт"
+            />
+          ),
+        },
+        {
+          icon: null,
+          position: 'top-center',
+          style: {
+            background: 'transparent',
+            boxShadow: 'none',
+            padding: 0,
+          },
+        },
+      )
+      .catch((err) => {
+        console.error('Ошибка авторизации:', err);
       });
-
-      if (!resp?.ok) {
-        throw Error();
-      }
-
-      toast.success('Вы успешно вошли в аккаунт', {
-        icon: <AnimatedSuccessCheck />,
-      });
-      onClose();
-    } catch (error) {
-      console.error('Error [Login]', error);
-      toast.error('Не удалось войти в аккаунт', {
-        icon: <AnimatedError />,
-      });
-    }
   };
+
   return (
     <FormProvider {...form}>
       <form

@@ -39,7 +39,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
             items.length === 0 && 'justify-center',
           )}
         >
-          {items.length > 0 && <CartDrawerHeader quantity={items.length} />}
+          <CartDrawerHeader quantity={items.length} />
 
           {items.length ? (
             <>

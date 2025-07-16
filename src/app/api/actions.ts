@@ -1,25 +1,23 @@
 'use server';
 
 import { prisma } from '@/prisma/prisma-client';
-import type { CheckoutFormSchema } from '@/src/constants/schemas/checkout-form-schema';
-import { getCartDetails, getMailDetails } from '@/src/lib';
+import {
+  getCartDetails,
+  getMailDetails,
+  getUserSession,
+  parseSafe,
+} from '@/src/lib';
 import { OrderStatus } from '@prisma/client';
 import { cookies } from 'next/headers';
 import { checkoutFormSchema } from '@/src/constants/schemas/checkout-form-schema';
 import { generateLiqPayData, generateLiqPaySignature } from '@/src/lib/liqpay';
 import { sendEmail } from '@/src/lib/mails/send-email';
 import { randomBytes } from 'crypto';
+import { hashSync } from 'bcrypt';
+import { updateUserSchema } from '@/src/constants/schemas/login-form-schema';
 
-export async function createOrder(
-  data: CheckoutFormSchema,
-): Promise<string | undefined> {
-  const parsed = checkoutFormSchema.safeParse(data);
-  if (!parsed.success) {
-    console.error('❌ Invalid checkout data:', parsed.error);
-    throw new Error('Invalid checkout data');
-  }
-
-  const safeData = parsed.data;
+export async function createOrder(data: unknown): Promise<string | undefined> {
+  const safeData = parseSafe(checkoutFormSchema, data, 'createOrder');
   try {
     const cookiesStore = cookies();
     const cartToken = cookiesStore.get('cartToken')?.value;
@@ -138,3 +136,26 @@ export async function createOrder(
     return undefined;
   }
 }
+
+export const updateUserInfo = async (data: unknown) => {
+  const safeData = parseSafe(updateUserSchema, data, 'updateUser');
+  try {
+    const currentUser = await getUserSession();
+    if (!currentUser) {
+      throw new Error('Пользователь не найден');
+    }
+    await prisma.user.update({
+      where: {
+        id: Number(currentUser.id),
+      },
+      data: {
+        email: safeData.email,
+        fullName: safeData.fullName,
+        password: hashSync(safeData.password, 10),
+      },
+    });
+  } catch (error) {
+    console.error('Error [UPDATE USER]', error);
+    throw error;
+  }
+};

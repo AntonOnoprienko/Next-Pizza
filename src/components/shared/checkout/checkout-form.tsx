@@ -1,4 +1,5 @@
 'use client';
+
 import {
   CheckoutSummary,
   CheckoutCart,
@@ -15,7 +16,7 @@ import {
 } from '@/src/constants/schemas/checkout-form-schema';
 import { createOrder } from '@/src/app/api/actions';
 import toast from 'react-hot-toast';
-import { AnimatedError, AnimatedSuccessCheck } from '../../animations';
+import { DynamicNotificationToast } from '../../dynamics';
 
 export const CheckoutForm = () => {
   const {
@@ -47,23 +48,57 @@ export const CheckoutForm = () => {
       email: '',
     },
   });
+
   const onSubmit: SubmitHandler<CheckoutFormSchema> = async (data) => {
     setSubmitting(true);
-    try {
-      const url = await createOrder(data);
-      toast.success('Заказ успешно оформлен переходите на оплату...', {
-        icon: <AnimatedSuccessCheck />,
+
+    await toast
+      .promise(
+        createOrder(data),
+        {
+          loading: (
+            <DynamicNotificationToast
+              isLoading
+              success={false}
+              error={false}
+              notification="Оформляем заказ..."
+            />
+          ),
+          success: (
+            <DynamicNotificationToast
+              isLoading={false}
+              success
+              error={false}
+              notification="Заказ успешно оформлен! Перенаправляем..."
+            />
+          ),
+          error: (
+            <DynamicNotificationToast
+              isLoading={false}
+              success={false}
+              error
+              notification="Ошибка при создании заказа."
+            />
+          ),
+        },
+        {
+          icon: null,
+          position: 'top-center',
+          style: {
+            background: 'transparent',
+            boxShadow: 'none',
+            padding: 0,
+          },
+        },
+      )
+      .then((url) => {
+        if (url) {
+          location.href = url;
+        }
+      })
+      .catch(() => {
+        setSubmitting(false);
       });
-      if (url) {
-        location.href = url;
-      }
-    } catch (err) {
-      console.error('Ошибка при создании заказа:', err);
-      toast.error('Не удалось создать заказ...', {
-        icon: <AnimatedError />,
-      });
-      setSubmitting(false);
-    }
   };
 
   return (
@@ -73,7 +108,7 @@ export const CheckoutForm = () => {
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <div className="flex gap-10">
-          {/* Левая часть*/}
+          {/* Левая часть */}
           <div className="flex flex-col gap-10 flex-1 mb-20">
             <CheckoutCart
               items={items}
@@ -86,7 +121,7 @@ export const CheckoutForm = () => {
             <CheckoutPersonalForm />
             <CheckoutAddressForm />
           </div>
-          {/*Правая часть*/}
+          {/* Правая часть */}
           <div className="w-450px">
             <CheckoutSummary
               deliveryPrice={DELIVERY_PRICE}
