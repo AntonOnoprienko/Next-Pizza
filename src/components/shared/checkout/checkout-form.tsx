@@ -31,7 +31,7 @@ export const CheckoutForm = () => {
   const [submitting, setSubmitting] = React.useState(false);
 
   const taxRate = 0.2;
-  const DELIVERY_PRICE = 80;
+  const DELIVERY_PRICE = 0;
   const taxAmount = +((totalAmount * taxRate) / (1 + taxRate)).toFixed(2);
   const basePrice = +(totalAmount - taxAmount).toFixed(2);
   const totalPrice = +(totalAmount + DELIVERY_PRICE).toFixed(2);

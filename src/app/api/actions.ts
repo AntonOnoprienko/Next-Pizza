@@ -99,7 +99,7 @@ export async function createOrder(data: unknown): Promise<string | undefined> {
       amount: cartData.totalAmount.toFixed(2),
       currency: 'UAH',
       description: `Оплата заказа №${order.id}`,
-      order_id: order.id,
+      order_id: orderToken,
       version: '3',
       sandbox: '1',
       email: safeData.email,
