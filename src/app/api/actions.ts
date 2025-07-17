@@ -14,7 +14,10 @@ import { generateLiqPayData, generateLiqPaySignature } from '@/src/lib/liqpay';
 import { sendEmail } from '@/src/lib/mails/send-email';
 import { randomBytes } from 'crypto';
 import { hashSync } from 'bcrypt';
-import { updateUserSchema } from '@/src/constants/schemas/login-form-schema';
+import {
+  registerFormSchema,
+  updateUserSchema,
+} from '@/src/constants/schemas/login-form-schema';
 
 export async function createOrder(data: unknown): Promise<string | undefined> {
   const safeData = parseSafe(checkoutFormSchema, data, 'createOrder');
@@ -156,6 +159,49 @@ export const updateUserInfo = async (data: unknown) => {
     });
   } catch (error) {
     console.error('Error [UPDATE USER]', error);
+    throw error;
+  }
+};
+
+export const registerUser = async (data: unknown) => {
+  const safeData = parseSafe(registerFormSchema, data, 'registerUser');
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        email: safeData.email,
+      },
+    });
+    if (user) {
+      if (!user.verified) {
+        throw new Error('Почта не подтверждена!');
+      }
+      throw new Error('Пользователь уже существует!');
+    }
+    const createdUser = await prisma.user.create({
+      data: {
+        email: safeData.email,
+        fullName: safeData.fullName,
+        password: hashSync(safeData.password, 10),
+      },
+    });
+    const code = Math.floor(100000 + Math.random() * 900000).toString();
+
+    await prisma.verificationCode.create({
+      data: {
+        code,
+        userId: createdUser.id,
+      },
+    });
+    await sendEmail({
+      type: 'verification-code',
+      to: createdUser.email,
+      props: {
+        fullName: createdUser.fullName,
+        code,
+      },
+    });
+  } catch (error) {
+    console.error('Error [REGISTER USER]', error);
     throw error;
   }
 };

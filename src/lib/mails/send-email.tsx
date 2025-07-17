@@ -1,19 +1,27 @@
 import nodemailer from 'nodemailer';
 import { render } from '@react-email/render';
-import { OrderConfirmationEmail } from './order-confirm-email-component';
-import { PaymentSuccessEmail } from './payment-success-email-component';
-import { OrderConfirmEmailProps, PaymentSuccessEmailProps } from './types';
-
-type EmailType = 'order-confirmation' | 'payment-success';
+import {
+  OrderConfirmEmailProps,
+  PaymentSuccessEmailProps,
+  VerificationCodeEmailProps,
+} from './types';
+import {
+  OrderConfirmationEmail,
+  PaymentSuccessEmail,
+  VerificationCodeEmail,
+} from './email-templates';
+type EmailType = 'order-confirmation' | 'payment-success' | 'verification-code';
 
 type EmailPropsMap = {
   'order-confirmation': OrderConfirmEmailProps;
   'payment-success': PaymentSuccessEmailProps;
+  'verification-code': VerificationCodeEmailProps;
 };
 
 const subjectMap = {
   'order-confirmation': 'Подтверждение заказа',
   'payment-success': 'Оплата подтверждена',
+  'verification-code': 'Код подтверждения аккаунта',
 };
 
 const transporter = nodemailer.createTransport({
@@ -44,6 +52,11 @@ export async function sendEmail<T extends EmailType>({
     case 'payment-success': {
       const p = props as EmailPropsMap['payment-success'];
       html = await render(<PaymentSuccessEmail {...p} />);
+      break;
+    }
+    case 'verification-code': {
+      const p = props as EmailPropsMap['verification-code'];
+      html = await render(<VerificationCodeEmail {...p} />);
       break;
     }
     default:

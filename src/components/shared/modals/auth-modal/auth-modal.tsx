@@ -10,6 +10,7 @@ import { signIn } from 'next-auth/react';
 import React from 'react';
 import Image from 'next/image';
 import { LoginForm } from './forms/login-form';
+import { RegisterForm } from './forms/register-form';
 
 type Props = {
   open: boolean;
@@ -50,12 +51,7 @@ export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
         {type === 'login' ? (
           <LoginForm onClose={handleClose} />
         ) : (
-          <>
-            <h1>Register Form</h1>
-            <span className="bg-yellow-200 text-yellow-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-              В разработке
-            </span>
-          </>
+          <RegisterForm onClose={handleClose} />
         )}
 
         <div className="w-full border-b border-gray-300"></div>
@@ -108,7 +104,7 @@ export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
           className="h-12"
           onClick={onSwitchType}
         >
-          {type !== 'login' ? 'Войти' : 'Регистрация'};
+          {type !== 'login' ? 'Уже есть аккаунт? Войти' : 'Регистрация'}
         </Button>
       </DialogContent>
     </Dialog>

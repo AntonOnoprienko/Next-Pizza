@@ -40,3 +40,8 @@ export type CartItemWithIngredients = {
   extraIngredients?: Ingredient[];
   excludedIngredients?: Ingredient[];
 };
+
+export type VerificationCodeEmailProps = {
+  fullName: string;
+  code: string;
+};

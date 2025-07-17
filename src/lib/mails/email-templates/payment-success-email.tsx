@@ -9,7 +9,7 @@ import {
   Heading,
   Text,
 } from '@react-email/components';
-import { PaymentSuccessEmailProps } from './types';
+import { PaymentSuccessEmailProps } from '../types';
 
 export const PaymentSuccessEmail: React.FC<PaymentSuccessEmailProps> = ({
   fullName,

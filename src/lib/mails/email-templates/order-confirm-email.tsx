@@ -10,7 +10,7 @@ import {
   Text,
   Button,
 } from '@react-email/components';
-import { OrderConfirmEmailProps } from './types';
+import { OrderConfirmEmailProps } from '../types';
 
 export const OrderConfirmationEmail: React.FC<OrderConfirmEmailProps> = ({
   fullName,
