@@ -34,5 +34,9 @@ export const GET = async (req: NextRequest) => {
     return NextResponse.redirect(`${process.env.FRONTEND_URL}`);
   } catch (error) {
     console.error('Error [VERIFY_GET]', error);
+    return NextResponse.json(
+      { error: 'Внутренняя ошибка сервера' },
+      { status: 500 },
+    );
   }
 };
