@@ -17,6 +17,8 @@ import {
 import { createOrder } from '@/src/app/api/actions';
 import toast from 'react-hot-toast';
 import { DynamicNotificationToast } from '../../dynamics';
+import { useSession } from 'next-auth/react';
+import { Api } from '@/src/services/api-client';
 
 export const CheckoutForm = () => {
   const {
@@ -35,6 +37,7 @@ export const CheckoutForm = () => {
   const taxAmount = +((totalAmount * taxRate) / (1 + taxRate)).toFixed(2);
   const basePrice = +(totalAmount - taxAmount).toFixed(2);
   const totalPrice = +(totalAmount + DELIVERY_PRICE).toFixed(2);
+  const { data: session } = useSession();
   const form = useForm<CheckoutFormData>({
     resolver: zodResolver(checkoutFormSchema),
     defaultValues: {
@@ -49,6 +52,21 @@ export const CheckoutForm = () => {
     },
   });
 
+  React.useEffect(() => {
+    async function getUserInfo() {
+      const data = await Api.auth.getMe();
+      const [firstName, lastName] = data.fullName.split(' ');
+
+      form.setValue('firstName', firstName);
+      form.setValue('lastName', lastName);
+      form.setValue('email', data.email);
+    }
+
+    if (session) {
+      getUserInfo();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [session]);
   const onSubmit: SubmitHandler<CheckoutFormData> = async (data) => {
     setSubmitting(true);
 
