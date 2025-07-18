@@ -31,9 +31,7 @@ export const GET = async (req: NextRequest) => {
       },
     });
 
-    const response = NextResponse.redirect(
-      'https://next-pizza.up.railway.app/',
-    );
+    const response = NextResponse.redirect(`${process.env.FRONTEND_URL}`);
     response.cookies.set('toast', 'verified_success', {
       path: '/',
       httpOnly: false,
