@@ -38,28 +38,31 @@ export async function POST(request: NextRequest) {
     const orderStatus = mapLiqpayStatus(jsonData.status);
 
     if (jsonData.order_id && orderStatus) {
-      const orderId = Number(jsonData.order_id);
-      if (!orderId) {
-        console.error('❌ Невалидный order_id');
+      const orderToken = jsonData.order_id;
+
+      if (typeof orderToken !== 'string') {
+        console.error('❌ Невалидный order_token');
         return NextResponse.json(
-          { error: 'Invalid order_id' },
+          { error: 'Invalid order_token' },
           { status: 400 },
         );
       }
 
       const order = await prisma.order
         .update({
-          where: { id: orderId },
+          where: { token: orderToken },
           data: { status: orderStatus, paymentID: String(jsonData.payment_id) },
         })
         .catch(() => null);
 
       if (!order) {
-        console.error(`❌ Заказ с id ${orderId} не найден или не обновлен`);
+        console.error(
+          `❌ Заказ с токеном ${orderToken} не найден или не обновлен`,
+        );
         return NextResponse.json({ error: 'Order not found' }, { status: 404 });
       }
 
-      console.log(`✅ Заказ ${orderId} обновлён:`, order);
+      console.log(`✅ Заказ ${orderToken} обновлён:`, order);
 
       if (typeof order.items !== 'string') {
         throw new Error('order.items is not a string');
@@ -76,7 +79,7 @@ export async function POST(request: NextRequest) {
           items,
           totalAmount: order.totalAmount,
           address: order.address,
-          orderId,
+          orderId: orderToken,
           paymentDate: new Date().toLocaleString('uk-UA'),
           paymentId: order.paymentID!,
         },
