@@ -12,7 +12,7 @@ export const NotificationToastSkeleton: React.FC = () => {
       )}
     >
       <div className="flex-shrink-0 w-12 h-12 rounded-full bg-zinc-300 dark:bg-zinc-700" />
-      <div className="flex-1">
+      <div className="flex-1 flex items-center justify-center">
         <div className="h-4 bg-zinc-300 dark:bg-zinc-700 rounded w-3/4" />
       </div>
     </div>

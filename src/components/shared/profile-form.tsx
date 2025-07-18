@@ -61,12 +61,12 @@ export const ProfileForm: React.FC<Props> = ({ data }) => {
             notification="Данные успешно обновлены!"
           />
         ),
-        error: (
+        error: (error) => (
           <DynamicNotificationToast
             isLoading={false}
             success={false}
             error
-            notification="Ошибка при обновлении данных"
+            notification={error.message || 'Ошибка при обновлении данных'}
           />
         ),
       },

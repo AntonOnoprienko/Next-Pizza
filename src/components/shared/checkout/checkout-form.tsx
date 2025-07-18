@@ -11,7 +11,7 @@ import React from 'react';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
-  CheckoutFormSchema,
+  CheckoutFormData,
   checkoutFormSchema,
 } from '@/src/constants/schemas/checkout-form-schema';
 import { createOrder } from '@/src/app/api/actions';
@@ -35,7 +35,7 @@ export const CheckoutForm = () => {
   const taxAmount = +((totalAmount * taxRate) / (1 + taxRate)).toFixed(2);
   const basePrice = +(totalAmount - taxAmount).toFixed(2);
   const totalPrice = +(totalAmount + DELIVERY_PRICE).toFixed(2);
-  const form = useForm<CheckoutFormSchema>({
+  const form = useForm<CheckoutFormData>({
     resolver: zodResolver(checkoutFormSchema),
     defaultValues: {
       firstName: '',
@@ -49,7 +49,7 @@ export const CheckoutForm = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<CheckoutFormSchema> = async (data) => {
+  const onSubmit: SubmitHandler<CheckoutFormData> = async (data) => {
     setSubmitting(true);
 
     await toast
@@ -72,12 +72,12 @@ export const CheckoutForm = () => {
               notification="Заказ успешно оформлен! Перенаправляем..."
             />
           ),
-          error: (
+          error: (error) => (
             <DynamicNotificationToast
               isLoading={false}
               success={false}
               error
-              notification="Ошибка при создании заказа."
+              notification={error.message || 'Ошибка при создании заказа.'}
             />
           ),
         },

@@ -21,4 +21,4 @@ export const checkoutFormSchema = z.object({
   comment: z.string().optional(),
 });
 
-export type CheckoutFormSchema = z.infer<typeof checkoutFormSchema>;
+export type CheckoutFormData = z.infer<typeof checkoutFormSchema>;

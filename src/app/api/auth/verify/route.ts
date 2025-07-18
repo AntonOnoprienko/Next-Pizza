@@ -31,7 +31,13 @@ export const GET = async (req: NextRequest) => {
       },
     });
 
-    return NextResponse.redirect(`${process.env.FRONTEND_URL}`);
+    const response = NextResponse.redirect(new URL('/', req.url));
+    response.cookies.set('toast', 'verified_success', {
+      path: '/',
+      httpOnly: false,
+      maxAge: 30,
+    });
+    return response;
   } catch (error) {
     console.error('Error [VERIFY_GET]', error);
     return NextResponse.json(

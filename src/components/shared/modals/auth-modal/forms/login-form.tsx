@@ -58,12 +58,12 @@ export const LoginForm: React.FC<Props> = ({ onClose }) => {
               throw new Error();
             }
           },
-          error: (
+          error: (error) => (
             <DynamicNotificationToast
               isLoading={false}
               success={false}
               error
-              notification="Не удалось войти в аккаунт"
+              notification={error.message || 'Не удалось войти в аккаунт'}
             />
           ),
         },

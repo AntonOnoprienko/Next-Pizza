@@ -61,7 +61,7 @@ export const RegisterForm: React.FC<Props> = ({ onClose }) => {
             isLoading={false}
             success={false}
             error
-            notification={error.message}
+            notification={error.message || 'Ошибка регистрации'}
           />
         ),
       },

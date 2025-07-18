@@ -6,6 +6,7 @@ type Props = {
   isLoading: boolean;
   success: boolean;
   error?: boolean;
+  className?: string;
 };
 
 const DynamicNotificationToastComponent = dynamic(

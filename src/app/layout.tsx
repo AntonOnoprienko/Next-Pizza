@@ -3,6 +3,7 @@ import { Nunito } from 'next/font/google';
 import dynamic from 'next/dynamic';
 import { ClientSessionProvider } from '../components/shared';
 import NextTopLoader from 'nextjs-toploader';
+import { Toaster } from 'react-hot-toast';
 
 interface RootLayoutProps {
   readonly children: React.ReactNode;
@@ -23,14 +24,6 @@ const CartLoader = dynamic(
   },
 );
 
-const DynamicToaster = dynamic(
-  () => import('react-hot-toast').then((mod) => mod.Toaster),
-  {
-    ssr: false,
-    loading: () => null,
-  },
-);
-
 const RootLayout = ({ children }: RootLayoutProps) => {
   return (
     <html lang="en">
@@ -39,7 +32,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
           <CartLoader />
           <NextTopLoader />
           {children}
-          <DynamicToaster />
+          <Toaster />
         </ClientSessionProvider>
       </body>
     </html>

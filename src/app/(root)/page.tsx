@@ -3,10 +3,12 @@ import {
   ProductsGroupList,
   Title,
   TopBar,
+  VerifiedToast,
 } from '@/src/components/shared';
 import { findPizzas, GetSearchParams } from '@/src/lib';
 import { Loader } from 'lucide-react';
 import dynamic from 'next/dynamic';
+import { cookies } from 'next/headers';
 
 interface PageProps {
   searchParams: GetSearchParams;
@@ -26,9 +28,12 @@ const DynamicFilters = dynamic(
 
 const Home = async ({ searchParams }: PageProps) => {
   const categories = await findPizzas(searchParams);
+  const cookieStore = cookies();
+  const toastValue = cookieStore.get('toast')?.value;
 
   return (
     <>
+      <VerifiedToast toastValue={toastValue} />
       <Container className="mt-10">
         <Title className="font-extrabold" size="lg" text="Все пиццы" />
       </Container>

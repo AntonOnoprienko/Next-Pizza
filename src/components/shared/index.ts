@@ -38,6 +38,7 @@ export { ClientSessionProvider } from './client-session-provider';
 export { LoginButton } from './login-button';
 export { InfoBlock } from './info-block';
 export { ProfileForm } from './profile-form';
+export { VerifiedToast } from './verified-toast';
 export * from './modals';
 export * from './checkout';
 export * from './form';

@@ -9,6 +9,7 @@ type Props = {
   isLoading: boolean;
   success: boolean;
   error?: boolean;
+  className?: string;
 };
 
 export const NotificationToast: React.FC<Props> = ({
@@ -16,6 +17,7 @@ export const NotificationToast: React.FC<Props> = ({
   isLoading,
   success,
   error,
+  className,
 }) => {
   const textColor = cn({
     'text-gray-900 dark:text-white': isLoading,
@@ -24,7 +26,8 @@ export const NotificationToast: React.FC<Props> = ({
   });
 
   const containerStyle = cn(
-    'w-full min-w-[300px] max-w-sm rounded-xl shadow-md border flex items-center gap-4 p-4',
+    'px-6 py-4 rounded-xl shadow-md border flex items-center gap-4',
+    className,
     {
       'bg-white border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800': !error,
       'bg-rose-50 border-rose-300 dark:bg-rose-900 dark:border-rose-700': error,
@@ -43,7 +46,9 @@ export const NotificationToast: React.FC<Props> = ({
         ) : null}
       </div>
       <div className="flex-1">
-        <p className={cn('text-sm font-semibold', textColor)}>{notification}</p>
+        <p className={cn('text-sm font-semibold text-center', textColor)}>
+          {notification}
+        </p>
       </div>
     </div>
   );

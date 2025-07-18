@@ -9,18 +9,27 @@ import {
 } from '@/src/lib';
 import { OrderStatus } from '@prisma/client';
 import { cookies } from 'next/headers';
-import { checkoutFormSchema } from '@/src/constants/schemas/checkout-form-schema';
+import {
+  CheckoutFormData,
+  checkoutFormSchema,
+} from '@/src/constants/schemas/checkout-form-schema';
 import { generateLiqPayData, generateLiqPaySignature } from '@/src/lib/liqpay';
 import { sendEmail } from '@/src/lib/mails/send-email';
 import { randomBytes } from 'crypto';
 import { hashSync } from 'bcrypt';
 import {
+  RegisterFormData,
   registerFormSchema,
+  UpdateUserData,
   updateUserSchema,
 } from '@/src/constants/schemas/login-form-schema';
 
 export async function createOrder(data: unknown): Promise<string | undefined> {
-  const safeData = parseSafe(checkoutFormSchema, data, 'createOrder');
+  const safeData = parseSafe<CheckoutFormData>(
+    checkoutFormSchema,
+    data,
+    'createOrder',
+  );
   try {
     const cookiesStore = cookies();
     const cartToken = cookiesStore.get('cartToken')?.value;
@@ -141,7 +150,11 @@ export async function createOrder(data: unknown): Promise<string | undefined> {
 }
 
 export const updateUserInfo = async (data: unknown) => {
-  const safeData = parseSafe(updateUserSchema, data, 'updateUser');
+  const safeData = parseSafe<UpdateUserData>(
+    updateUserSchema,
+    data,
+    'updateUser',
+  );
   try {
     const currentUser = await getUserSession();
     if (!currentUser) {
@@ -164,7 +177,11 @@ export const updateUserInfo = async (data: unknown) => {
 };
 
 export const registerUser = async (data: unknown) => {
-  const safeData = parseSafe(registerFormSchema, data, 'registerUser');
+  const safeData = parseSafe<RegisterFormData>(
+    registerFormSchema,
+    data,
+    'registerUser',
+  );
   try {
     const user = await prisma.user.findUnique({
       where: {
