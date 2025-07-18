@@ -78,7 +78,6 @@ export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
           </Button>
 
           <Button
-            disabled
             onClick={() =>
               signIn('google', {
                 callbackUrl: '/',
