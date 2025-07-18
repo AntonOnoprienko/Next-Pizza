@@ -15,7 +15,6 @@ export const PaymentSuccessEmail: React.FC<PaymentSuccessEmailProps> = ({
   fullName,
   items,
   totalAmount,
-  orderId,
   paymentId,
   address,
   paymentDate,
@@ -41,7 +40,7 @@ export const PaymentSuccessEmail: React.FC<PaymentSuccessEmailProps> = ({
           <Section className="p-5 text-left">
             <Text className="text-lg mb-2">
               Здравствуйте, <strong>{fullName}</strong>! Спасибо за оплату
-              заказа №{orderId}.
+              заказа.
             </Text>
             <Text className="text-sm mb-2">
               <strong>Дата оплаты:</strong> {paymentDate}

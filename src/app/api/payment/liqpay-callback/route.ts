@@ -79,7 +79,6 @@ export async function POST(request: NextRequest) {
           items,
           totalAmount: order.totalAmount,
           address: order.address,
-          orderId: orderToken,
           paymentDate: new Date().toLocaleString('uk-UA'),
           paymentId: order.paymentID!,
         },

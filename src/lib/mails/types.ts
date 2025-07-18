@@ -25,7 +25,6 @@ export interface PaymentSuccessEmailProps {
   fullName: string;
   items: CartItemWithIngredients[];
   totalAmount: number;
-  orderId: string;
   paymentId: string;
   address: string;
   paymentDate: string;
