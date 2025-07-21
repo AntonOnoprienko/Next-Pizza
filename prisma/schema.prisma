@@ -166,6 +166,35 @@ model ProductItemExtraIngredient {
   @@unique([productItemId, ingredientId])
 }
 
+model Story {
+  id         Int         @id @default(autoincrement())
+  title      String
+  imageUrl   String       
+  startDate  DateTime
+  endDate    DateTime
+  isActive   Boolean     @default(true)
+  priority   Int         @default(0)       
+  textColor  TextColor   @default(LIGHT)    
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  items      StoryItem[]
+}
+
+model StoryItem {
+  id         Int       @id @default(autoincrement())
+  storyId    Int
+  story      Story     @relation(fields: [storyId], references: [id])
+  imageUrl   String
+  order      Int      
+  layout     LayoutType @default(TEXT_BOTTOM)  
+  textColor  TextColor  @default(LIGHT)        
+  showButton Boolean    @default(true)
+  buttonText String?   
+  linkUrl String?                         
+  createdAt  DateTime  @default(now())
+}
+
 enum OrderStatus {
   PENDING
   SUCCEEDED
@@ -175,4 +204,18 @@ enum OrderStatus {
 enum UserRole {
   USER
   ADMIN
+}
+
+enum LayoutType {
+  TEXT_TOP        
+  TEXT_BOTTOM     
+  TEXT_CENTER
+  TEXT_OVER_IMAGE 
+}
+
+enum TextColor {
+  LIGHT     
+  DARK      
+  ACCENT    
+  MUTED   
 }
