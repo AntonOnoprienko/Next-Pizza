@@ -81,7 +81,7 @@ export const StoryViewer: React.FC<Props> = ({ open, onOpenChange, items }) => {
                   </DialogDescription>
                 </DialogHeader>
                 <div
-                  className={`h-full bg-white transition-all duration-[3000ms] ease-linear`}
+                  className={`h-full bg-white transition-all ease-linear`}
                   style={{
                     width:
                       i === currentIndex
