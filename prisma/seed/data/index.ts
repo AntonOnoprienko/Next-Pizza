@@ -5,3 +5,4 @@ export { products } from './products';
 export { seedPizzas } from './pizzas';
 export { seedProductItems } from './product-items';
 export { users } from './users';
+export { stories } from './stories';

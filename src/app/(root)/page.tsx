@@ -1,6 +1,7 @@
 import {
   Container,
   ProductsGroupList,
+  Stories,
   Title,
   TopBar,
   VerifiedToast,
@@ -37,6 +38,7 @@ const Home = async ({ searchParams }: PageProps) => {
       <Container className="mt-10">
         <Title className="font-extrabold" size="lg" text="Все пиццы" />
       </Container>
+      <Stories />
       <TopBar
         categories={categories.filter(
           (category) => category.products.length > 0,
