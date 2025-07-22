@@ -48,6 +48,8 @@ export const StoriesClient: React.FC<Props> = ({ className, stories }) => {
               width={180}
               height={270}
               className="object-cover rounded-md"
+              quality="auto"
+              format="auto"
               fallbackImage
             />
             <div className="absolute bottom-0 left-0 right-0 text-white text-2xl text-center font-bold p-2">

@@ -1,7 +1,7 @@
 //git bash  npx ts-node --compiler-options '{"module":"CommonJS"}' scripts/upload-images.ts
 
 import { v2 as cloudinary } from 'cloudinary';
-import { imageUrls } from './images';
+import { imagePaths, imageUrls } from './images';
 import { writeFileSync } from 'fs';
 import dotenv from 'dotenv';
 
@@ -16,16 +16,16 @@ cloudinary.config({
 async function uploadAllImages() {
   const resultIds: string[] = [];
 
-  for (const url of imageUrls) {
+  for (const filePath of imagePaths) {
     try {
-      const result = await cloudinary.uploader.upload(url, {
-        folder: 'products',
+      const result = await cloudinary.uploader.upload(filePath, {
+        folder: 'story',
       });
 
       resultIds.push(`"${result.public_id}"`);
       console.log(`✅ ${result.public_id}`);
     } catch (err) {
-      console.error(`❌ Ошибка загрузки ${url}`, err);
+      console.error(`❌ Ошибка загрузки ${filePath}`, err);
     }
   }
 

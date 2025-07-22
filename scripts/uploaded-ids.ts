@@ -1,4 +1,8 @@
 export const uploadedIds = [
-  'products/c9yjlmwgfpi1sfmw7dkq',
-  'products/wkxhn2pflsed8zpzyezi',
+  "story/qttwkz4u6zcazzh6fywe",
+  "story/qfxjb5ejs8b7lb2u0zzu",
+  "story/xfg0qm9gxnwhvxlel2do",
+  "story/xozsy9pdyl6xonotj32z",
+  "story/oq7wpp9oltjcoqvp5zzl",
+  "story/qkyaxwpqitjdrw57h4eu",
 ];
