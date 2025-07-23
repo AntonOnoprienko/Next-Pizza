@@ -49,7 +49,7 @@ const Home = async ({ searchParams }: PageProps) => {
         )}
       />
       <Container className="mt-10 pb-14">
-        <div className="flex gap-[80px]">
+        <div className="flex gap-[70px]">
           <div className="w-[250px] hidden md:block">
             <DynamicFilters />
           </div>
