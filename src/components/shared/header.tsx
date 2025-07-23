@@ -1,9 +1,14 @@
 import { cn } from '@/src/lib/utils';
 import React from 'react';
-import { CartButton, Container, LoginButton, SearchInput } from '../shared';
+import {
+  CartButton,
+  Container,
+  HeaderMobileMenu,
+  LoginButton,
+  SearchInput,
+} from '../shared';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSession } from 'next-auth/react';
 
 type Props = {
   hasCart?: boolean;
@@ -27,26 +32,29 @@ export const Header: React.FC<Props> = ({
               width={35}
               height={35}
               priority={true}
-              className="w-[35px] h-[35px]"
+              className="w-[30px] h-[30px] md:w-[35px] md:h-[35px]"
             />
-            <div>
-              <h1 className="text-2xl uppercase font-black">Next Pizza</h1>
-              <p className="text-sm text-gray-600 leading-3">
-                Вкуснее чем в буфете
-              </p>
+            <div className="text-sm md:text-base">
+              <h1 className="text-lg md:text-2xl font-black uppercase leading-5">
+                Next Pizza
+              </h1>
+              <p className="text-gray-600 leading-4">Вкуснее чем в буфете</p>
             </div>
           </div>
         </Link>
 
         {hasSearch && (
-          <div className="mx-10 flex-1">
+          <div className="w-full order-3 md:order-none md:flex-1 md:mx-10 hidden md:block">
             <SearchInput />
           </div>
         )}
 
-        <div className="flex items-center gap-3">
+        <div className=" items-center gap-3 flex-shrink-0 hidden md:flex ">
           <LoginButton />
           {hasCart && <CartButton />}
+        </div>
+        <div className="md:hidden">
+          <HeaderMobileMenu hasCart={hasCart} hasSearch={hasSearch} />
         </div>
       </Container>
     </header>

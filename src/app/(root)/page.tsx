@@ -31,6 +31,9 @@ const Home = async ({ searchParams }: PageProps) => {
   const categories = await findPizzas(searchParams);
   const cookieStore = cookies();
   const toastValue = cookieStore.get('toast')?.value;
+  const isMobilePhone = cookieStore.get('isMobilePhone')?.value === 'true';
+  const isTablet = cookieStore.get('isTablet')?.value === 'true';
+  const isMobile = isMobilePhone && !isTablet;
 
   return (
     <>
@@ -40,13 +43,14 @@ const Home = async ({ searchParams }: PageProps) => {
       </Container>
       <Stories />
       <TopBar
+        className="hidden md:block"
         categories={categories.filter(
           (category) => category.products.length > 0,
         )}
       />
       <Container className="mt-10 pb-14">
         <div className="flex gap-[80px]">
-          <div className="w-[250px]">
+          <div className="w-[250px] hidden md:block">
             <DynamicFilters />
           </div>
           <div className="flex-1">
@@ -59,6 +63,7 @@ const Home = async ({ searchParams }: PageProps) => {
                       title={category.name}
                       categoryId={category.id}
                       items={category.products}
+                      isMobile={isMobile}
                     />
                   ),
               )}

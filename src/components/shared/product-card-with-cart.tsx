@@ -4,7 +4,7 @@ import React from 'react';
 import { useCartStore } from '@/src/store/cart';
 import { CartItemForToast } from './cart-item-details/cart-item-details.types';
 import { useAddToCartToast } from '@/src/hooks';
-import { ProductCard } from '.';
+import { ProductCardMobile, ProductCard } from '.';
 
 interface Props {
   id: number;
@@ -15,6 +15,7 @@ interface Props {
   description: string | null;
   ingredients: { name: string }[] | null;
   isPizza: boolean;
+  isMobile: boolean;
 }
 
 const ProductCardWithCartComponent: React.FC<Props> = ({
@@ -26,6 +27,7 @@ const ProductCardWithCartComponent: React.FC<Props> = ({
   description,
   ingredients,
   isPizza,
+  isMobile,
 }) => {
   const cartItem = useCartStore(
     React.useCallback(
@@ -72,21 +74,25 @@ const ProductCardWithCartComponent: React.FC<Props> = ({
 
   const inCart = Boolean(cartItem);
 
-  return (
-    <ProductCard
-      id={id}
-      name={name}
-      price={price}
-      imageUrl={imageUrl}
-      description={description}
-      ingredients={ingredients}
-      isPizza={isPizza}
-      count={cartItem?.quantity}
-      inCart={inCart}
-      loading={loading}
-      onAdd={handleAdd}
-      onQuantityChange={handleQuantityChange}
-    />
+  const commonProps = {
+    id,
+    name,
+    price,
+    imageUrl,
+    description,
+    ingredients,
+    isPizza,
+    count: cartItem?.quantity,
+    inCart,
+    loading,
+    onAdd: handleAdd,
+    onQuantityChange: handleQuantityChange,
+  };
+
+  return isMobile ? (
+    <ProductCardMobile {...commonProps} />
+  ) : (
+    <ProductCard {...commonProps} />
   );
 };
 

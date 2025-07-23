@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from 'react';
 import { cn } from '@/src/lib/utils';
 import { ProductCardWithCart, Title } from '.';
-import { useIntersection } from 'react-use';
+import { useIntersection, useWindowSize } from 'react-use';
 import { useCategoryStore } from '@/src/store/category';
 
 interface ProductItem {
@@ -21,6 +21,7 @@ interface Props {
   className?: string;
   categoryId: number;
   listClassName?: string;
+  isMobile: boolean;
 }
 
 export const ProductsGroupList: React.FC<Props> = ({
@@ -28,14 +29,13 @@ export const ProductsGroupList: React.FC<Props> = ({
   items,
   className,
   categoryId,
-  listClassName,
+  isMobile,
 }) => {
   const setActiveCategoryId = useCategoryStore((state) => state.setActiveId);
   const intersectionRef = useRef(null);
   const intersection = useIntersection(intersectionRef, {
     threshold: 0.4,
   });
-
   const getMinPrice = (items: { price: number }[]) => {
     return items.reduce(
       (min, item) => (item.price < min ? item.price : min),
@@ -52,21 +52,41 @@ export const ProductsGroupList: React.FC<Props> = ({
   return (
     <div className={cn('', className)} id={title} ref={intersectionRef}>
       <Title text={title} size="lg" className="font-extrabold mb-5" />
-      <div className="grid grid-cols-3 gap-[30px] items-stretch">
-        {items.map((product, i: number) => (
-          <ProductCardWithCart
-            key={product.id}
-            id={product.id}
-            productItemId={product.items[0].id}
-            name={product.name}
-            imageUrl={product.imageUrl}
-            price={getMinPrice(product.items)}
-            ingredients={product.ingredients}
-            description={product.description}
-            isPizza={Boolean(product.items[0].pizzaType)}
-          />
-        ))}
-      </div>
+      {isMobile ? (
+        <div className="divide-y divide-gray-200">
+          {items.map((product, i) => (
+            <ProductCardWithCart
+              key={product.id}
+              id={product.id}
+              productItemId={product.items[0].id}
+              name={product.name}
+              imageUrl={product.imageUrl}
+              price={getMinPrice(product.items)}
+              ingredients={product.ingredients}
+              description={product.description}
+              isPizza={Boolean(product.items[0].pizzaType)}
+              isMobile={true}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-[30px] items-stretch">
+          {items.map((product) => (
+            <ProductCardWithCart
+              key={product.id}
+              id={product.id}
+              productItemId={product.items[0].id}
+              name={product.name}
+              imageUrl={product.imageUrl}
+              price={getMinPrice(product.items)}
+              ingredients={product.ingredients}
+              description={product.description}
+              isPizza={Boolean(product.items[0].pizzaType)}
+              isMobile={false}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

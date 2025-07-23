@@ -14,6 +14,7 @@ type Props = {
   onAdd?: () => void;
   onQuantityChange?: (type: 'plus' | 'minus') => void;
   className?: string;
+  isMobile?: boolean;
 };
 
 const ProductCardActionsComponent: React.FC<Props> = ({
@@ -24,6 +25,7 @@ const ProductCardActionsComponent: React.FC<Props> = ({
   loading = false,
   onAdd,
   onQuantityChange,
+  isMobile = false,
   className,
 }) => {
   return (
@@ -43,7 +45,7 @@ const ProductCardActionsComponent: React.FC<Props> = ({
         </Link>
       ) : (
         <Button
-          className="w-[125px]"
+          className={cn(isMobile ? 'w-[125px] h-8 text-sm px-3' : 'w-[125px]')}
           loading={loading}
           disabledStyles="bg-[#FF5E00]"
           variant="secondary"
@@ -52,7 +54,7 @@ const ProductCardActionsComponent: React.FC<Props> = ({
             onAdd?.();
           }}
         >
-          <Plus size={20} className="mr-1" />В корзину
+          <Plus size={isMobile ? 16 : 20} className="mr-1" />В корзину
         </Button>
       )}
     </div>
