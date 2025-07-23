@@ -31,9 +31,8 @@ const Home = async ({ searchParams }: PageProps) => {
   const categories = await findPizzas(searchParams);
   const cookieStore = cookies();
   const toastValue = cookieStore.get('toast')?.value;
-  const isMobilePhone = cookieStore.get('isMobilePhone')?.value === 'true';
-  const isTablet = cookieStore.get('isTablet')?.value === 'true';
-  const isMobile = isMobilePhone && !isTablet;
+  const viewport = cookieStore.get('viewport')?.value || 'desktop';
+  const isMobile = viewport === 'mobile';
 
   return (
     <>
