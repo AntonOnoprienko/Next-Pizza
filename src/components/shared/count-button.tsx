@@ -33,16 +33,6 @@ export const CountButton: React.FC<CountButtonProps> = ({
   allowZero,
   isMobile = false,
 }) => {
-  const createHandler = (
-    type: 'plus' | 'minus',
-  ): React.TouchEventHandler<HTMLButtonElement> &
-    React.MouseEventHandler<HTMLButtonElement> => {
-    return (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      onClick?.(type);
-    };
-  };
   return (
     <div
       className={cn(
@@ -53,9 +43,10 @@ export const CountButton: React.FC<CountButtonProps> = ({
     >
       <CountIconButton
         aria-label="Уменьшить количество"
-        {...(isMobile
-          ? { onTouchEnd: createHandler('minus') }
-          : { onClick: createHandler('minus') })}
+        onClick={(e) => {
+          (e.currentTarget as HTMLButtonElement).blur();
+          onClick?.('minus');
+        }}
         disabled={(!allowZero && value === 1) || loading}
         size={size}
         type="minus"
@@ -73,9 +64,10 @@ export const CountButton: React.FC<CountButtonProps> = ({
       <CountIconButton
         aria-label="Увеличить количество"
         disabled={loading}
-        {...(isMobile
-          ? { onTouchEnd: createHandler('plus') }
-          : { onClick: createHandler('plus') })}
+        onClick={(e) => {
+          (e.currentTarget as HTMLButtonElement).blur();
+          onClick?.('plus');
+        }}
         size={size}
         type="plus"
       />

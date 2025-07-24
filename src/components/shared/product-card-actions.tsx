@@ -28,10 +28,6 @@ const ProductCardActionsComponent: React.FC<Props> = ({
   isMobile = false,
   className,
 }) => {
-  const handleAction = () => {
-    if (loading) return;
-    onAdd?.();
-  };
   return (
     <div className={cn(className)}>
       {inCart ? (
@@ -53,17 +49,10 @@ const ProductCardActionsComponent: React.FC<Props> = ({
           loading={loading}
           disabledStyles="bg-[#FF5E00]"
           variant="secondary"
-          {...(isMobile
-            ? {
-                onTouchEnd: (e) => {
-                  e.preventDefault();
-                  e.currentTarget.blur();
-                  handleAction();
-                },
-              }
-            : {
-                onClick: handleAction,
-              })}
+          onClick={() => {
+            if (loading) return;
+            onAdd?.();
+          }}
         >
           <Plus size={isMobile ? 16 : 20} className="mr-1" />В корзину
         </Button>
