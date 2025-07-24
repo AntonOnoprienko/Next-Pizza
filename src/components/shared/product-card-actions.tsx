@@ -37,7 +37,6 @@ const ProductCardActionsComponent: React.FC<Props> = ({
           allowZero={true}
           onClick={onQuantityChange}
           size={isMobile ? 'xs' : 'sm'}
-          isMobile={isMobile}
         />
       ) : isPizza ? (
         <Link href={`/product/${id}`}>

@@ -17,13 +17,16 @@ export const CountIconButton: React.FC<IconButtonProps> = ({
   onClick,
 }) => {
   const isSmall = size === 'sm' || size === 'xs';
+  const handleTouchEnd = (e: React.TouchEvent<HTMLButtonElement>) => {
+    e.currentTarget.blur();
+  };
   return (
     <Button
       aria-label="Изменение количества"
       variant="outline"
       disabled={disabled}
       onClick={onClick}
-      onTouchEnd={onClick}
+      onTouchEnd={handleTouchEnd}
       type="button"
       className={cn(
         'p-0 hover:bg-primary hover:text-white disabled:bg-white disabled:border-gray-400 disabled:text-gray-400',

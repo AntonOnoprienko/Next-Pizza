@@ -10,7 +10,6 @@ export interface CountButtonProps {
   loading: boolean;
   allowZero?: boolean;
   className?: string;
-  isMobile?: boolean;
 }
 
 const Spinner = dynamic(
@@ -31,7 +30,6 @@ export const CountButton: React.FC<CountButtonProps> = ({
   size = 'sm',
   loading,
   allowZero,
-  isMobile = false,
 }) => {
   return (
     <div
@@ -44,7 +42,6 @@ export const CountButton: React.FC<CountButtonProps> = ({
       <CountIconButton
         aria-label="Уменьшить количество"
         onClick={(e) => {
-          (e.currentTarget as HTMLButtonElement).blur();
           onClick?.('minus');
         }}
         disabled={(!allowZero && value === 1) || loading}
@@ -65,7 +62,6 @@ export const CountButton: React.FC<CountButtonProps> = ({
         aria-label="Увеличить количество"
         disabled={loading}
         onClick={(e) => {
-          (e.currentTarget as HTMLButtonElement).blur();
           onClick?.('plus');
         }}
         size={size}
