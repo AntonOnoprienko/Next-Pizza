@@ -42,6 +42,11 @@ html {
     --ring: 24.6 95% 53.1%;
     --radius: 1rem;
   }
+
+  button {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+  }
 }
 
 * {
