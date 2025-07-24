@@ -37,6 +37,7 @@ const ProductCardActionsComponent: React.FC<Props> = ({
           allowZero={true}
           onClick={onQuantityChange}
           size={isMobile ? 'xs' : 'sm'}
+          isMobile
         />
       ) : isPizza ? (
         <Link href={`/product/${id}`}>
@@ -48,6 +49,7 @@ const ProductCardActionsComponent: React.FC<Props> = ({
           loading={loading}
           disabledStyles="bg-[#FF5E00]"
           variant="secondary"
+          isMobile
           onClick={() => {
             if (loading) return;
             onAdd?.();

@@ -9,6 +9,7 @@ export interface CountButtonProps {
   onClick?: (type: 'plus' | 'minus') => void;
   loading: boolean;
   allowZero?: boolean;
+  isMobile?: boolean;
   className?: string;
 }
 
@@ -30,6 +31,7 @@ export const CountButton: React.FC<CountButtonProps> = ({
   size = 'sm',
   loading,
   allowZero,
+  isMobile,
 }) => {
   return (
     <div
@@ -41,12 +43,11 @@ export const CountButton: React.FC<CountButtonProps> = ({
     >
       <CountIconButton
         aria-label="Уменьшить количество"
-        onClick={(e) => {
-          onClick?.('minus');
-        }}
+        onClick={() => onClick?.('minus')}
         disabled={(!allowZero && value === 1) || loading}
         size={size}
         type="minus"
+        isMobile={isMobile}
       />
       {loading ? (
         <Spinner size="sm" />
@@ -61,11 +62,10 @@ export const CountButton: React.FC<CountButtonProps> = ({
       <CountIconButton
         aria-label="Увеличить количество"
         disabled={loading}
-        onClick={(e) => {
-          onClick?.('plus');
-        }}
+        onClick={() => onClick?.('plus')}
         size={size}
         type="plus"
+        isMobile={isMobile}
       />
     </div>
   );

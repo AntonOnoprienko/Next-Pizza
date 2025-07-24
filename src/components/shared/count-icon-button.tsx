@@ -8,6 +8,7 @@ interface IconButtonProps {
   disabled?: boolean;
   type?: 'plus' | 'minus';
   onClick?: (e: any) => void;
+  isMobile?: boolean;
 }
 
 export const CountIconButton: React.FC<IconButtonProps> = ({
@@ -15,19 +16,17 @@ export const CountIconButton: React.FC<IconButtonProps> = ({
   disabled,
   type,
   onClick,
+  isMobile,
 }) => {
   const isSmall = size === 'sm' || size === 'xs';
-  const handleTouchEnd = (e: React.TouchEvent<HTMLButtonElement>) => {
-    e.currentTarget.blur();
-  };
   return (
     <Button
       aria-label="Изменение количества"
       variant="outline"
       disabled={disabled}
       onClick={onClick}
-      onTouchEnd={handleTouchEnd}
       type="button"
+      isMobile={isMobile}
       className={cn(
         'p-0 hover:bg-primary hover:text-white disabled:bg-white disabled:border-gray-400 disabled:text-gray-400',
         isSmall
