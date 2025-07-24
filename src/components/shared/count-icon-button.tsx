@@ -16,24 +16,26 @@ export const CountIconButton: React.FC<IconButtonProps> = ({
   type,
   onClick,
 }) => {
+  const isSmall = size === 'sm' || size === 'xs';
   return (
     <Button
       aria-label="Изменение количества"
       variant="outline"
       disabled={disabled}
       onClick={onClick}
+      onTouchEnd={onClick}
       type="button"
       className={cn(
         'p-0 hover:bg-primary hover:text-white disabled:bg-white disabled:border-gray-400 disabled:text-gray-400',
-        size === 'sm' || 'xs'
+        isSmall
           ? 'w-[32px] h-[32px] rounded-[10px]'
           : 'w-[38px] h-[38px] rounded-md',
       )}
     >
       {type === 'plus' ? (
-        <Plus className={size === 'sm' ? 'h-4' : 'h-5'} />
+        <Plus className={isSmall ? 'h-4' : 'h-5'} />
       ) : (
-        <Minus className={size === 'sm' ? 'h-4' : 'h-5'} />
+        <Minus className={isSmall ? 'h-4' : 'h-5'} />
       )}
     </Button>
   );
