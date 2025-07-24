@@ -28,6 +28,10 @@ const ProductCardActionsComponent: React.FC<Props> = ({
   isMobile = false,
   className,
 }) => {
+  const handleAction = () => {
+    if (loading) return;
+    onAdd?.();
+  };
   return (
     <div className={cn(className)}>
       {inCart ? (
@@ -36,8 +40,8 @@ const ProductCardActionsComponent: React.FC<Props> = ({
           loading={loading}
           allowZero={true}
           onClick={onQuantityChange}
-          size="sm"
-          className="my-[5px]"
+          size={isMobile ? 'xs' : 'sm'}
+          isMobile={isMobile}
         />
       ) : isPizza ? (
         <Link href={`/product/${id}`}>
@@ -45,14 +49,21 @@ const ProductCardActionsComponent: React.FC<Props> = ({
         </Link>
       ) : (
         <Button
-          className={cn(isMobile ? 'w-[125px] h-8 text-sm px-3' : 'w-[125px]')}
+          className={cn(isMobile ? 'w-[125px] text-sm h-8' : 'w-[125px]')}
           loading={loading}
           disabledStyles="bg-[#FF5E00]"
           variant="secondary"
-          onClick={() => {
-            if (loading) return;
-            onAdd?.();
-          }}
+          {...(isMobile
+            ? {
+                onTouchEnd: (e) => {
+                  e.preventDefault();
+                  e.currentTarget.blur();
+                  handleAction();
+                },
+              }
+            : {
+                onClick: handleAction,
+              })}
         >
           <Plus size={isMobile ? 16 : 20} className="mr-1" />В корзину
         </Button>

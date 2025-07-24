@@ -5,17 +5,24 @@ import dynamic from 'next/dynamic';
 
 export interface CountButtonProps {
   value?: number;
-  size?: 'sm' | 'lg';
+  size?: 'xs' | 'sm' | 'lg';
   onClick?: (type: 'plus' | 'minus') => void;
   loading: boolean;
   allowZero?: boolean;
   className?: string;
+  isMobile?: boolean;
 }
 
 const Spinner = dynamic(
   () => import('../animations/spinner').then((mod) => mod.Spinner),
   { ssr: false },
 );
+
+const heightMap: Record<NonNullable<CountButtonProps['size']>, string> = {
+  xs: 'h-8',
+  sm: 'h-9',
+  lg: 'h-11',
+};
 
 export const CountButton: React.FC<CountButtonProps> = ({
   className,
@@ -24,21 +31,31 @@ export const CountButton: React.FC<CountButtonProps> = ({
   size = 'sm',
   loading,
   allowZero,
+  isMobile = false,
 }) => {
+  const createHandler = (
+    type: 'plus' | 'minus',
+  ): React.TouchEventHandler<HTMLButtonElement> &
+    React.MouseEventHandler<HTMLButtonElement> => {
+    return (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      onClick?.(type);
+    };
+  };
   return (
     <div
       className={cn(
         'inline-flex items-center justify-between w-[100px]',
+        heightMap[size],
         className,
       )}
     >
       <CountIconButton
         aria-label="Уменьшить количество"
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          onClick?.('minus');
-        }}
+        {...(isMobile
+          ? { onTouchEnd: createHandler('minus') }
+          : { onClick: createHandler('minus') })}
         disabled={(!allowZero && value === 1) || loading}
         size={size}
         type="minus"
@@ -56,11 +73,9 @@ export const CountButton: React.FC<CountButtonProps> = ({
       <CountIconButton
         aria-label="Увеличить количество"
         disabled={loading}
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          onClick?.('plus');
-        }}
+        {...(isMobile
+          ? { onTouchEnd: createHandler('plus') }
+          : { onClick: createHandler('plus') })}
         size={size}
         type="plus"
       />
