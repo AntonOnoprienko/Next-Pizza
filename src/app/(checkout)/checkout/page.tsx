@@ -1,5 +1,7 @@
 import { Container } from '@/src/components/shared/container';
 import { Title } from '@/src/components/shared/title';
+import { getCookiesInfo } from '@/src/lib/getCookiesInfo';
+import { cn } from '@/src/lib/utils';
 import dynamic from 'next/dynamic';
 
 const CheckoutForm = dynamic(
@@ -12,14 +14,18 @@ const CheckoutForm = dynamic(
   },
 );
 const CheckoutPage = (): JSX.Element => {
+  const { isMobile } = getCookiesInfo();
   return (
-    <Container className="mt-10">
+    <Container className={cn(isMobile ? 'mt-5' : 'mt-10', 'px-0')}>
       <Title
         size="lg"
         text="Оформление заказа"
-        className="font-extrabold mb-8 text-[36px]"
+        className={cn(
+          'font-extrabold mb-8',
+          isMobile ? 'text-2xl' : 'text-[36px]',
+        )}
       />
-      <CheckoutForm />
+      <CheckoutForm isMobile={isMobile} />
     </Container>
   );
 };

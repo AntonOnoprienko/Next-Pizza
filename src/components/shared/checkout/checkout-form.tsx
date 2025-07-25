@@ -19,8 +19,13 @@ import toast from 'react-hot-toast';
 import { DynamicNotificationToast } from '../../dynamics';
 import { useSession } from 'next-auth/react';
 import { Api } from '@/src/services/api-client';
+import { cn } from '@/src/lib/utils';
 
-export const CheckoutForm = () => {
+type Props = {
+  isMobile?: boolean;
+};
+
+export const CheckoutForm = ({ isMobile }: Props) => {
   const {
     items,
     loadingById,
@@ -125,7 +130,7 @@ export const CheckoutForm = () => {
         aria-label="Форма оформления заказа"
         onSubmit={form.handleSubmit(onSubmit)}
       >
-        <div className="flex gap-10">
+        <div className={cn('flex', isMobile ? 'flex-col' : 'gap-10')}>
           {/* Левая часть */}
           <div className="flex flex-col gap-10 flex-1 mb-20">
             <CheckoutCart
@@ -135,12 +140,13 @@ export const CheckoutForm = () => {
               isActionsLoading={isActionsLoading}
               countHandlers={countHandlers}
               removeHandlers={removeHandlers}
+              isMobile={isMobile}
             />
-            <CheckoutPersonalForm />
+            <CheckoutPersonalForm isMobile={isMobile} />
             <CheckoutAddressForm />
           </div>
           {/* Правая часть */}
-          <div className="w-450px">
+          <div className={cn(isMobile ? 'w-full' : 'w-450px')}>
             <CheckoutSummary
               deliveryPrice={DELIVERY_PRICE}
               basePrice={basePrice}
@@ -149,6 +155,7 @@ export const CheckoutForm = () => {
               isActionsLoading={isActionsLoading}
               isCartLoading={isCartLoading}
               loading={submitting}
+              isMobile={isMobile}
             />
           </div>
         </div>

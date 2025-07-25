@@ -12,6 +12,7 @@ interface Props {
   basePrice: number;
   taxAmount: number;
   loading: boolean;
+  isMobile?: boolean;
 }
 
 export const CheckoutSummary: React.FC<Props> = ({
@@ -22,9 +23,10 @@ export const CheckoutSummary: React.FC<Props> = ({
   isCartLoading,
   isActionsLoading,
   loading,
+  isMobile,
 }) => {
   return (
-    <WhiteBlock className={cn('p-6 sticky top-4')}>
+    <WhiteBlock className={cn(isMobile ? '' : 'p-6 sticky top-4')}>
       <div className="flex flex-col gap-1">
         <span className="text-xl">Итого:</span>
         {isCartLoading ? (
