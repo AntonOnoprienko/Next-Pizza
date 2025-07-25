@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation';
 import { Container, FullPageLoader } from '@/src/components/shared';
 import dynamic from 'next/dynamic';
 import { logSizeTracker } from '@/src/lib/log-size-tracker';
+import { getCookiesInfo } from '@/src/lib/getCookiesInfo';
+import { cn } from '@/src/lib/utils';
 
 type Props = {
   params: {
@@ -23,6 +25,7 @@ const ChooseProductClientWrapper = dynamic(
 );
 
 const ProductPage = async ({ params }: Props) => {
+  const { isMobile } = getCookiesInfo();
   const product = await prisma.product.findFirst({
     where: { id: Number(params.id) },
     include: {
@@ -55,8 +58,8 @@ const ProductPage = async ({ params }: Props) => {
   logSizeTracker('ProductPage', product);
 
   return (
-    <Container className="flex flex-col my-2">
-      <ChooseProductClientWrapper product={product} />
+    <Container className={cn(isMobile && 'px-0', 'flex flex-col my-2')}>
+      <ChooseProductClientWrapper product={product} isMobile={isMobile} />
     </Container>
   );
 };

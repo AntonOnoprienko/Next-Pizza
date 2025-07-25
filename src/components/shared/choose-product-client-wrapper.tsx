@@ -11,11 +11,13 @@ import { ProductwithCategory } from '@/src/@types/prisma';
 type Props = {
   className?: string;
   product: ProductwithCategory;
+  isMobile?: boolean;
 };
 
 export const ChooseProductClientWrapper: React.FC<Props> = ({
   className,
   product,
+  isMobile,
 }) => {
   const router = useRouter();
   const loadingById = useCartStore((state) => state.loadingById);
@@ -30,6 +32,7 @@ export const ChooseProductClientWrapper: React.FC<Props> = ({
       product={product}
       loadingById={loadingById}
       onSubmit={handleAddCartItem}
+      isMobile={isMobile}
     />
   );
 };

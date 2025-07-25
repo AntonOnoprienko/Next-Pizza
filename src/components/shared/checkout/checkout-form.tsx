@@ -131,8 +131,12 @@ export const CheckoutForm = ({ isMobile }: Props) => {
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <div className={cn('flex', isMobile ? 'flex-col' : 'gap-10')}>
-          {/* Левая часть */}
-          <div className="flex flex-col gap-10 flex-1 mb-20">
+          <div
+            className={cn(
+              'flex flex-col gap-10 flex-1',
+              isMobile ? 'mb-10' : 'mb-20',
+            )}
+          >
             <CheckoutCart
               items={items}
               isCartLoading={isCartLoading}
@@ -145,7 +149,6 @@ export const CheckoutForm = ({ isMobile }: Props) => {
             <CheckoutPersonalForm isMobile={isMobile} />
             <CheckoutAddressForm />
           </div>
-          {/* Правая часть */}
           <div className={cn(isMobile ? 'w-full' : 'w-450px')}>
             <CheckoutSummary
               deliveryPrice={DELIVERY_PRICE}
