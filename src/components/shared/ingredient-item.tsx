@@ -9,6 +9,7 @@ type Props = {
   price: number;
   active?: boolean;
   onClick?: () => void;
+  isMobile: boolean;
   className?: string;
 };
 
@@ -19,12 +20,15 @@ const IngredientItemComponent: React.FC<Props> = ({
   name,
   imageUrl,
   onClick,
+  isMobile,
 }) => {
+  const imageSize = isMobile ? 100 : 110;
   return (
     <div
       onClick={onClick}
       className={cn(
-        'flex items-center flex-col p-1 rounded-md w-32 text-center relative cursor-pointer shadow-md bg-white border border-white',
+        'flex items-center flex-col p-1 rounded-md text-center relative cursor-pointer shadow-md bg-white border border-white',
+        isMobile ? 'w-[110px]' : 'w-32',
         { 'border-primary': active },
         className,
       )}
@@ -35,8 +39,8 @@ const IngredientItemComponent: React.FC<Props> = ({
       <DynamicCldImage
         src={imageUrl}
         alt={name}
-        width={110}
-        height={110}
+        width={imageSize}
+        height={imageSize}
         crop="fill"
         gravity="auto"
         quality="auto"

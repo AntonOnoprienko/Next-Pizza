@@ -13,9 +13,14 @@ import { useAddToCartToast } from '@/src/hooks';
 type Props = {
   className?: string;
   product: ProductWithRelations;
+  isMobile?: boolean;
 };
 
-export const ChooseProductModal: React.FC<Props> = ({ className, product }) => {
+export const ChooseProductModal: React.FC<Props> = ({
+  className,
+  product,
+  isMobile = false,
+}) => {
   const router = useRouter();
   const loadingById = useCartStore((state) => state.loadingById);
   const addToCartToast = useAddToCartToast();
@@ -29,7 +34,8 @@ export const ChooseProductModal: React.FC<Props> = ({ className, product }) => {
     <Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
       <DialogContent
         className={cn(
-          'p-0 w-[1060px] max-w-[1060px] min-h-[550px] bg-white overflow-hidden',
+          'p-0 bg-white overflow-hidden min-h-[550px]',
+          isMobile ? 'w-full' : 'w-[1060px] max-w-[1060px]',
           className,
         )}
         aria-describedby={undefined}
@@ -40,6 +46,7 @@ export const ChooseProductModal: React.FC<Props> = ({ className, product }) => {
           product={product}
           loadingById={loadingById}
           onSubmit={handleAddCartItem}
+          isMobile={isMobile}
         />
       </DialogContent>
     </Dialog>

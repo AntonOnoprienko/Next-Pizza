@@ -8,12 +8,14 @@ type Props = {
   className?: string;
   addIngredient: (id: number) => void;
   selectedIngredients: Set<number>;
+  isMobile?: boolean;
 };
 
 export const IngredientsList: React.FC<Props> = ({
   item,
   addIngredient,
   selectedIngredients,
+  isMobile = false,
   className,
 }) => {
   const handlers = React.useMemo(() => {
@@ -29,11 +31,14 @@ export const IngredientsList: React.FC<Props> = ({
   return (
     <div
       className={cn(
-        'bg-gray-50 px-5 py-3 rounded-md h-[390px] overflow-auto scrollbar mt-2',
+        'bg-gray-50 py-3 rounded-md h-[390px] overflow-auto scrollbar mt-2',
+        !isMobile && 'px-5',
         className,
       )}
     >
-      <div className="grid grid-cols-3 gap-3 mt-2">
+      <div
+        className={cn('grid grid-cols-3 mt-2', isMobile ? 'gap-1' : 'gap-3')}
+      >
         {item &&
           item.extraIngredients.map(({ ingredient }) => (
             <IngredientItem
@@ -43,6 +48,7 @@ export const IngredientsList: React.FC<Props> = ({
               price={ingredient.price}
               onClick={handlers.get(ingredient.id)!}
               active={selectedIngredients.has(ingredient.id)}
+              isMobile={isMobile}
             />
           ))}
       </div>

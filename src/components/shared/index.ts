@@ -43,6 +43,7 @@ export { Stories } from './stories';
 export { StoryViewer } from './story-viewer';
 export { HeaderMobileMenu } from './header-mobile-menu';
 export { ProductCardMobile } from './product-card-mobile';
+export { ResponsiveImage } from './responsive-image';
 export * from './modals';
 export * from './checkout';
 export * from './form';

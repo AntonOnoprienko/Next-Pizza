@@ -7,9 +7,9 @@ import {
   VerifiedToast,
 } from '@/src/components/shared';
 import { findPizzas, GetSearchParams } from '@/src/lib';
+import { getCookiesInfo } from '@/src/lib/getCookiesInfo';
 import { Loader } from 'lucide-react';
 import dynamic from 'next/dynamic';
-import { cookies } from 'next/headers';
 
 interface PageProps {
   searchParams: GetSearchParams;
@@ -29,10 +29,7 @@ const DynamicFilters = dynamic(
 
 const Home = async ({ searchParams }: PageProps) => {
   const categories = await findPizzas(searchParams);
-  const cookieStore = cookies();
-  const toastValue = cookieStore.get('toast')?.value;
-  const viewport = cookieStore.get('viewport')?.value || 'desktop';
-  const isMobile = viewport === 'mobile';
+  const { toastValue, isMobile } = getCookiesInfo();
 
   return (
     <>
@@ -49,9 +46,11 @@ const Home = async ({ searchParams }: PageProps) => {
       />
       <Container className="mt-10 pb-14">
         <div className="flex gap-[70px]">
-          <div className="w-[250px] hidden md:block">
-            <DynamicFilters />
-          </div>
+          {!isMobile && (
+            <div className="w-[250px]">
+              <DynamicFilters />
+            </div>
+          )}
           <div className="flex-1">
             <div className="flex flex-col gap-16">
               {categories.map(

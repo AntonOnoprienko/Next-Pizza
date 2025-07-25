@@ -7,12 +7,14 @@ type ChooseFormProps = {
   product: ProductWithRelations | ProductwithCategory;
   loadingById: Record<number, boolean>;
   onSubmit: (item: CartItemForToast) => void;
+  isMobile?: boolean;
 };
 
 export const ChooseProductFormRenderer: React.FC<ChooseFormProps> = ({
   product,
   loadingById,
   onSubmit,
+  isMobile,
 }) => {
   const isPizza = Boolean(product.items[0].pizzaType);
 
@@ -24,6 +26,7 @@ export const ChooseProductFormRenderer: React.FC<ChooseFormProps> = ({
     ingredients: product.ingredients,
     onSubmit,
     loadingById,
+    isMobile,
   };
 
   return isPizza ? (

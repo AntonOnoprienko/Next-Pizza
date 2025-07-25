@@ -8,6 +8,7 @@ import {
   GroupVariants,
   IngredientsList,
   PizzaImage,
+  ResponsiveImage,
   Title,
 } from '.';
 import { Button } from '../ui';
@@ -25,6 +26,7 @@ type Props = {
   description?: string | null;
   loadingById: Record<number, boolean>;
   onSubmit: (cartItem: CartItemForToast) => void;
+  isMobile?: boolean;
   className?: string;
 };
 
@@ -36,8 +38,10 @@ export const ChoosePizzaForm: React.FC<Props> = ({
   description,
   loadingById,
   onSubmit,
+  isMobile = false,
   className,
 }) => {
+  console.log(isMobile, 'IS MOBILE');
   const {
     size,
     type,
@@ -73,7 +77,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
     ? (loadingById[selectedItem.id] ?? false)
     : false;
 
-  return (
+  return !isMobile ? (
     <div className={cn(className, 'flex flex-1')}>
       <PizzaImage
         key={imageUrl}
@@ -122,6 +126,53 @@ export const ChoosePizzaForm: React.FC<Props> = ({
           Добавить в корзину за {totalPrice} ₴
         </Button>
       </div>
+    </div>
+  ) : (
+    <div
+      className={cn(className, 'flex flex-col bg-[rgb(252,252,252)] py-7 px-5')}
+    >
+      <ResponsiveImage imageUrl={selectedImg} alt={name} />
+
+      <Title text={name} size="md" className="font-bold mb-1 text-2xl" />
+
+      <DescriptionAndIngredients
+        description={description}
+        ingredients={ingredients}
+        excludedIngredients={excludedIngredients}
+        onToggleExclude={excludeIngredient}
+        textDetails={textDetails}
+      />
+
+      <GroupVariants
+        items={availablePizzaSize}
+        value={String(size)}
+        onClick={(value) => setSize(Number(value) as PizzaSize)}
+        className="mt-2"
+      />
+
+      <GroupVariants
+        items={pizzaTypes}
+        value={String(type)}
+        onClick={(value) => setType(Number(value) as PizzaType)}
+        className="mt-1"
+      />
+      <p className="mt-6 mb-3 font-bold text-base">Добавить по вкусу</p>
+      <Suspense fallback={<ExtraIngredientsListSkeleton />}>
+        <IngredientsList
+          item={selectedItem}
+          addIngredient={addIngredient}
+          selectedIngredients={selectedIngredients}
+          isMobile
+        />
+      </Suspense>
+
+      <Button
+        loading={isLoading}
+        onClick={handleClickAdd}
+        className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10"
+      >
+        Добавить в корзину за {totalPrice} ₴
+      </Button>
     </div>
   );
 };
