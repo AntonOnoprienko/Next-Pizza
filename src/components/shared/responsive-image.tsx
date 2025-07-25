@@ -3,7 +3,6 @@
 import React, { useEffect } from 'react';
 import { cn } from '@/src/lib/utils';
 import { DynamicCldImage } from '../dynamics';
-import { useWindowSize } from 'react-use';
 
 type Props = {
   imageUrl: string;
@@ -16,8 +15,13 @@ export const ResponsiveImage: React.FC<Props> = ({
   alt,
   className,
 }) => {
-  const { width } = useWindowSize();
-  const imageSize = width - 40;
+  const [initialWidth, setInitialWidth] = React.useState<number | null>(null);
+
+  React.useEffect(() => {
+    setInitialWidth(window.innerWidth);
+  }, []);
+  if (!initialWidth) return null;
+  const imageSize = initialWidth - 40;
   return (
     <div
       className={cn('relative w-full', className)}
