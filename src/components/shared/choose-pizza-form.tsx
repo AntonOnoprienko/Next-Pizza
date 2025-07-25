@@ -128,51 +128,54 @@ export const ChoosePizzaForm: React.FC<Props> = ({
       </div>
     </div>
   ) : (
-    <div
-      className={cn(className, 'flex flex-col bg-[rgb(252,252,252)] py-7 px-5')}
-    >
-      <ResponsiveImage imageUrl={selectedImg} alt={name} />
+    <div className={cn('flex flex-col bg-[rgb(252,252,252)]', className)}>
+      <div className="flex flex-col py-7 px-5">
+        <ResponsiveImage imageUrl={selectedImg} alt={name} />
 
-      <Title text={name} size="md" className="font-bold mb-1 text-2xl" />
+        <Title text={name} size="md" className="font-bold mb-1 text-2xl" />
 
-      <DescriptionAndIngredients
-        description={description}
-        ingredients={ingredients}
-        excludedIngredients={excludedIngredients}
-        onToggleExclude={excludeIngredient}
-        textDetails={textDetails}
-      />
-
-      <GroupVariants
-        items={availablePizzaSize}
-        value={String(size)}
-        onClick={(value) => setSize(Number(value) as PizzaSize)}
-        className="mt-2"
-      />
-
-      <GroupVariants
-        items={pizzaTypes}
-        value={String(type)}
-        onClick={(value) => setType(Number(value) as PizzaType)}
-        className="mt-1"
-      />
-      <p className="mt-6 mb-3 font-bold text-base">Добавить по вкусу</p>
-      <Suspense fallback={<ExtraIngredientsListSkeleton />}>
-        <IngredientsList
-          item={selectedItem}
-          addIngredient={addIngredient}
-          selectedIngredients={selectedIngredients}
-          isMobile
+        <DescriptionAndIngredients
+          description={description}
+          ingredients={ingredients}
+          excludedIngredients={excludedIngredients}
+          onToggleExclude={excludeIngredient}
+          textDetails={textDetails}
         />
-      </Suspense>
 
-      <Button
-        loading={isLoading}
-        onClick={handleClickAdd}
-        className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10"
-      >
-        Добавить в корзину за {totalPrice} ₴
-      </Button>
+        <GroupVariants
+          items={availablePizzaSize}
+          value={String(size)}
+          onClick={(value) => setSize(Number(value) as PizzaSize)}
+          className="mt-2"
+        />
+
+        <GroupVariants
+          items={pizzaTypes}
+          value={String(type)}
+          onClick={(value) => setType(Number(value) as PizzaType)}
+          className="mt-1"
+        />
+
+        <p className="mt-6 mb-3 font-bold text-base">Добавить по вкусу</p>
+
+        <Suspense fallback={<ExtraIngredientsListSkeleton />}>
+          <IngredientsList
+            item={selectedItem}
+            addIngredient={addIngredient}
+            selectedIngredients={selectedIngredients}
+            isMobile
+          />
+        </Suspense>
+      </div>
+      <div className="sticky bottom-0 left-0 bg-[rgb(252,252,252)] border border-[rgb(252,252,252)]  py-3 px-4 z-50">
+        <Button
+          loading={isLoading}
+          onClick={handleClickAdd}
+          className="h-[48px] text-base rounded-[18px] w-full"
+        >
+          Добавить в корзину за {totalPrice} ₴
+        </Button>
+      </div>
     </div>
   );
 };

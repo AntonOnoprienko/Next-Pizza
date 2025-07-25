@@ -17,21 +17,23 @@ export const ResponsiveImage: React.FC<Props> = ({
   className,
 }) => {
   const { width } = useWindowSize();
-  useEffect(() => {
-    console.log(width, 'DEVICE WIDTH');
-  }, [width]);
-  console.log(width);
+  const imageSize = width - 40;
   return (
-    <DynamicCldImage
-      src={imageUrl}
-      alt={alt}
-      width={width}
-      height={width}
-      crop="fill"
-      gravity="auto"
-      quality="auto"
-      format="auto"
-      className={cn(className)}
-    />
+    <div
+      className={cn('relative w-full', className)}
+      style={{ aspectRatio: '1/1' }}
+    >
+      <DynamicCldImage
+        src={imageUrl}
+        alt={alt}
+        width={imageSize}
+        height={imageSize}
+        crop="fill"
+        gravity="auto"
+        quality="auto"
+        format="auto"
+        className={cn(className)}
+      />
+    </div>
   );
 };

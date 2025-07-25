@@ -31,8 +31,8 @@ export const IngredientsList: React.FC<Props> = ({
   return (
     <div
       className={cn(
-        'bg-gray-50 py-3 rounded-md h-[390px] overflow-auto scrollbar mt-2',
-        !isMobile && 'px-5',
+        'bg-gray-50 py-3 rounded-md mt-2',
+        !isMobile && 'px-5 h-[390px] overflow-auto scrollbar',
         className,
       )}
     >

@@ -35,7 +35,9 @@ export const ChooseProductModal: React.FC<Props> = ({
       <DialogContent
         className={cn(
           'p-0 bg-white overflow-hidden min-h-[550px]',
-          isMobile ? 'w-full' : 'w-[1060px] max-w-[1060px]',
+          isMobile
+            ? 'w-full max-h-[100dvh] overflow-y-auto border-none'
+            : 'w-[1060px] max-w-[1060px]',
           className,
         )}
         aria-describedby={undefined}
