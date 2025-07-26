@@ -6,15 +6,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/src/lib/utils';
 import { ArrowLeft } from 'lucide-react';
-import router from 'next/router';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   className?: string;
 };
 
 export const HeaderCheckoutMobile: React.FC<Props> = ({ className }) => {
+  const router = useRouter();
   return (
-    <header className={cn('border-b sticky bg-white top-0 z-50', className)}>
+    <header
+      className={cn('border-b sticky bg-[#F4F1EE] top-0 z-50', className)}
+    >
       <Container className="flex items-center justify-between py-2">
         <div className="flex gap-2">
           <button
