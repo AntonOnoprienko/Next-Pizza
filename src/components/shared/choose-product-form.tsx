@@ -57,15 +57,13 @@ export const ChooseProductForm: React.FC<Props> = ({
         <p className="text-gray-400">{textDetails}</p>
         <p>{description}</p>
       </div>
-      <div className="mt-auto bg-[rgb(252,252,252)] border border-[rgb(252,252,252)]  py-3 px-4 z-50">
+      <div className="sticky bottom-0 left-0 bg-[rgb(252,252,252)] border border-[rgb(252,252,252)]  py-3 px-4 z-50">
         <Button
           loading={loading}
           onClick={handleClickAdd}
           className="h-[48px] text-base rounded-[18px] w-full"
         >
-          {loading
-            ? 'Идёт загрузка'
-            : `Добавить в корзину за ${firstItem.price} ₴`}
+          Добавить в корзину за {firstItem.price} ₴
         </Button>
       </div>
     </div>
@@ -89,15 +87,15 @@ export const ChooseProductForm: React.FC<Props> = ({
         <Title text={name} size="md" className="font-extrabold mb-1" />
         <p className="text-gray-400">{textDetails}</p>
         <p>{description}</p>
-        <div className="sticky bottom-0 left-0 bg-[rgb(252,252,252)] border border-[rgb(252,252,252)]  py-3 px-4 z-50">
-          <Button
-            loading={loading}
-            onClick={handleClickAdd}
-            className="h-[48px] text-base rounded-[18px] w-full"
-          >
-            Добавить в корзину за {firstItem.price} ₴
-          </Button>
-        </div>
+        <Button
+          disabled={loading}
+          onClick={handleClickAdd}
+          className="h-[55px] px-10 text-base rounded-[18px] w-full mt-auto"
+        >
+          {loading
+            ? 'Идёт загрузка'
+            : `Добавить в корзину за ${firstItem.price} ₴`}
+        </Button>
       </div>
     </div>
   );
