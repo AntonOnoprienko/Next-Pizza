@@ -1,6 +1,10 @@
-import { Container, Header } from '@/src/components/shared';
+import {
+  Container,
+  Header,
+  HeaderCheckoutMobile,
+} from '@/src/components/shared';
+import { getCookiesInfo } from '@/src/lib/getCookiesInfo';
 import { Metadata } from 'next';
-import { Suspense } from 'react';
 
 export const metadata: Metadata = {
   title: 'Next Pizza | Оформление заказа',
@@ -39,14 +43,15 @@ export default function CheckoutLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const { isMobile } = getCookiesInfo();
   return (
     <main className="min-h-screen bg-[#F4F1EE]">
       <Container>
-        <Header
-          hasCart={false}
-          hasSearch={false}
-          className="border-b-gray-200"
-        />
+        {isMobile ? (
+          <HeaderCheckoutMobile />
+        ) : (
+          <Header isCheckout className="border-b-gray-200" />
+        )}
         {children}
       </Container>
     </main>

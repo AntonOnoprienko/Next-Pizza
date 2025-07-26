@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { CartButton, LoginButton, SearchInput } from '../../shared';
 import Image from 'next/image';
@@ -9,9 +7,10 @@ import { Container } from '../../shared';
 
 type Props = {
   className?: string;
+  isCheckout?: boolean;
 };
 
-export const Header: React.FC<Props> = ({ className }) => {
+export const Header: React.FC<Props> = ({ className, isCheckout = false }) => {
   return (
     <header className={cn('border-b', className)}>
       <Container className="flex items-center justify-between py-8">
@@ -34,13 +33,15 @@ export const Header: React.FC<Props> = ({ className }) => {
           </div>
         </Link>
 
-        <div className="flex-1 mx-10">
-          <SearchInput />
-        </div>
+        {!isCheckout && (
+          <div className="flex-1 mx-10">
+            <SearchInput />
+          </div>
+        )}
 
         <div className="flex items-center gap-3 flex-shrink-0">
           <LoginButton />
-          <CartButton />
+          {!isCheckout && <CartButton />}
         </div>
       </Container>
     </header>

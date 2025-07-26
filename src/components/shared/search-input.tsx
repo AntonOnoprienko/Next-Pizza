@@ -7,18 +7,21 @@ import { useClickAway, useDebounce } from 'react-use';
 import Link from 'next/link';
 import { Api } from '@/src/services/api-client';
 import { Product } from '@prisma/client';
-import dynamic from 'next/dynamic';
 import { DynamicCldImage } from '../dynamics';
 
 type Props = {
+  isMobile?: boolean;
+  onClose?: () => void;
   className?: string;
+  inputRef?: React.RefObject<HTMLInputElement>;
 };
-const CldImage = dynamic(
-  () => import('next-cloudinary').then((mod) => mod.CldImage),
-  { ssr: false },
-);
 
-export const SearchInput: React.FC<Props> = ({ className }) => {
+export const SearchInput: React.FC<Props> = ({
+  isMobile,
+  onClose,
+  inputRef,
+  className,
+}) => {
   const [searchQuery, setSearchQuery] = React.useState<string>('');
   const [focused, setFocused] = React.useState<boolean>(false);
   const [products, setProducts] = React.useState<Product[]>([]);
@@ -27,6 +30,7 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
 
   useClickAway(ref, () => {
     setFocused(false);
+    onClose?.();
   });
 
   useDebounce(
@@ -72,16 +76,25 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
       <div
         ref={ref}
         className={cn(
-          'flex rounded-2xl flex-1 justify-between relative h-11 z-30',
+          'flex flex-1 justify-between relative z-30',
+          isMobile ? 'h-9 rounded-sm' : 'h-11 rounded-2xl',
           className,
         )}
       >
-        <Search className="absolute top-1/2 translate-y-[-50%] left-3 h-5 text-gray-400" />
+        {!isMobile && (
+          <Search className="absolute top-1/2 translate-y-[-50%] left-3 h-5 text-gray-400" />
+        )}
         <input
+          ref={inputRef}
           aria-label="Поиск по названию"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="rounded-2xl outline-none w-full bg-gray-100 pl-11"
+          className={cn(
+            'outline-none w-full bg-gray-100',
+            isMobile
+              ? 'h-9 text-sm pl-4 rounded-sm'
+              : 'h-11 text-base pl-11 rounded-2xl',
+          )}
           type="text"
           placeholder="Найти продукт..."
           onFocus={() => setFocused(true)}
