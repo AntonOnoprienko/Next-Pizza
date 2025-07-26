@@ -92,7 +92,7 @@ export const SearchInput: React.FC<Props> = ({
           className={cn(
             'outline-none w-full bg-gray-100',
             isMobile
-              ? 'h-9 text-sm pl-4 rounded-sm'
+              ? 'h-9 text-base pl-4 rounded-sm'
               : 'h-11 text-base pl-11 rounded-2xl',
           )}
           type="text"
