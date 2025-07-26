@@ -2,6 +2,10 @@ export default function Head() {
   return (
     <>
       <link rel="canonical" href="https://next-pizza.up.railway.app/" />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      ></meta>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

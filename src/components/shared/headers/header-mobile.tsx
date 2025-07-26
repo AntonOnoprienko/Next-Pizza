@@ -13,13 +13,13 @@ type Props = {
 
 export const HeaderMobile: React.FC<Props> = ({ className }) => {
   const [showSearch, setShowSearch] = React.useState<boolean>(false);
-  // const inputRef = React.useRef<HTMLInputElement | null>(null);
+  const inputRef = React.useRef<HTMLInputElement | null>(null);
 
-  // React.useEffect(() => {
-  //   if (showSearch) {
-  //     inputRef.current?.focus();
-  //   }
-  // }, [showSearch]);
+  React.useEffect(() => {
+    if (showSearch) {
+      inputRef.current?.focus();
+    }
+  }, [showSearch]);
 
   return (
     <header className={cn('border-b sticky bg-white top-0 z-50', className)}>
@@ -55,7 +55,7 @@ export const HeaderMobile: React.FC<Props> = ({ className }) => {
           <SearchInput
             onClose={() => setShowSearch(false)}
             isMobile
-            // inputRef={inputRef}
+            inputRef={inputRef}
           />
         )}
         <div className="flex">

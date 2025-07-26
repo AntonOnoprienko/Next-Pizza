@@ -85,7 +85,7 @@ export const SearchInput: React.FC<Props> = ({
           <Search className="absolute top-1/2 translate-y-[-50%] left-3 h-5 text-gray-400" />
         )}
         <input
-          // ref={inputRef}
+          ref={inputRef}
           aria-label="Поиск по названию"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
