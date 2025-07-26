@@ -6,7 +6,7 @@ import { Menu } from 'lucide-react';
 import { CartButton, LoginButton } from '../.';
 import React from 'react';
 
-export const HeaderMobileMenu: React.FC<Props> = () => {
+export const HeaderMobileMenu: React.FC = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
