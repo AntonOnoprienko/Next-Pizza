@@ -9,7 +9,7 @@ import { AuthModal } from './modals';
 export const LoginButton: React.FC = () => {
   const [isOpenAuth, setIsOpenAuth] = React.useState(false);
   const { data: session } = useSession();
-  console.log(session, 'session');
+
   return (
     <div>
       <AuthModal open={isOpenAuth} onClose={() => setIsOpenAuth(false)} />

@@ -1,4 +1,3 @@
-export { Header } from './header';
 export { Container } from './container';
 export { Title } from './title';
 export { Categories } from './categories';
@@ -41,9 +40,9 @@ export { ProfileForm } from './profile-form';
 export { VerifiedToast } from './verified-toast';
 export { Stories } from './stories';
 export { StoryViewer } from './story-viewer';
-export { HeaderMobileMenu } from './header-mobile-menu';
 export { ProductCardMobile } from './product-card-mobile';
 export { ResponsiveImage } from './responsive-image';
 export * from './modals';
 export * from './checkout';
 export * from './form';
+export * from './headers';

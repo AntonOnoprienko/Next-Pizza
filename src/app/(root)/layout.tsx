@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { Header } from '@/src/components/shared';
+import { Header, HeaderMobile } from '@/src/components/shared';
+import { getCookiesInfo } from '@/src/lib/getCookiesInfo';
 
 interface HomeLayoutProps {
   readonly children: React.ReactNode;
@@ -47,9 +48,10 @@ export const metadata: Metadata = {
 };
 
 const HomeLayout = ({ children, modal }: HomeLayoutProps) => {
+  const { isMobile } = getCookiesInfo();
   return (
     <main className="min-h-screen">
-      <Header className="p-4" />
+      {isMobile ? <HeaderMobile /> : <Header className="p-4" />}
       {children}
       {modal}
     </main>

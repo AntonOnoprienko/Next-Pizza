@@ -2,11 +2,11 @@
 
 import React from 'react';
 import { Trash } from 'lucide-react';
-import * as CartItem from '../cart-item-details';
 import { CartItemProps } from '../cart-item-details/cart-item-details.types';
 import { cn } from '@/src/lib/utils';
 import { mapPizzaType } from '@/src/constants/pizza';
 import { DynamicCldImage } from '../../dynamics';
+import { CountButton } from '..';
 
 interface Props extends CartItemProps {
   onClickCountButton?: (type: 'plus' | 'minus') => void;
@@ -78,10 +78,11 @@ export const CheckoutCartItemMobile: React.FC<Props> = ({
           )}
         </div>
         <div className="flex items-center justify-between">
-          <CartItem.CountButton
+          <CountButton
             loading={loading}
             onClick={onClickCountButton}
             value={quantity}
+            isMobile
           />
           <h5 className="font-bold text-xl">{price} ₴</h5>
         </div>

@@ -29,7 +29,7 @@ export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="w-full max-w-[450px] bg-white p-6 sm:p-8 md:p-10 mx-4 sm:mx-auto">
+      <DialogContent className="w-full max-w-[450px] bg-white p-4 sm:p-6 md:p-10 sm:mx-auto">
         <DialogHeader>
           <div className="flex justify-between items-center">
             <div className="mr-2">

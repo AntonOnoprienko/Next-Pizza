@@ -28,7 +28,7 @@ const CartDrawerItemComponent: React.FC<Props> = ({
   className,
 }) => {
   return (
-    <div className={cn('flex bg-white p-5 gap-6', className)}>
+    <div className={cn('flex bg-white p-4 gap-4 sm:p-5 sm:gap-6', className)}>
       <CartItem.Image src={imageUrl} name={name} />
 
       <div className="flex-1">
