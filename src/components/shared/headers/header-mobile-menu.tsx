@@ -1,8 +1,6 @@
 'use client';
-
-import { Button } from '../../ui';
 import { Sheet, SheetContent, SheetTrigger } from '../../ui/sheet';
-import { Menu } from 'lucide-react';
+import { AlignJustify } from 'lucide-react';
 import { LoginButton } from '../.';
 import React from 'react';
 
@@ -10,9 +8,9 @@ export const HeaderMobileMenu: React.FC = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button aria-label="Открыть меню" variant="ghost" size="icon">
-          <Menu className="h-6 w-6" />
-        </Button>
+        <button className="w-12 h-12 p-3" aria-label="Открыть меню">
+          <AlignJustify className="h-5 w-5" />
+        </button>
       </SheetTrigger>
       <SheetContent
         side="left"

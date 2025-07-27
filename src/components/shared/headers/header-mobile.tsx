@@ -29,11 +29,8 @@ export const HeaderMobile: React.FC<Props> = ({ className }) => {
   return (
     <header className={cn('border-b sticky bg-white top-0 z-50', className)}>
       <Container className="flex items-center justify-between py-2">
-        <div className="flex gap-2">
-          <button
-            className="p-2 rounded-md hover:bg-gray-100 transition"
-            aria-label="Выбор категории"
-          >
+        <div className="flex gap-2 items-center">
+          <button className="w-12 h-12 p-3" aria-label="Выбор категории">
             <LayoutGrid size={20} />
           </button>
           {!showSearch && (
@@ -71,7 +68,7 @@ export const HeaderMobile: React.FC<Props> = ({ className }) => {
             <button
               aria-label="Поиск товара"
               onClick={() => setShowSearch(true)}
-              className="p-2 rounded-md hover:bg-gray-100 transition"
+              className="w-12 h-12 p-3"
             >
               <Search size={20} />
             </button>
