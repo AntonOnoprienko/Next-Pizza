@@ -42,6 +42,7 @@ export { Stories } from './stories';
 export { StoryViewer } from './story-viewer';
 export { ProductCardMobile } from './product-card-mobile';
 export { ResponsiveImage } from './responsive-image';
+export { CartButtonMobile } from './cart-button-mobile';
 export * from './modals';
 export * from './checkout';
 export * from './form';

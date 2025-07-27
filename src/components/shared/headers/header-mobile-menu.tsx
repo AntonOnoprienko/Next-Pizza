@@ -3,14 +3,14 @@
 import { Button } from '../../ui';
 import { Sheet, SheetContent, SheetTrigger } from '../../ui/sheet';
 import { Menu } from 'lucide-react';
-import { CartButton, LoginButton } from '../.';
+import { LoginButton } from '../.';
 import React from 'react';
 
 export const HeaderMobileMenu: React.FC = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon">
+        <Button aria-label="Открыть меню" variant="ghost" size="icon">
           <Menu className="h-6 w-6" />
         </Button>
       </SheetTrigger>
@@ -20,7 +20,6 @@ export const HeaderMobileMenu: React.FC = () => {
       >
         <div className="flex flex-col space-y-4 mt-6 gap-3">
           <LoginButton />
-          <CartButton />
         </div>
       </SheetContent>
     </Sheet>

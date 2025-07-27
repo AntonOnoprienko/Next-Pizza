@@ -1,7 +1,12 @@
 'use client';
 
 import React from 'react';
-import { Container, HeaderMobileMenu, SearchInput } from '../../shared';
+import {
+  CartButtonMobile,
+  Container,
+  HeaderMobileMenu,
+  SearchInput,
+} from '../../shared';
 import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/src/lib/utils';
@@ -25,7 +30,10 @@ export const HeaderMobile: React.FC<Props> = ({ className }) => {
     <header className={cn('border-b sticky bg-white top-0 z-50', className)}>
       <Container className="flex items-center justify-between py-2">
         <div className="flex gap-2">
-          <button className="p-2 rounded-md hover:bg-gray-100 transition">
+          <button
+            className="p-2 rounded-md hover:bg-gray-100 transition"
+            aria-label="Выбор категории"
+          >
             <LayoutGrid size={20} />
           </button>
           {!showSearch && (
@@ -61,12 +69,14 @@ export const HeaderMobile: React.FC<Props> = ({ className }) => {
         <div className="flex">
           {!showSearch && (
             <button
+              aria-label="Поиск товара"
               onClick={() => setShowSearch(true)}
               className="p-2 rounded-md hover:bg-gray-100 transition"
             >
               <Search size={20} />
             </button>
           )}
+          <CartButtonMobile />
           <HeaderMobileMenu />
         </div>
       </Container>
