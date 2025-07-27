@@ -48,7 +48,7 @@ export const HeaderMobile: React.FC<Props> = ({ className }) => {
                   <h1 className="text-lg font-black uppercase leading-5">
                     Next Pizza
                   </h1>
-                  <p className="text-gray-600 leading-4 text-xs">
+                  <p className="text-gray-600 leading-4 text-xs xs:hidden">
                     Вкуснее чем в буфете
                   </p>
                 </div>
@@ -65,15 +65,18 @@ export const HeaderMobile: React.FC<Props> = ({ className }) => {
         )}
         <div className="flex">
           {!showSearch && (
-            <button
-              aria-label="Поиск товара"
-              onClick={() => setShowSearch(true)}
-              className="w-12 h-12 p-3"
-            >
-              <Search size={20} />
-            </button>
+            <>
+              <button
+                aria-label="Поиск товара"
+                onClick={() => setShowSearch(true)}
+                className="w-12 h-12 p-3"
+              >
+                <Search size={20} />
+              </button>
+
+              <CartButtonMobile />
+            </>
           )}
-          <CartButtonMobile />
           <HeaderMobileMenu />
         </div>
       </Container>

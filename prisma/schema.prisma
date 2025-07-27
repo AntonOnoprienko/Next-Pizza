@@ -169,7 +169,8 @@ model ProductItemExtraIngredient {
 model Story {
   id         Int         @id @default(autoincrement())
   title      String
-  imageUrl   String       
+  imageUrl   String  
+  imageUrlMobile String     
   startDate  DateTime
   endDate    DateTime
   isActive   Boolean     @default(true)

@@ -26,6 +26,9 @@ const config = {
       },
     },
     extend: {
+      screens: {
+        xs: { max: '400px' },
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
@@ -75,11 +78,16 @@ const config = {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' },
         },
+        'scroll-left': {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'spin-slow': 'spin 1.5s linear infinite',
+        'scroll-left': 'scroll-left 5s linear infinite',
       },
     },
   },

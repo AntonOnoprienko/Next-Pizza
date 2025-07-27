@@ -9,10 +9,11 @@ export const stories = [
   {
     title: 'Любимый кофе',
     imageUrl: 'story/hzm1w8qxx0ugvrli5rxs',
+    imageUrlMobile: 'story-mobile/wxgbkgs81ibjdzyaixuh',
     startDate,
     endDate,
     isActive: true,
-    priority: 0,
+    priority: 1,
     textColor: TextColor.LIGHT,
     items: [
       {
@@ -32,10 +33,11 @@ export const stories = [
   {
     title: 'Добавь ингредиент',
     imageUrl: 'story/ebbdzavlhwk32bkcxvn7',
+    imageUrlMobile: 'story-mobile/kzpmmdaduxao6bcyw6dd',
     startDate,
     endDate,
     isActive: true,
-    priority: 1,
+    priority: 6,
     textColor: TextColor.LIGHT,
     items: [
       {
@@ -55,10 +57,11 @@ export const stories = [
   {
     title: 'Сладкие новинки',
     imageUrl: 'story/qkyaxwpqitjdrw57h4eu',
+    imageUrlMobile: 'story-mobile/aj5gt2kqmflmpke93jqv',
     startDate,
     endDate,
     isActive: true,
-    priority: 2,
+    priority: 5,
     textColor: TextColor.LIGHT,
     items: [
       {
@@ -78,6 +81,7 @@ export const stories = [
   {
     title: 'Сытный завтрак',
     imageUrl: 'story/kjhuvkvrocpsccifz13z',
+    imageUrlMobile: 'story-mobile/nrmtahrqycgfzl2pdfrt',
     startDate,
     endDate,
     isActive: true,
@@ -113,6 +117,7 @@ export const stories = [
   {
     title: 'Топ недели',
     imageUrl: 'story/cr57bqwdvtgxituwgql0',
+    imageUrlMobile: 'story-mobile/nmj27hgv44v0p09t3eqg',
     startDate,
     endDate,
     isActive: true,
@@ -136,10 +141,11 @@ export const stories = [
   {
     title: 'Горячие закуски',
     imageUrl: 'story/xozsy9pdyl6xonotj32z',
+    imageUrlMobile: 'story-mobile/yms46r3uaaqfgf7lnufs',
     startDate,
     endDate,
     isActive: true,
-    priority: 5,
+    priority: 2,
     textColor: TextColor.LIGHT,
     items: [
       {
@@ -159,10 +165,11 @@ export const stories = [
   {
     title: 'Интересные факты',
     imageUrl: 'story/hesjhbfbc5mbbuonfpou',
+    imageUrlMobile: 'story-mobile/mw4nhfsmqwmo9awfennh',
     startDate,
     endDate,
     isActive: true,
-    priority: 6,
+    priority: 0,
     textColor: TextColor.LIGHT,
     items: [
       {
@@ -187,6 +194,7 @@ export async function seedStories() {
       data: {
         title: story.title,
         imageUrl: story.imageUrl,
+        imageUrlMobile: story.imageUrlMobile,
         startDate: story.startDate,
         endDate: story.endDate,
         isActive: story.isActive,

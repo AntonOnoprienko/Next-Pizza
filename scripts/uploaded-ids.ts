@@ -1,8 +1,9 @@
 export const uploadedIds = [
-  "story/qttwkz4u6zcazzh6fywe",
-  "story/qfxjb5ejs8b7lb2u0zzu",
-  "story/xfg0qm9gxnwhvxlel2do",
-  "story/xozsy9pdyl6xonotj32z",
-  "story/oq7wpp9oltjcoqvp5zzl",
-  "story/qkyaxwpqitjdrw57h4eu",
+  "story-mobile/wxgbkgs81ibjdzyaixuh",
+  "story-mobile/kzpmmdaduxao6bcyw6dd",
+  "story-mobile/aj5gt2kqmflmpke93jqv",
+  "story-mobile/nrmtahrqycgfzl2pdfrt",
+  "story-mobile/nmj27hgv44v0p09t3eqg",
+  "story-mobile/yms46r3uaaqfgf7lnufs",
+  "story-mobile/mw4nhfsmqwmo9awfennh",
 ];

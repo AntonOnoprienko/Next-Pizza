@@ -37,7 +37,7 @@ const Home = async ({ searchParams }: PageProps) => {
       <Container className="mt-10">
         <Title className="font-extrabold" size="lg" text="Все пиццы" />
       </Container>
-      <Stories />
+      <Stories isMobile={isMobile} />
       <TopBar
         className="hidden md:block"
         categories={categories.filter(

@@ -4,3 +4,4 @@ export { useIngredients } from './use-ingredients';
 export { usePizzaOption } from './use-pizza-options';
 export { useAddToCartToast } from './use-add-to-cart-toast';
 export { useCart } from './use-cart';
+export { useSlideSize } from './use-slide-size';
