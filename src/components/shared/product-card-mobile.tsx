@@ -41,7 +41,10 @@ const ProductCardMobileComponent: React.FC<Props> = ({
     <div className={cn('h-full flex gap-2 py-4', className)}>
       <Link href={`/product/${id}`} className="shrink-0">
         <DynamicCldImage
-          src={imageUrl}
+          src={imageUrl.replace(
+            '/upload/',
+            '/upload/w_130,h_130,c_fill,q_auto,f_auto/',
+          )}
           alt={name}
           width={130}
           height={130}
