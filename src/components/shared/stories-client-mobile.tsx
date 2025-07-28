@@ -39,7 +39,7 @@ export const StoriesClientMobile: React.FC<Props> = ({
     <>
       <Container className={cn('my-6', className)}>
         <Swiper slidesPerView="auto" spaceBetween={16} className="pb-6">
-          {stories.map((story) => (
+          {stories.map((story, index) => (
             <SwiperSlide key={story.id} style={{ width: `${slideWidth}px` }}>
               <div
                 onClick={() => onClickStory(story)}
@@ -54,6 +54,8 @@ export const StoriesClientMobile: React.FC<Props> = ({
                   className="w-full h-full object-cover"
                   quality="auto"
                   format="auto"
+                  loadMode={index < 2 ? 'eager' : 'lazy'}
+                  priority={index < 2}
                   fallbackImage
                 />
                 <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white font-bold text-lg leading-none max-w-[110px]">
