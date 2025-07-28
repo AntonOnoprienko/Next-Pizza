@@ -1,7 +1,7 @@
 export default function Head() {
   return (
     <>
-      <link rel="stylesheet" href="/css/critical.min.css" />
+      <link rel="stylesheet" href="/critical.min.css" />
       <link rel="canonical" href="https://next-pizza.up.railway.app/" />
       <meta
         name="viewport"
