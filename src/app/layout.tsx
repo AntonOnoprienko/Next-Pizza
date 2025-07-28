@@ -1,4 +1,3 @@
-import './critical.min.css';
 import './globals.css';
 import { Nunito } from 'next/font/google';
 import dynamic from 'next/dynamic';
