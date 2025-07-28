@@ -48,10 +48,7 @@ const ProductCardMobileComponent: React.FC<Props> = ({
           alt={name}
           width={130}
           height={130}
-          crop="fill"
           loadMode="lazy"
-          quality="auto"
-          format="auto"
           fallbackImage={true}
           className="transition-transform duration-300 ease-in-out group-hover:translate-y-2"
         />
