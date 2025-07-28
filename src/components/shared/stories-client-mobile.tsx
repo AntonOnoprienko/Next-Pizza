@@ -56,6 +56,7 @@ export const StoriesClientMobile: React.FC<Props> = ({
                   format="auto"
                   loadMode={index < 2 ? 'eager' : 'lazy'}
                   priority={index < 2}
+                  fetchPriority={index < 2 ? 'high' : 'auto'}
                   fallbackImage
                 />
                 <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white font-bold text-lg leading-none max-w-[110px]">

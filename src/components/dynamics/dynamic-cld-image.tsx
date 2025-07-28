@@ -34,6 +34,7 @@ interface DynamicCldImageProps {
   loadMode?: 'lazy' | 'eager';
   priority?: boolean;
   fallbackImage?: boolean;
+  fetchPriority?: 'high' | 'low' | 'auto';
 }
 
 // Компонент для fallback изображения
@@ -92,6 +93,7 @@ export const DynamicCldImage: React.FC<DynamicCldImageProps> = ({
   format = 'auto',
   loadMode,
   priority = false,
+  fetchPriority,
 }) => {
   const Component = fallbackImage
     ? getDynamicCldImageWithFallback(width, height)
@@ -109,6 +111,7 @@ export const DynamicCldImage: React.FC<DynamicCldImageProps> = ({
       format={format}
       loading={loadMode}
       priority={priority}
+      fetchPriority={fetchPriority}
       className={cn(className)}
       style={{ width: `${width}px`, height: `${height}px` }}
     />

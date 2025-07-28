@@ -51,6 +51,8 @@ interface Props {
   isMobile?: boolean;
 }
 
+export const revalidate = 60;
+
 export async function Stories({ isMobile, className }: Props) {
   const stories = await getActiveStories();
 
