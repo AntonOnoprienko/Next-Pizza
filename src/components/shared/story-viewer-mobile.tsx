@@ -32,11 +32,13 @@ export const StoryViewerMobile: React.FC<Props> = ({ items, onClose }) => {
         alt={`story-${item.id}`}
         width={width}
         height={height}
-        className="w-full h-full object-contain"
         fallbackImage
       />
       {(item.title || item.description) && (
-        <div className="absolute top-20 left-4 right-4 text-white text-center z-20">
+        <div
+          className="absolute left-4 right-4 text-white text-center z-20"
+          style={{ top: '15%' }}
+        >
           {item.title && (
             <h2 className="text-2xl font-extrabold leading-snug drop-shadow-md">
               {item.title}
