@@ -32,14 +32,13 @@ export const StoryViewerMobile: React.FC<Props> = ({ items, onClose }) => {
         alt={`story-${item.id}`}
         width={width}
         height={height}
-        className="w-full h-full object-cover"
         fallbackImage
       />
       {(item.title || item.description) && (
-        <div className="absolute top-4 left-4 right-4 text-white text-center z-10">
-          {item.title && <h2 className="text-lg font-bold">{item.title}</h2>}
+        <div className="absolute top-14 left-4 right-4 text-white text-center z-20">
+          {item.title && <h2 className="text-xl font-bold">{item.title}</h2>}
           {item.description && (
-            <p className="text-sm mt-2">{item.description}</p>
+            <p className="text-lg mt-2">{item.description}</p>
           )}
         </div>
       )}
@@ -47,7 +46,7 @@ export const StoryViewerMobile: React.FC<Props> = ({ items, onClose }) => {
         <Link href={item.linkUrl}>
           <Button
             onClick={onClose}
-            className="absolute bottom-4 left-1/2 -translate-x-1/2"
+            className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30"
           >
             {item.buttonText}
           </Button>
@@ -57,7 +56,7 @@ export const StoryViewerMobile: React.FC<Props> = ({ items, onClose }) => {
   );
 
   return (
-    <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
+    <div className="fixed inset-0 z-50 bg-black flex items-center justify-center ">
       {items.length === 1 ? (
         renderStory(items[0])
       ) : (
@@ -84,9 +83,9 @@ export const StoryViewerMobile: React.FC<Props> = ({ items, onClose }) => {
 
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 text-white bg-black/50 rounded p-2"
+        className="absolute top-4 right-4 text-white z-30"
       >
-        <X size={44} />
+        <X size={32} />
       </button>
     </div>
   );

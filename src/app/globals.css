@@ -14,6 +14,8 @@ html {
 
 @layer base {
   :root {
+    --app-height: 100dvh;
+
     --foreground: 20 14.3% 4.1%;
 
     --card: 0 0% 100%;
@@ -75,6 +77,10 @@ html {
   .text-balance {
     text-wrap: balance;
   }
+
+  .h-app {
+    height: var(--app-height);
+  }
 }
 
 @layer base {
@@ -97,3 +103,4 @@ html {
 #nprogress .spinner-icon {
   @apply border-t-primary border-l-primary !important;
 }
+
