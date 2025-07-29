@@ -32,13 +32,20 @@ export const StoryViewerMobile: React.FC<Props> = ({ items, onClose }) => {
         alt={`story-${item.id}`}
         width={width}
         height={height}
+        className="w-full h-full object-contain"
         fallbackImage
       />
       {(item.title || item.description) && (
-        <div className="absolute top-18 left-4 right-4 text-white text-center z-20">
-          {item.title && <h2 className="text-xl font-bold">{item.title}</h2>}
+        <div className="absolute top-20 left-4 right-4 text-white text-center z-20">
+          {item.title && (
+            <h2 className="text-2xl font-extrabold leading-snug drop-shadow-md">
+              {item.title}
+            </h2>
+          )}
           {item.description && (
-            <p className="text-lg mt-2">{item.description}</p>
+            <p className="text-xl mt-5 leading-relaxed drop-shadow-md">
+              {item.description}
+            </p>
           )}
         </div>
       )}
@@ -46,7 +53,10 @@ export const StoryViewerMobile: React.FC<Props> = ({ items, onClose }) => {
         <Link href={item.linkUrl}>
           <Button
             onClick={onClose}
-            className="absolute bottom-12 left-1/2 -translate-x-1/2 z-30"
+            className="absolute left-1/2 -translate-x-1/2 z-30 px-6 py-3
+               text-lg
+"
+            style={{ bottom: '15%' }}
           >
             {item.buttonText}
           </Button>
@@ -62,12 +72,12 @@ export const StoryViewerMobile: React.FC<Props> = ({ items, onClose }) => {
       ) : (
         <Swiper
           modules={[Autoplay]}
-          autoplay={{ delay: 5000, disableOnInteraction: false }}
+          autoplay={{ delay: 10000, disableOnInteraction: false }}
           onSlideChange={(swiper) => {
             if (swiper.activeIndex === items.length - 1) {
               setTimeout(() => {
                 onClose();
-              }, 5000);
+              }, 10000);
             }
           }}
           loop={false}
@@ -83,7 +93,7 @@ export const StoryViewerMobile: React.FC<Props> = ({ items, onClose }) => {
 
       <button
         onClick={onClose}
-        className="absolute top-8 right-4 text-white z-30"
+        className="absolute top-4 right-4 text-white z-30"
       >
         <X size={32} />
       </button>
