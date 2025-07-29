@@ -7,16 +7,10 @@ import { Button } from '@/src/components/ui';
 import { DynamicCldImage } from '../dynamics';
 import { useSlideSize } from '@/src/hooks';
 import { Loader, X } from 'lucide-react';
+import { StoryItem } from '@prisma/client';
 
 interface Props {
-  items: {
-    id: number;
-    imageUrlMobile: string;
-    title?: string;
-    description?: string;
-    linkUrl?: string;
-    buttonText?: string;
-  }[];
+  items: StoryItem[];
   onClose: () => void;
 }
 
