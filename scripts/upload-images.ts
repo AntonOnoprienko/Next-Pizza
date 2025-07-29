@@ -19,7 +19,7 @@ async function uploadAllImages() {
   for (const filePath of imagePaths) {
     try {
       const result = await cloudinary.uploader.upload(filePath, {
-        folder: 'story-mobile',
+        folder: 'story-items-mobile',
       });
 
       resultIds.push(`"${result.public_id}"`);

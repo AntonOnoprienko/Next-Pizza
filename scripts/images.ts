@@ -4,11 +4,13 @@ export const imageUrls = [
 ];
 
 export const imagePaths = [
-  'C:/Users/Пользователь1/Desktop/story/story-mobile/coffee.png',
-  'C:/Users/Пользователь1/Desktop/story/story-mobile/ingredients.png',
-  'C:/Users/Пользователь1/Desktop/story/story-mobile/deserts.png',
-  'C:/Users/Пользователь1/Desktop/story/story-mobile/denvich.png',
-  'C:/Users/Пользователь1/Desktop/story/story-mobile/cheese.png',
-  'C:/Users/Пользователь1/Desktop/story/story-mobile/snaks.png',
-  'C:/Users/Пользователь1/Desktop/story/story-mobile/facts.png',
+  'C:/Users/Пользователь1/Desktop/story/story-items-mobile/coffee.png',
+  'C:/Users/Пользователь1/Desktop/story/story-items-mobile/ingredients.png',
+  'C:/Users/Пользователь1/Desktop/story/story-items-mobile/deserts.png',
+  'C:/Users/Пользователь1/Desktop/story/story-items-mobile/denvich.png',
+  'C:/Users/Пользователь1/Desktop/story/story-items-mobile/cheese.png',
+  'C:/Users/Пользователь1/Desktop/story/story-items-mobile/snaks.png',
+  'C:/Users/Пользователь1/Desktop/story/story-items-mobile/facts.png',
+  'C:/Users/Пользователь1/Desktop/story/story-items-mobile/omlet.png',
+  'C:/Users/Пользователь1/Desktop/story/story-items-mobile/peperony.png',
 ];

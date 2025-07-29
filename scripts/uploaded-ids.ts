@@ -1,9 +1,11 @@
 export const uploadedIds = [
-  "story-mobile/wxgbkgs81ibjdzyaixuh",
-  "story-mobile/kzpmmdaduxao6bcyw6dd",
-  "story-mobile/aj5gt2kqmflmpke93jqv",
-  "story-mobile/nrmtahrqycgfzl2pdfrt",
-  "story-mobile/nmj27hgv44v0p09t3eqg",
-  "story-mobile/yms46r3uaaqfgf7lnufs",
-  "story-mobile/mw4nhfsmqwmo9awfennh",
+  "story-items-mobile/ra3wz50nba0glgazezc8",
+  "story-items-mobile/kffhjtblx52tdoizmomp",
+  "story-items-mobile/nte4pvcjdt9ve2uzh0z6",
+  "story-items-mobile/tjhfr7i1saccqqbrqnzs",
+  "story-items-mobile/c9aqzrpranjbwz2rtljh",
+  "story-items-mobile/jqsyo5lbmk1uet6lypou",
+  "story-items-mobile/yk5tgum4wbtonudbcdc4",
+  "story-items-mobile/k2w5jqcjgnkxw9trg3uc",
+  "story-items-mobile/swhzymwjh9u6bovfmyvl",
 ];

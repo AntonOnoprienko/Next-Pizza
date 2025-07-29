@@ -189,6 +189,7 @@ model StoryItem {
   title String
   description String?
   imageUrl   String
+  imageUrlMobile String
   order      Int      
   layout     LayoutType @default(TEXT_BOTTOM)  
   textColor  TextColor  @default(LIGHT)        

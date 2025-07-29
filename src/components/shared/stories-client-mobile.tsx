@@ -10,6 +10,7 @@ import { DynamicCldImage } from '../dynamics';
 import { Container } from './container';
 import { StoryViewer } from './story-viewer';
 import { useSlideSize } from '@/src/hooks';
+import { StoryViewerMobile } from './story-viewer-mobile';
 
 export type StoryWithItems = Story & {
   items: StoryItem[];
@@ -69,10 +70,9 @@ export const StoriesClientMobile: React.FC<Props> = ({
       </Container>
 
       {open && selectedStory && (
-        <StoryViewer
-          open={open}
-          onOpenChange={setOpen}
+        <StoryViewerMobile
           items={selectedStory.items}
+          onClose={() => setOpen(false)}
         />
       )}
     </>
