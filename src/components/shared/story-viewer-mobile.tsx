@@ -35,7 +35,7 @@ export const StoryViewerMobile: React.FC<Props> = ({ items, onClose }) => {
         fallbackImage
       />
       {(item.title || item.description) && (
-        <div className="absolute top-14 left-4 right-4 text-white text-center z-20">
+        <div className="absolute top-18 left-4 right-4 text-white text-center z-20">
           {item.title && <h2 className="text-xl font-bold">{item.title}</h2>}
           {item.description && (
             <p className="text-lg mt-2">{item.description}</p>
@@ -46,7 +46,7 @@ export const StoryViewerMobile: React.FC<Props> = ({ items, onClose }) => {
         <Link href={item.linkUrl}>
           <Button
             onClick={onClose}
-            className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30"
+            className="absolute bottom-12 left-1/2 -translate-x-1/2 z-30"
           >
             {item.buttonText}
           </Button>
@@ -83,7 +83,7 @@ export const StoryViewerMobile: React.FC<Props> = ({ items, onClose }) => {
 
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 text-white z-30"
+        className="absolute top-8 right-4 text-white z-30"
       >
         <X size={32} />
       </button>
