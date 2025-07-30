@@ -3,6 +3,7 @@
 import React from 'react';
 import {
   CartButtonMobile,
+  CategoryDrawerMobile,
   Container,
   HeaderMobileMenu,
   SearchInput,
@@ -30,9 +31,11 @@ export const HeaderMobile: React.FC<Props> = ({ className }) => {
     <header className={cn('border-b sticky bg-white top-0 z-50', className)}>
       <Container className="flex items-center justify-between py-2">
         <div className="flex gap-2 items-center">
-          <button className="w-12 h-12 p-3" aria-label="Выбор категории">
-            <LayoutGrid size={20} />
-          </button>
+          <CategoryDrawerMobile>
+            <button className="w-12 h-12 p-3" aria-label="Выбор категории">
+              <LayoutGrid size={20} />
+            </button>
+          </CategoryDrawerMobile>
           {!showSearch && (
             <Link href="/">
               <div className="flex items-center gap-3">

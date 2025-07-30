@@ -3,13 +3,18 @@ import React from 'react';
 
 type TitleSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLHeadingElement> {
   size?: TitleSize;
   className?: string;
   text: string;
 }
 
-export const Title: React.FC<Props> = ({ text, size = 'sm', className }) => {
+export const Title: React.FC<Props> = ({
+  text,
+  size = 'sm',
+  className,
+  ...rest
+}) => {
   const mapTagBySize = {
     xs: 'h5',
     sm: 'h4',
@@ -30,7 +35,7 @@ export const Title: React.FC<Props> = ({ text, size = 'sm', className }) => {
 
   return React.createElement(
     mapTagBySize[size],
-    { className: clsx(mapClassNameBySize[size], className) },
+    { className: clsx(mapClassNameBySize[size], className), ...rest },
     text,
   );
 };

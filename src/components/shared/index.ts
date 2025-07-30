@@ -44,6 +44,7 @@ export { ProductCardMobile } from './product-card-mobile';
 export { ResponsiveImage } from './responsive-image';
 export { CartButtonMobile } from './cart-button-mobile';
 export { StoryViewerMobile } from './story-viewer-mobile';
+export { CategoryDrawerMobile } from './category-drawer-mobile';
 export * from './modals';
 export * from './checkout';
 export * from './form';
