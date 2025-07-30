@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from 'react';
 import { cn } from '@/src/lib/utils';
 import { ProductCardWithCart, Title } from '.';
-import { useIntersection, useWindowSize } from 'react-use';
+import { useIntersection } from 'react-use';
 import { useCategoryStore } from '@/src/store/category';
 
 interface ProductItem {
