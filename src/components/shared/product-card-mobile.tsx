@@ -47,6 +47,7 @@ const ProductCardMobileComponent: React.FC<Props> = ({
           height={130}
           loadMode="lazy"
           fallbackImage={true}
+          unoptimized
           className="transition-transform duration-300 ease-in-out group-hover:translate-y-2"
         />
       </Link>
