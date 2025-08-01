@@ -31,6 +31,7 @@ export const ProductsGroupList: React.FC<Props> = ({
   categoryId,
   isMobile,
 }) => {
+  const [isRetina, setIsRetina] = React.useState<boolean>(false);
   const setActiveCategoryId = useCategoryStore((state) => state.setActiveId);
   const intersectionRef = useRef(null);
   const intersection = useIntersection(intersectionRef, {
@@ -42,6 +43,12 @@ export const ProductsGroupList: React.FC<Props> = ({
       items[0].price,
     );
   };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.devicePixelRatio > 1) {
+      setIsRetina(true);
+    }
+  }, []);
 
   useEffect(() => {
     if (intersection?.isIntersecting) {
@@ -66,6 +73,7 @@ export const ProductsGroupList: React.FC<Props> = ({
               description={product.description}
               isPizza={Boolean(product.items[0].pizzaType)}
               isMobile={true}
+              isRetina={isRetina}
             />
           ))}
         </div>

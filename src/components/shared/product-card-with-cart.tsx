@@ -16,6 +16,7 @@ interface Props {
   ingredients: { name: string }[] | null;
   isPizza: boolean;
   isMobile: boolean;
+  isRetina?: boolean;
 }
 
 const ProductCardWithCartComponent: React.FC<Props> = ({
@@ -28,6 +29,7 @@ const ProductCardWithCartComponent: React.FC<Props> = ({
   ingredients,
   isPizza,
   isMobile,
+  isRetina,
 }) => {
   const cartItem = useCartStore(
     React.useCallback(
@@ -90,7 +92,7 @@ const ProductCardWithCartComponent: React.FC<Props> = ({
   };
 
   return isMobile ? (
-    <ProductCardMobile {...commonProps} />
+    <ProductCardMobile {...commonProps} isRetina={isRetina} />
   ) : (
     <ProductCard {...commonProps} />
   );

@@ -19,6 +19,7 @@ interface Props {
   loading?: boolean;
   onAdd?: () => void;
   onQuantityChange?: (type: 'plus' | 'minus') => void;
+  isRetina?: boolean;
   className?: string;
 }
 
@@ -36,6 +37,7 @@ const ProductCardMobileComponent: React.FC<Props> = ({
   onQuantityChange,
   inCart,
   className,
+  isRetina,
 }) => {
   return (
     <div className={cn('h-full flex gap-2 py-4', className)}>
@@ -43,8 +45,8 @@ const ProductCardMobileComponent: React.FC<Props> = ({
         <DynamicCldImage
           src={imageUrl}
           alt={name}
-          width={130}
-          height={130}
+          width={isRetina ? 260 : 130}
+          height={isRetina ? 260 : 130}
           loadMode="lazy"
           fallbackImage={true}
           unoptimized
