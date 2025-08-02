@@ -42,7 +42,7 @@ const ProductCardMobileComponent: React.FC<Props> = ({
   return (
     <div className={cn('h-full flex gap-2 py-4', className)}>
       <Link href={`/product/${id}`} className="shrink-0">
-        <div className="max-w-[130px] max-h-[130px]">
+        <div className="w-[130px] h-[130px] overflow-hidden">
           <DynamicCldImage
             src={imageUrl}
             alt={name}
@@ -51,7 +51,7 @@ const ProductCardMobileComponent: React.FC<Props> = ({
             loadMode="lazy"
             fallbackImage={true}
             unoptimized
-            className="transition-transform duration-300 ease-in-out group-hover:translate-y-2 object-cover"
+            className="w-[130px] h-[130px] object-cover"
           />
         </div>
       </Link>

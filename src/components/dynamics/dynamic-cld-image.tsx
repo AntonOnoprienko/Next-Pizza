@@ -119,7 +119,6 @@ export const DynamicCldImage: React.FC<DynamicCldImageProps> = ({
       className={cn(className)}
       unoptimized={unoptimized}
       dpr={dpr}
-      style={{ width: `${width}px`, height: `${height}px` }}
     />
   );
 };
