@@ -50,7 +50,7 @@ const ProductCardMobileComponent: React.FC<Props> = ({
           loadMode="lazy"
           fallbackImage={true}
           unoptimized
-          className="transition-transform duration-300 ease-in-out group-hover:translate-y-2"
+          className="transition-transform duration-300 ease-in-out group-hover:translate-y-2 w-[130px] h-[130px] object-cover"
         />
       </Link>
       <div className="flex flex-col flex-1 min-w-0">
