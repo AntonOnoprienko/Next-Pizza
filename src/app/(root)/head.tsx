@@ -2,6 +2,11 @@ export default function Head() {
   return (
     <>
       <link rel="canonical" href="https://next-pizza.up.railway.app/" />
+      <link
+        rel="preconnect"
+        href="https://res.cloudinary.com"
+        crossOrigin="anonymous"
+      />
       <meta
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
