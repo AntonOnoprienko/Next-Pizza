@@ -3,7 +3,8 @@ FROM node:18-alpine AS builder
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm ci
+RUN npm cache clean --force
+RUN npm install --no-audit --no-fund --legacy-peer-deps
 
 COPY . .
 RUN npx prisma generate
